@@ -80,4 +80,4 @@ Now, you should be deployed!
 * Reservations Model that connected to a calender functionality
 * On SingleRoom or SingleExperience, review form
 * Weather API
-* 
+* pagination + more hotel rooms?
