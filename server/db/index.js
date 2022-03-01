@@ -5,12 +5,17 @@ const Room = require('./models/Room')
 const User = require('./models/User')
 const Experience = require('./models/Experience')
 const Review = require('./models/Review')
+const Reservation = require('./models/Reservation')
 
 //associations could go here!
 Room.hasMany(User);
 User.hasOne(Room);
 Room.hasMany(Experience);
 Experience.hasOne(Room);
+Reservation.hasOne(Room);
+Reservation.hasOne(User);
+Room.hasMany(Reservation);
+User.hasMany(Reservation);
 
 //model not built, might add later if we have time:
 //Room.hasMany(Reservation);

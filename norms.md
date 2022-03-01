@@ -3,8 +3,8 @@
 ## Roles
 * Task manager
   - Responsible for reviewing that each feature meets all requirements upon pull request submission
-* Git manager
-  - Responsible for managing the various issues within Github
+* Project Manager
+  - Responsible for managing the timing of our project, ensuring timeliness is at the forefront of what we're doing
 * Request manager
   - Responsible for reviewing/approving pull requests
 * Worker Bee
@@ -38,7 +38,3 @@ Steps to reach an agreement:
 1. Everyone says their piece about what direction they believe we should go, we have a conversation to start to see if we can get on the same page
 2. If no agreement can be reached, or we're at a stalemate, then it goes up to a vote. We explain why we voted that way and why we feel strongly about it so hopefully no one feels hurt or left out of the decision
 3. If residual feelings or thoughts exist and we still can't reach an agreement, we'll escalate to Rusty
-
-
-
-
