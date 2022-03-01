@@ -12,7 +12,7 @@
   - Investigator, if someone is having trouble and experiencing a bug this person is the first line of defense
 
 ## Daily process
-* Morning standup at 11AM EST/8AM PST started by yesterday's Task Manager 
+* Morning standup at 11:15AM EST/8:15AM PST started by yesterday's Task Manager 
   - New roles assigned (by yesterday’s Task manager)
   - Yesterday? Today? Obstacles? (by today’s Task manager)
 * Pair program on assigned tasks
