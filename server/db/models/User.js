@@ -14,6 +14,12 @@ const User = db.define('user', {
   },
   password: {
     type: Sequelize.STRING,
+  },
+  //employees have access to delete rooms, delete bookings, etc.
+  
+  type: {
+    type: Sequelize.ENUM("employee", "guest"),
+    defaultValue: "guest"
   }
 })
 

@@ -75,3 +75,9 @@ Database Setup
 
 
 Now, you should be deployed!
+
+## Future State Ideas:
+* Reservations Model that connected to a calender functionality
+* On SingleRoom or SingleExperience, review form
+* Weather API
+* 
