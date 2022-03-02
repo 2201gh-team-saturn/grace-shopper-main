@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchRoom, toggleStatus } from '../store/singleRoom'
+import { fetchRoom } from '../store/singleRoom'
 
 //there was a thought that I could use this to practice the useContext react hook,
 //and we would pass the context to this like props

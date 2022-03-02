@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchRooms, deleteRoomThunk } from '../store/rooms';
 
@@ -9,27 +9,32 @@ export class AllRooms extends React.Component {
   }
 
   render() {
-    if (this.props.rooms.length <= 0) {
+    const user = this.props.user;
+    const rooms = this.props.rooms;
+   // console.log(user.type);
+
+    if (rooms.length <= 0) {
       return (
         <div>
           <main>
-          <Link to={'/room/add'}>
-            <div className='button_container'>
-              <button type='button' className='add_room_btn'>
-                Add Room
-              </button>
-            </div>
-          </Link>
-          <br/>
-          <span> There are no rooms registered in the database</span>
-          <p> Please add a room</p>
+            <Link to={'/room/add'}>
+              <div className='button_container'>
+                <button type='button' className='add_room_btn'>
+                  Add Room
+                </button>
+              </div>
+            </Link>
+            <br />
+            <span> There are no rooms registered in the database</span>
+            <p> Please add a room</p>
           </main>
         </div>
-       
       );
     }
+    
     return (
       <div>
+        {user.type === 'employee' ? (
           <Link to={'/room/add'}>
             <div className='button_container'>
               <button type='button' className='add_room_btn'>
@@ -37,15 +42,17 @@ export class AllRooms extends React.Component {
               </button>
             </div>
           </Link>
+        ) : (
+          ''
+        )}
+
         <div className='rooms'>
-          {this.props.rooms.map((room) => (
+          {rooms.map((room) => (
             <div className='room' key={room.id}>
               <img src={room.imageUrl} />
               <div className='room_card'>
                 <p>
-                  <Link to={`/rooms/${room.id}`}>
-                      Name: {room.name}
-                  </Link>
+                  <Link to={`/rooms/${room.id}`}>Name: {room.name}</Link>
                   <br />
                   Description: {room.description}
                   <br />
@@ -53,20 +60,24 @@ export class AllRooms extends React.Component {
                   <br />
                   Category: {room.category}
                   <br />
-                  Availability: {room.available ? "Available" : "Booked"}
+                  Availability: {room.available ? 'Available' : 'Booked'}
                 </p>
-                <form>
-                  <button
-                    type='submit'
-                    className='room_delete_btn'
-                    value={room.id}
-                    onClick={(event) =>
-                      this.props.deleteRoom(event.target.value)
-                    }
-                  >
-                    Remove Room
-                  </button>
-                </form>
+                {user.type === 'employee' ? (
+                  <form>
+                    <button
+                      type='submit'
+                      className='room_delete_btn'
+                      value={room.id}
+                      onClick={(event) =>
+                        this.props.deleteRoom(event.target.value)
+                      }
+                    >
+                      Remove Room
+                    </button>
+                  </form>
+                ) : (
+                  ''
+                )}
               </div>
             </div>
           ))}
@@ -79,6 +90,7 @@ export class AllRooms extends React.Component {
 const mapState = (state) => {
   return {
     rooms: state.roomsReducer,
+    user: state.auth,
   };
 };
 
