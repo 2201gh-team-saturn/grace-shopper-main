@@ -1,7 +1,7 @@
 import axios from "axios";
 
 ////ACTION TYPES
-const SET_ROOM = 'SET_ROOOM'
+const SET_ROOM = 'SET_ROOM'
 const TOGGLE_AVAILABLE = 'TOGGLE_AVAILABLE';
 
 //ACTION CREATORS
@@ -14,7 +14,7 @@ const setRoom = (room) => {
   const toggleAvailable = (availability) => {
     return {
       type: TOGGLE_AVAILABLE,
-      availble: availability
+      availability
     }
   };
 
@@ -33,20 +33,20 @@ export const fetchRoom = (id) => {
   export const toggleStatus = (id, availability) => {
     return async (dispatch) => {
       try {
-        const { data } = await axios.get(`/api/rooms/${id}`, { availble: !availability });
-        dispatch(toggleCompletion(data.availble));
+        const { data } = await axios.get(`/api/rooms/${id}`, { available: !availability });
+        dispatch(toggleAvailable(data.available));
       } catch (err) {
         console.log(err)
       }
     }
   };
   
-  export default function projectReducer(state = {}, action) {
+  export default function singleRoomReducer(state = {}, action) {
     switch (action.type) {
       case SET_ROOM:
         return action.room
-      case TOGGLE_COMPLETE:
-        return { ...state, availble: action.availability };
+      case TOGGLE_AVAILABLE:
+        return { ...state, available: action.availability };
       default:
         return state
     }
