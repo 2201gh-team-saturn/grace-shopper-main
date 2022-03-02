@@ -1,4 +1,6 @@
-const {db, models: {User, Room} } = require('../server/db')
+'use strict'
+
+const { db, models: { User, Room, Experience, Review, Reservation } } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -17,9 +19,28 @@ async function seed() {
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 
- // Creating Rooms
+  // Creating Rooms
   const rooms = await Promise.all([
     Room.create({
+      name: 'Cave Suite',
+      description: 
+      'Ever wanted to spend a night in a cave? Come explore what mysteries exist in this naturally air conditioned suite! The cave suite offers a large stone fireplace and geothermal jacuzzi.',
+      price: 98.50,
+      imageUrl: 'https://www.masseriatorrecoccaro.com/immagini/sistema/news/foto/foto_267_7.jpg',
+      available: true,
+      category: 'natural'
+  }),
+  Room.create({
+    name: 'Stanley Suite',
+    description: 
+    "This is just your average not-haunted hotel room. Nothing themed about this room. A great place to stay for the whole family.",
+    price: 23.70,
+    imageUrl: 'https://images.weserv.nl/?url=https://the-take.com/images/uploads/screenprism/_constrain-1080w/Green-Bathroom.jpg&output=jpg',
+    available: true,
+    category: 'haunted'
+    //alternatively, category: spooky
+}),
+ Room.create({
       name: 'Zen Room',
       description: "The Zen room provides guests with the most relaxing experience. Guests will have a chance to separate themselves from disruption and be completely at peace.",
       price: 300,
@@ -59,16 +80,21 @@ async function seed() {
   console.log(`seeded ${rooms.length} rooms`)
   console.log(`seeded successfully`)
 
-   // Creating Experiences
+  // Creating Experiences
   const experiences = await Promise.all([
 
   ])
   console.log(`seeded ${experiences.length} experiences`)
   console.log(`seeded successfully`)
 
-   // Creating Reviews
+  // Creating Reviews
   const reviews = await Promise.all([
-
+    Review.create({
+      review_text: "I had a wonderful time in the Cave Suite. Our spelunking experience was phenomenal as well! It was fun to play hide an seek with my husband in the cave system. He's been the hide and seek champion for 3 straight days now!"
+    }),
+    Review.create({
+      review_text: "I loved staying in the Stanley Suite while I was writing my novel. It's a great place for the whole family too. After all, all work and no play makes Jack a dull boy."
+    })
   ])
   console.log(`seeded ${reviews.length} reviews`)
   console.log(`seeded successfully`)
@@ -79,13 +105,15 @@ async function seed() {
       murphy: users[1]
     },
     rooms: {
-
+      caveSuite: rooms[0],
+      stanleySuite: rooms[1]
     },
     experiences: {
-
+      
     },
     reviews: {
-
+      caveReview: reviews[0],
+      stanleyReview:reviews[1]
     }
   }
 }
