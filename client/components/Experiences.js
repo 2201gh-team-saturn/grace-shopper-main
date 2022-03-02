@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 //import { Link } from 'react-router-dom';
-//import { fetchExperiences, bookExperience } from '../redux/experiences';
+import { fetchExperiences } from '../store/experiences';
 
 export class Experiences extends React.Component {
-  // componentDidMount() {
-  //   this.props.loadExperiences();
-  // }
+  componentDidMount() {
+    this.props.loadExperiences();
+  }
   render() {
     const experiences = this.props.experiences;
     return (
@@ -41,9 +41,8 @@ const mapStateToProps = (state) => ({
   experiences: state.experiences,
 });
 
-const mapDispatchToProps = (dispatch, { history }) => ({
+const mapDispatchToProps = (dispatch) => ({
   loadExperiences: () => dispatch(fetchExperiences()),
-  bookExperience: (id) => dispatch(bookExperience(id, history)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Experiences);
