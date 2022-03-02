@@ -8,7 +8,6 @@ import { fetchRoom } from '../store/singleRoom'
 
 
 class Room extends React.Component {
-
     componentDidMount() {
         this.props.singleRoom(this.props.match.params.id)
     }
