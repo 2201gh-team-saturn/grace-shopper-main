@@ -1,6 +1,7 @@
 'use strict'
 
 const {db, models: {User} } = require('../server/db')
+//need to import the other models, not doing it here to avoid merge conflicts!
 
 /**
  * seed - this function clears the database, updates tables to
@@ -33,7 +34,9 @@ async function seed() {
 
    // Creating Experiences
   const experiences = await Promise.all([
-
+    Experience.create({ name: 'Moon Walk', price: 500.00, description: `Are you the type of person who has "enjoys long walks on the beach" on their dating profile? Then why not step it up with a long walk on the Moon? We promise you're dating profile will suddenly be much more interesting.`, imageUrl: 'https://images.unsplash.com/photo-1446941303752-a64bb1048d54?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bW9vbiUyMHdhbGt8ZW58MHx8MHx8&auto=format&fit=crop&w=700&q=60'}),
+    Experience.create({ name: 'Alpen Wandern', price: 20.00, description: `Find yourself atop Alpen ridges with cascading views of the multitude of lakes and green fields for kilometers. If you are lucky or bring snacks with you there is a good chance you can pet a Swiss cow on your outing as well!`, imageUrl: 'https://images.unsplash.com/photo-1534764945014-02d68e5680d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGFscCUyMGhpa2V8ZW58MHx8MHx8&auto=format&fit=crop&w=700&q=60'  }),
+    Experience.create({ name: 'Tea With The Queen', price: 100.00, description: `Find yourself atop Alpen ridges with cascading views of the multitude of lakes and green fields for kilometers. If you are lucky or bring snacks with you there is a good chance you can pet a Swiss cow on your outing as well!`, imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ26pQkNLsjb0PMGG5eUFNIacGdKb50Ck0ZLEzeOFhVRRy7ZoabDoZ1waP94gsNzJDTJXE&usqp=CAU'  })
   ])
   console.log(`seeded ${experiences.length} experiences`)
   console.log(`seeded successfully`)
