@@ -43,6 +43,7 @@ async function seed() {
 
    // Creating Reviews
   const reviews = await Promise.all([
+    Review.create({text: `I cannot recomend the The Reverie Resort enough. For our birthday my twin and I came here and while they rode a dragon I was having tea with the queen and her corgies, no one had to compromisee! The range of experience the resort has to offer can truly make everyones dream come true.`})
 
   ])
   console.log(`seeded ${reviews.length} reviews`)
