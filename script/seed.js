@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: {User} } = require('../server/db')
+const { db, models: { User, Room, Experience, Review, Reservation } } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -19,23 +19,82 @@ async function seed() {
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 
- // Creating Rooms
+  // Creating Rooms
   const rooms = await Promise.all([
-
+    Room.create({
+      name: 'Cave Suite',
+      description: 
+      'Ever wanted to spend a night in a cave? Come explore what mysteries exist in this naturally air conditioned suite! The cave suite offers a large stone fireplace and geothermal jacuzzi.',
+      price: 98.50,
+      imageUrl: 'https://www.masseriatorrecoccaro.com/immagini/sistema/news/foto/foto_267_7.jpg',
+      available: true,
+      category: 'natural'
+  }),
+  Room.create({
+    name: 'Stanley Suite',
+    description: 
+    "This is just your average not-haunted hotel room. Nothing themed about this room. A great place to stay for the whole family.",
+    price: 23.70,
+    imageUrl: 'https://images.weserv.nl/?url=https://the-take.com/images/uploads/screenprism/_constrain-1080w/Green-Bathroom.jpg&output=jpg',
+    available: true,
+    category: 'haunted'
+    //alternatively, category: spooky
+}),
+ Room.create({
+      name: 'Zen Room',
+      description: "The Zen room provides guests with the most relaxing experience. Guests will have a chance to separate themselves from disruption and be completely at peace.",
+      price: 300,
+      imageUrl: "https://media.istockphoto.com/photos/luxurious-bedroom-interior-with-messy-bed-and-armchair-in-holiday-or-picture-id1326393613?b=1&k=20&m=1326393613&s=170667a&w=0&h=gEvTszklSpD_l0LmkGHoehehXLcOJs1q-Sar5lwJhE0=",
+      available: true,
+      category: 'nature'
+    }),
+    Room.create({
+      name: 'Fantasy Room',
+      description: "Ready to be feel like you're in wonderland? Fantasy room will let all your dreams come true.",
+      price: 250,
+      imageUrl: "https://media.istockphoto.com/photos/the-clock-tower-viewpoint-picture-id1135502050?b=1&k=20&m=1135502050&s=170667a&w=0&h=7RHt0TMvSPIHErTncxstO1dhL9IypWRvmWK0i7xy5E0=",
+      available: true,
+      category: 'fantasy'
+    }),
+    Room.create({
+      name: 'Space Room',
+      description: 'Ever wondered what it feels like to be an astronaut? Space room can provide you that experience!',
+      price: 300,
+      imageUrl: "https://flh.ca/media/73137/flh_20180612-luxuryspace-1.jpg?anchor=center&mode=crop&width=1200&height=600&rnd=132830010110000000",
+      available: true,
+      category: 'space'
+    }),
+    Room.create({
+      name: 'Dragon Room',
+      description: 'Welcome to our most popular room, the Dragon Room. Guests will have access to ride our friendly dragon after purchasing the experience on our site.',
+      price: 550,
+      imageUrl: "https://images2.minutemediacdn.com/image/fetch/w_2000,h_2000,c_fit/https%3A%2F%2Fwinteriscoming.net%2Ffiles%2F2019%2F05%2F804-Drogon-and-Rhaegal-fly-at-Dragonstone.jpg",
+      available: true,
+      category: 'medieval'
+    })
   ])
+
+  await users[0].setRoom(rooms[0])
+  await users[1].setRoom(rooms[1])
+
   console.log(`seeded ${rooms.length} rooms`)
   console.log(`seeded successfully`)
 
-   // Creating Experiences
+  // Creating Experiences
   const experiences = await Promise.all([
 
   ])
   console.log(`seeded ${experiences.length} experiences`)
   console.log(`seeded successfully`)
 
-   // Creating Reviews
+  // Creating Reviews
   const reviews = await Promise.all([
-
+    Review.create({
+      review_text: "I had a wonderful time in the Cave Suite. Our spelunking experience was phenomenal as well! It was fun to play hide an seek with my husband in the cave system. He's been the hide and seek champion for 3 straight days now!"
+    }),
+    Review.create({
+      review_text: "I loved staying in the Stanley Suite while I was writing my novel. It's a great place for the whole family too. After all, all work and no play makes Jack a dull boy."
+    })
   ])
   console.log(`seeded ${reviews.length} reviews`)
   console.log(`seeded successfully`)
@@ -46,13 +105,15 @@ async function seed() {
       murphy: users[1]
     },
     rooms: {
-
+      caveSuite: rooms[0],
+      stanleySuite: rooms[1]
     },
     experiences: {
-
+      
     },
     reviews: {
-
+      caveReview: reviews[0],
+      stanleyReview:reviews[1]
     }
   }
 }
