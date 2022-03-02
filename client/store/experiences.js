@@ -23,7 +23,6 @@ export const fetchExperiences = () => {
 
 const initialState = [];
 
-// add to the Redux store with combineReducers
 export default function experienceReducer(state = initialState, action) {
   switch (action.type) {
     case SET_EXPERIENCES:
