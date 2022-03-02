@@ -1,6 +1,6 @@
 'use strict'
 
-const {db, models: {User} } = require('../server/db')
+const { db, models: { User, Room, Experience, Review, Reservation } } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -19,21 +19,29 @@ async function seed() {
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 
- // Creating Rooms
+  // Creating Rooms
   const rooms = await Promise.all([
-
+    Room.create({
+      name: 'Cave Suite',
+      description: 
+      'Ever wanted to spend a night in a cave? Come explore what mysteries exist in this naturally air conditioned suite! The cave suite offers a large stone fireplace and geothermal jacuzzi.',
+      price: 98.50,
+      imageUrl: 'https://www.masseriatorrecoccaro.com/immagini/sistema/news/foto/foto_267_7.jpg',
+      available: true,
+      category: 'natural'
+  })
   ])
   console.log(`seeded ${rooms.length} rooms`)
   console.log(`seeded successfully`)
 
-   // Creating Experiences
+  // Creating Experiences
   const experiences = await Promise.all([
 
   ])
   console.log(`seeded ${experiences.length} experiences`)
   console.log(`seeded successfully`)
 
-   // Creating Reviews
+  // Creating Reviews
   const reviews = await Promise.all([
 
   ])

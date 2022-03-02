@@ -63,4 +63,4 @@ const mapDispatch = (dispatch) => {
     };
 };
 
-export default connect(mapState, mapDispatch)(Robot);
+export default connect(mapState, mapDispatch)(Room);
