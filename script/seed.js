@@ -18,10 +18,41 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
+
+ // Creating Rooms
+  const rooms = await Promise.all([
+
+  ])
+  console.log(`seeded ${rooms.length} rooms`)
+  console.log(`seeded successfully`)
+
+   // Creating Experiences
+  const experiences = await Promise.all([
+
+  ])
+  console.log(`seeded ${experiences.length} experiences`)
+  console.log(`seeded successfully`)
+
+   // Creating Reviews
+  const reviews = await Promise.all([
+
+  ])
+  console.log(`seeded ${reviews.length} reviews`)
+  console.log(`seeded successfully`)
+
   return {
     users: {
       cody: users[0],
       murphy: users[1]
+    },
+    rooms: {
+
+    },
+    experiences: {
+
+    },
+    reviews: {
+
     }
   }
 }
