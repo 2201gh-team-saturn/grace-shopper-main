@@ -41,11 +41,11 @@ export const fetchRoom = (id) => {
     }
   };
   
-  export default function projectReducer(state = {}, action) {
+  export default function singleRoomReducer(state = {}, action) {
     switch (action.type) {
       case SET_ROOM:
         return action.room
-      case TOGGLE_COMPLETE:
+      case TOGGLE_AVAILABLE:
         return { ...state, availble: action.availability };
       default:
         return state
