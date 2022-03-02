@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Experience } = require('../db')
+const Experience = require('../db/models/Experience')
 const { Room } = require('../db')
 
 // api/experiences
