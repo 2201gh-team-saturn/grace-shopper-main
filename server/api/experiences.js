@@ -2,8 +2,8 @@ const router = require('express').Router()
 const Experience = require('../db/models/Experience')
 const { Room } = require('../db')
 
-// api/experiences
-router.get('/', async (req, res, next) => {
+// api/
+router.get('/experiences', async (req, res, next) => {
   try {
     const experiences = await Experience.findAll();
     res.json(experiences);
@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/experiences/:id', async (req, res, next) => {
 	try {
 		const experience = await Experience.findByPk(req.params.id, {
 			include: [{ model: Room }],
