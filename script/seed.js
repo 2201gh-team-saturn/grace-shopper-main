@@ -1,5 +1,5 @@
 
-const {db, models: {User, Room}} = require('../server/db')
+const {db, models: {User, Room} } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -99,4 +99,4 @@ if (module === require.main) {
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
+module.exports = seed;
