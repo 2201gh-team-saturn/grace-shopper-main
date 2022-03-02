@@ -1,7 +1,7 @@
 'use strict'
 
-const {db, models: {User} } = require('../server/db')
-//need to import the other models, not doing it here to avoid merge conflicts!
+const {db, models: {User, Room, Experience, Review } } = require('../server/db')
+
 
 /**
  * seed - this function clears the database, updates tables to
@@ -25,10 +25,65 @@ async function seed() {
 
  // Creating Rooms
   const rooms = await Promise.all([
-    Room.create({ name: 'Moon Room', description: 'Enjoy a night sleeping on the softest clouds enjoying a 360 degree view of the moon in all her glory. Add a whole new meaning to the phrase "Goodnight Moon" in our one of a kind suite.', price: 130.00, imageUrl: 'https://images.unsplash.com/photo-1518352724948-729151797553?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTR8fG1vb24lMjByb29tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60', available: true, category: 'Astral' }),
-    Room.create({ name: 'Das Bergzimmer', description: `Enjoy a night like no other in our mountain top open air room that will make you feel like you're in the Swiss Alps. This room features our state of the art "Frisches Luft" technology that will bring the crisp Alpen air to make your stay refreshing and inspiring, with views you won't believe.`, price: 200.00, imageUrl: 'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8aG90ZWwlMjByb29tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60', available: true, category: 'Outdoors' }),
-    Room.create({ name: `The Queens Cabin`, description: `Come and experience the perfect marriage of luxury and rustic charm. This room features the very couch Princess Diana once spilled tea on and a chandelier from King Louis XIV's guest bath that he never noticed went missing, all featured in a craftsman style cabin that will have you feeling like you're in an issue of vogue living.`, price: 150.00, imageUrl: 'https://images.unsplash.com/photo-1607712617949-8c993d290809?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NzJ8fGhvdGVsJTIwcm9vbXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60', available: true, category: 'Rustic' })
+    Room.create({ 
+      name: 'Moon Room', 
+    description: 'Enjoy a night sleeping on the softest clouds enjoying a 360 degree view of the moon in all her glory. Add a whole new meaning to the phrase "Goodnight Moon" in our one of a kind suite.', 
+    price: 130.00, imageUrl: 'https://images.unsplash.com/photo-1518352724948-729151797553?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTR8fG1vb24lMjByb29tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60', 
+    available: true, 
+    category: 'Astral' }),
+        
+    Room.create({ 
+      name: 'Das Bergzimmer', 
+                 description: `Enjoy a night like no other in our mountain top open air room that will make you feel like you're in the Swiss Alps. This room features our state of the art "Frisches Luft" technology that will bring the crisp Alpen air to make your stay refreshing and inspiring, with views you won't believe.`, 
+                 price: 200.00, 
+                 imageUrl: 'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8aG90ZWwlMjByb29tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=700&q=60', 
+                 available: true, 
+                 category: 'Outdoors' }),
+      
+    Room.create({ 
+      name: `The Queens Cabin`, 
+                 description: `Come and experience the perfect marriage of luxury and rustic charm. This room features the very couch Princess Diana once spilled tea on and a chandelier from King Louis XIV's guest bath that he never noticed went missing, all featured in a craftsman style cabin that will have you feeling like you're in an issue of vogue living.`, 
+                 price: 150.00, 
+                 imageUrl: 'https://images.unsplash.com/photo-1607712617949-8c993d290809?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NzJ8fGhvdGVsJTIwcm9vbXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60', 
+                 available: true, 
+                 category: 'Rustic' }),
+    Room.create({
+      name: 'Zen Room',
+      description: "The Zen room provides guests with the most relaxing experience. Guests will have a chance to separate themselves from disruption and be completely at peace.",
+      price: 300,
+      imageUrl: "https://media.istockphoto.com/photos/luxurious-bedroom-interior-with-messy-bed-and-armchair-in-holiday-or-picture-id1326393613?b=1&k=20&m=1326393613&s=170667a&w=0&h=gEvTszklSpD_l0LmkGHoehehXLcOJs1q-Sar5lwJhE0=",
+      available: true,
+      category: 'nature'
+    }),
+    Room.create({
+      name: 'Fantasy Room',
+      description: "Ready to be feel like you're in wonderland? Fantasy room will let all your dreams come true.",
+      price: 250,
+      imageUrl: "https://media.istockphoto.com/photos/the-clock-tower-viewpoint-picture-id1135502050?b=1&k=20&m=1135502050&s=170667a&w=0&h=7RHt0TMvSPIHErTncxstO1dhL9IypWRvmWK0i7xy5E0=",
+      available: true,
+      category: 'fantasy'
+    }),
+    Room.create({
+      name: 'Space Room',
+      description: 'Ever wondered what it feels like to be an astronaut? Space room can provide you that experience!',
+      price: 300,
+      imageUrl: "https://flh.ca/media/73137/flh_20180612-luxuryspace-1.jpg?anchor=center&mode=crop&width=1200&height=600&rnd=132830010110000000",
+      available: true,
+      category: 'space'
+    }),
+    Room.create({
+      name: 'Dragon Room',
+      description: 'Welcome to our most popular room, the Dragon Room. Guests will have access to ride our friendly dragon after purchasing the experience on our site.',
+      price: 550,
+      imageUrl: "https://images2.minutemediacdn.com/image/fetch/w_2000,h_2000,c_fit/https%3A%2F%2Fwinteriscoming.net%2Ffiles%2F2019%2F05%2F804-Drogon-and-Rhaegal-fly-at-Dragonstone.jpg",
+      available: true,
+      category: 'medieval'
+    })
   ])
+
+  await users[0].setRoom(rooms[0])
+  await users[1].setRoom(rooms[1])
+
   console.log(`seeded ${rooms.length} rooms`)
   console.log(`seeded successfully`)
 
@@ -55,7 +110,7 @@ async function seed() {
       murphy: users[1]
     },
     rooms: {
-
+    
     },
     experiences: {
 
