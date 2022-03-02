@@ -8,7 +8,8 @@ import roomsReducer from './rooms'
 import singleRoomReducer from './singleRoom';
 import experiencesReducer from './experiences'
 
-const reducer = combineReducers({ auth, singleExperienceReducer, roomsReducer, singleRoomReducer, experiencesReducer} })
+//syntax issue, removed extra "}"
+const reducer = combineReducers({ auth, singleExperienceReducer, roomsReducer, singleRoomReducer, experiencesReducer})
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
