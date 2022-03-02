@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const GET_SINGLE_EXPERIENCE = 'GET_SINGLE_EXPERIENCE';
 
-const getSinglePExperience = (experience) => {
+const getSingleExperience = (experience) => {
 	return {
 		type: GET_SINGLE_EXPERIENCE,
 		experience,
@@ -16,7 +16,7 @@ export const fetchSingleExperience = (experienceId) => {
 	};
 };
 
-const experienceReducer = (state = { robots: [] }, action) => {
+const singleExperienceReducer = (state = { robots: [] }, action) => {
 	switch (action.type) {
 		case GET_SINGLE_EXPERIENCE:
 			return action.experience;
@@ -25,4 +25,4 @@ const experienceReducer = (state = { robots: [] }, action) => {
 	}
 };
 
-export default experienceReducer;
+export default singleExperienceReducer;
