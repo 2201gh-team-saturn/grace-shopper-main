@@ -1,7 +1,5 @@
 'use strict'
-
-const {db, models: {User, Room, Experience, Review } } = require('../server/db')
-
+const { db, models: { User, Room, Experience, Review, Reservation } } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -23,7 +21,7 @@ async function seed() {
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 
- // Creating Rooms
+  // Creating Rooms
   const rooms = await Promise.all([
     Room.create({ 
       name: 'Moon Room', 
@@ -48,6 +46,25 @@ async function seed() {
                  available: true, 
                  category: 'Rustic' }),
     Room.create({
+      name: 'Cave Suite',
+      description: 
+      'Ever wanted to spend a night in a cave? Come explore what mysteries exist in this naturally air conditioned suite! The cave suite offers a large stone fireplace and geothermal jacuzzi.',
+      price: 98.50,
+      imageUrl: 'https://www.masseriatorrecoccaro.com/immagini/sistema/news/foto/foto_267_7.jpg',
+      available: true,
+      category: 'natural'
+  }),
+  Room.create({
+    name: 'Stanley Suite',
+    description: 
+    "This is just your average not-haunted hotel room. Nothing themed about this room. A great place to stay for the whole family.",
+    price: 23.70,
+    imageUrl: 'https://images.weserv.nl/?url=https://the-take.com/images/uploads/screenprism/_constrain-1080w/Green-Bathroom.jpg&output=jpg',
+    available: true,
+    category: 'haunted'
+    //alternatively, category: spooky
+}),
+ Room.create({
       name: 'Zen Room',
       description: "The Zen room provides guests with the most relaxing experience. Guests will have a chance to separate themselves from disruption and be completely at peace.",
       price: 300,
@@ -87,7 +104,7 @@ async function seed() {
   console.log(`seeded ${rooms.length} rooms`)
   console.log(`seeded successfully`)
 
-   // Creating Experiences
+  // Creating Experiences
   const experiences = await Promise.all([
     Experience.create({ name: 'Moon Walk', price: 500.00, description: `Are you the type of person who has "enjoys long walks on the beach" on their dating profile? Then why not step it up with a long walk on the Moon? We promise you're dating profile will suddenly be much more interesting.`, imageUrl: 'https://images.unsplash.com/photo-1446941303752-a64bb1048d54?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bW9vbiUyMHdhbGt8ZW58MHx8MHx8&auto=format&fit=crop&w=700&q=60'}),
     Experience.create({ name: 'Alpen Wandern', price: 20.00, description: `Find yourself atop Alpen ridges with cascading views of the multitude of lakes and green fields for kilometers. If you are lucky or bring snacks with you there is a good chance you can pet a Swiss cow on your outing as well!`, imageUrl: 'https://images.unsplash.com/photo-1534764945014-02d68e5680d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGFscCUyMGhpa2V8ZW58MHx8MHx8&auto=format&fit=crop&w=700&q=60'  }),
@@ -96,10 +113,15 @@ async function seed() {
   console.log(`seeded ${experiences.length} experiences`)
   console.log(`seeded successfully`)
 
-   // Creating Reviews
+  // Creating Reviews
   const reviews = await Promise.all([
-    Review.create({text: `I cannot recomend the The Reverie Resort enough. For our birthday my twin and I came here and while they rode a dragon I was having tea with the queen and her corgies, no one had to compromisee! The range of experience the resort has to offer can truly make everyones dream come true.`})
-
+     Review.create({review_text: `I cannot recomend the The Reverie Resort enough. For our birthday my twin and I came here and while they rode a dragon I was having tea with the queen and her corgies, no one had to compromisee! The range of experience the resort has to offer can truly make everyones dream come true.`}),
+    Review.create({
+      review_text: "I had a wonderful time in the Cave Suite. Our spelunking experience was phenomenal as well! It was fun to play hide an seek with my husband in the cave system. He's been the hide and seek champion for 3 straight days now!"
+    }),
+    Review.create({
+      review_text: "I loved staying in the Stanley Suite while I was writing my novel. It's a great place for the whole family too. After all, all work and no play makes Jack a dull boy."
+    })
   ])
   console.log(`seeded ${reviews.length} reviews`)
   console.log(`seeded successfully`)
@@ -110,13 +132,15 @@ async function seed() {
       murphy: users[1]
     },
     rooms: {
-    
+      caveSuite: rooms[0],
+      stanleySuite: rooms[1]
     },
     experiences: {
-
+      
     },
     reviews: {
-
+      caveReview: reviews[0],
+      stanleyReview:reviews[1]
     }
   }
 }
