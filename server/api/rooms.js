@@ -15,7 +15,7 @@ router.get('/rooms', async (req, res, next) => {
 router.get('/rooms/:id', async (req, res, next) => {
   try {
     const roomId = req.params.id;
-    const getRoomById = await Room.findByPk(roomId); //I think this might need to be id since thats what we wrote in our route above?
+    const getRoomById = await Room.findByPk(roomId); 
     res.status(200).send(getRoomById);
   } catch (error) {
     next(error);

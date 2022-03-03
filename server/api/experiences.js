@@ -60,14 +60,12 @@ router.delete('/experiences/:id', async (req, res, next) => {
 
 router.put('/experiences/:id', async (req, res, next) => {
   try {
-    const experienceToUpdate = await Experience.findByPk(req.params.projectId);
-    experienceToUpdate.title = req.body.title;
-    experienceToUpdate.name = req.body.name,
-    experienceToUpdate.price = req.body.price,
-    experienceToUpdate.description = req.body.description,
-    experienceToUpdate.imageUrl = req.body.imageUrl,
-    await experienceToUpdate.save();
-    res.json(experienceToUpdate);
+    const experienceToUpdate = await Experience.findByPk(req.params.id);
+    if (experienceToUpdate) {
+      res.status(201).send(await experienceToUpdate.update(req.body));
+    } else {
+      res.status(404).send('experience does not exist');
+    }
   } catch (error) {
     console.error(
       'hey! you made a mistake with your experience put route'
@@ -75,6 +73,5 @@ router.put('/experiences/:id', async (req, res, next) => {
     next(error);
   }
 });
-
 
 module.exports = router;
