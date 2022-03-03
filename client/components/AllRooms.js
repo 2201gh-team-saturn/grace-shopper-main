@@ -52,7 +52,7 @@ export class AllRooms extends React.Component {
               <img src={room.imageUrl} />
               <div className='room_card'>
                 <p>
-                  <Link to={`/rooms/${room.id}`}>Name: {room.name}</Link>
+                  <Link to={`/rooms/${room.id}`} room={room}>Name: {room.name}</Link>
                   <br />
                   Description: {room.description}
                   <br />
