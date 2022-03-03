@@ -1,8 +1,9 @@
 import axios from 'axios'
 
 const SET_ROOMS= 'SET_ROOMS';
-const ADD_ROOM = 'ADD_ROOM'
-const DELETE_ROOM = 'DELETE_ROOM'
+const ADD_ROOM = 'ADD_ROOM';
+const DELETE_ROOM = 'DELETE_ROOM';
+const UPDATE_ROOM = 'UPDATE_EXPERIENCE';
 
 export const setRooms = (rooms) => {
     return {
@@ -16,14 +17,18 @@ export const setRooms = (rooms) => {
       type: ADD_ROOM,
       room
     }
-  }; 
+  };
 
   export const deleteRoom = (room) => {
     return {
       type: DELETE_ROOM,
       room
     }
-  }; 
+  };
+
+  const _updateRoom = (newRoom) => {
+    return { type: UPDATE_ROOM, updatedRoom: newRoom };
+  };
 
 export const fetchRooms = () => {
     return async (dispatch) => {
@@ -59,6 +64,15 @@ export const fetchRooms = () => {
     };
   };
 
+  export const updateRoom = (id, roomToUpdate, history) => {
+    return async (dispatch) => {
+      const response = await axios.put(`/api/experiences/${id}`, roomToUpdate);
+      const updatedRoom = response.data;
+      dispatch(_updateRoom(updatedRoom));
+      history.push('/');
+    };
+  };
+
   const initialState = [];
 
 export default (state = initialState, action) => {
@@ -69,6 +83,15 @@ export default (state = initialState, action) => {
         return [...state, action.room];
       case DELETE_ROOM:
       return state.filter((room) => room.id !== action.room.id);
+      case UPDATE_ROOM:
+      let newRooms = [...state];
+      newRooms = newRooms.map((room) => {
+        if (room.id === action.updatedRoom.id) {
+          return action.updatedRoom;
+        }
+        return room;
+      });
+      return  [...state, newRooms];
     default:
       return state;
   }

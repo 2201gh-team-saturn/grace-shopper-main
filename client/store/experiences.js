@@ -3,6 +3,7 @@ import axios from 'axios';
 const SET_EXPERIENCES = 'SET_EXPERIENCES';
 const ADD_EXPERIENCE = 'ADD_EXPERIENCE';
 const DELETE_EXPERIENCE = 'DELETE_EXPERIENCE';
+const UPDATE_EXPERIENCE = 'UPDATE_EXPERIENCE';
 
 export const setExperiences = (experiences) => {
   return {
@@ -23,6 +24,10 @@ export const _deleteExperience = (experience) => {
     type: DELETE_EXPERIENCE,
     experience,
   };
+};
+
+const _updateExperience = (newExperience) => {
+  return { type: UPDATE_EXPERIENCE, updatedExperience: newExperience };
 };
 
 export const fetchExperiences = () => {
@@ -63,6 +68,18 @@ export const deleteExperience = (id, history) => {
   };
 };
 
+export const updateExperience = (id, experienceToUpdate, history) => {
+  return async (dispatch) => {
+    const response = await axios.put(
+      `/api/experiences/${id}`,
+      experienceToUpdate
+    );
+    const updatedExperience = response.data;
+    dispatch(_updateExperience(updatedExperience));
+    history.push('/');
+  };
+};
+
 const initialState = [];
 
 export default (state = initialState, action) => {
@@ -75,6 +92,15 @@ export default (state = initialState, action) => {
       return state.filter(
         (experience) => experience.id !== action.experience.id
       );
+      case UPDATE_EXPERIENCE:
+      let newExperiences = [...state];
+      newExperiences = newExperiences.map((experience) => {
+        if (experience.id === action.updatedExperience.id) {
+          return action.updatedExperience;
+        }
+        return experience;
+      });
+      return [ ...state, newExperiences];
     default:
       return state;
   }
