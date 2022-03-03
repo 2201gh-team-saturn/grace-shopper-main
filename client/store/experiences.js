@@ -65,7 +65,7 @@ export const deleteExperience = (id, history) => {
 
 const initialState = [];
 
-export default function experienceReducer(state = initialState, action) {
+export default function experiencesReducer(state = initialState, action) {
   switch (action.type) {
     case SET_EXPERIENCES:
       return action.experiences;
