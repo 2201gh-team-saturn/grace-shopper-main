@@ -10,6 +10,7 @@ export class Experiences extends React.Component {
   render() {
     const experiences = this.props.experiences;
     const user = this.props.user;
+
     return (
       <>
       {user.type === 'employee' ? (
@@ -68,7 +69,7 @@ export class Experiences extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  experiences: state.experiences,
+  experiences: state.experiencesReducer,
   user: state.auth,
 });
 
