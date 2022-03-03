@@ -27,8 +27,20 @@ form div {
   justify-content: center;
   align-items: center;
   justify-content: center;
-}  
-.room-info img{
+  letter-spacing: 1px;
+}
+.room-info img {
   width: 60%;
   height: 60%;
+}
+.room-info__checks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.room-info__check-title {
+  display: block;
+  font-weight:bold;
+}
+.room-info__check-time {
+  letter-spacing: 1px;
 }

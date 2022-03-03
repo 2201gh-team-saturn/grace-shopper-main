@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchRoom } from '../store/singleRoom'
 import { fetchExperiences } from '../store/experiences'
 import { Link } from 'react-router-dom';
-import DatePicker from "react-datepicker";
+
 
 
 //there was a thought that I could use this to practice the useContext react hook,
@@ -40,6 +40,7 @@ class SingleRoom extends React.Component {
         return (
             <div className="single-room">
                 <Link to='/rooms'>Go Back</Link>
+                <br/>
                 <div className="room-info">
                     <div id="single-room-img">
                         <img src={room.imageUrl} />
@@ -47,6 +48,17 @@ class SingleRoom extends React.Component {
                     <div>
                         <h1>{room.name}</h1>
                         <p>{room.description}</p>
+                        <div className="room-info__checks">
+                            <div className="room-info__check">
+                                <span className="room-info__check-title">Check in </span>
+                                <span className="room-info__check-time">3 - 5 PM</span>
+                            </div>
+                            
+                            <div className="room-info__check">
+                                <span className="room-info__check-title">Check out </span>
+                                <span className="room-info__check-time">12 - 2 PM</span>
+                            </div>
+                        </div>
                         <div>
                             <p>Experiences you can only have in this room:</p>
                             <ul>
