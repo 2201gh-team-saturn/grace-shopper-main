@@ -16,7 +16,7 @@ export const fetchSingleExperience = (experienceId) => {
 	};
 };
 
-const singleExperienceReducer = (state = { robots: [] }, action) => {
+const singleExperienceReducer = (state = {}, action) => {
 	switch (action.type) {
 		case GET_SINGLE_EXPERIENCE:
 			return action.experience;

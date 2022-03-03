@@ -8,6 +8,7 @@ import AllRooms from './components/AllRooms';
 import HomePage from './components/HomePage';
 import SingleRoom from './components/SingleRoom';
 import Experiences from './components/Experiences';
+import SingleExperience from './components/SingleExperience';
 import AddRoom from './components/AddRoom';
 
 /**
@@ -30,6 +31,7 @@ class Routes extends Component {
             <Route path="/homepage" component={HomePage} />
             <Route exact path="/rooms" component={AllRooms} />
             <Route exact path="/experiences" component={Experiences} />
+            <Route exact path="/experiences/:id" component={SingleExperience} />
             <Route exact path="/room/add" component={AddRoom} />
             <Route exact path="/rooms/:id" component={SingleRoom}/>
           </Switch>
@@ -42,6 +44,7 @@ class Routes extends Component {
             <Route exact path="/rooms" component={AllRooms} />
             <Route exact path="/rooms/:id" component={SingleRoom}/>
             <Route exact path="/experiences" component={Experiences} />
+            <Route exact path="/experiences/:id" component={SingleExperience} />
           </Switch>
         )}
       </div>
