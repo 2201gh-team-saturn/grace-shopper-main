@@ -3,6 +3,7 @@ const router = require('express').Router()
 router.use('/', require('./users'))
 router.use('/', require('./rooms'))
 router.use('/', require('./experiences'))
+router.use('/', require('./cart'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')
