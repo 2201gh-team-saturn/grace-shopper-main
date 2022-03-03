@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { connect} from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchRooms, deleteRoomThunk } from '../store/rooms';
 
@@ -33,7 +33,7 @@ export class AllRooms extends React.Component {
     }
     
     return (
-      <div>
+      <div className="all_rooms_container">
         {user.type === 'employee' ? (
           <Link to={'/room/add'}>
             <div className='button_container'>
@@ -49,32 +49,33 @@ export class AllRooms extends React.Component {
         <div className='rooms'>
           {rooms.map((room) => (
             <div className='room' key={room.id}>
+            <Link to={`/rooms/${room.id}`}><h2>{room.name}</h2></Link>
               <img src={room.imageUrl} />
               <div className='room_card'>
                 <p>
-                  <Link to={`/rooms/${room.id}`}>Name: {room.name}</Link>
                   <br />
-                  Description: {room.description}
+                  <span>Description: </span>{room.description}
                   <br />
-                  Price/night: ${room.price}
+                 <span> Price/night: </span> ${room.price}
                   <br />
-                  Category: {room.category}
+                  <span>Category: </span>{room.category}
                   <br />
-                  Availability: {room.available ? 'Available' : 'Booked'}
+                 <span>Availability: </span> {room.available ? 'Available' : 'Booked'}
                 </p>
                 {user.type === 'employee' ? (
-                  <form>
+                
+                <form>
                     <button
                       type='submit'
                       className='room_delete_btn'
                       value={room.id}
                       onClick={(event) =>
-                        this.props.deleteRoom(event.target.value)
+                       this.props.deleteRooms(event.target.value)
                       }
                     >
                       Remove Room
                     </button>
-                  </form>
+                    </form>
                 ) : (
                   ''
                 )}
