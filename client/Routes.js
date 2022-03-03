@@ -6,8 +6,8 @@ import Home from './components/Home';
 import {me} from './store'
 import AllRooms from './components/AllRooms';
 import HomePage from './components/HomePage';
-import Experiences from './components/Experiences'
-import AddRoom from './components/AddRoom'
+import Experiences from './components/Experiences';
+import AddRoom from './components/AddRoom';
 
 /**
  * COMPONENT
