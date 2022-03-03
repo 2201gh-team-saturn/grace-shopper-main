@@ -25,7 +25,7 @@ module.exports = db.define('room', {
     },
     imageUrl: {
         type: Sequelize.STRING(1000),
-        defaultValue: ''
+        defaultValue: 'https://media.defense.gov/2016/Jul/01/2001565082/-1/-1/0/160701-O-ZZ999-001.PNG'
     },
     available: {
         type: Sequelize.BOOLEAN,
