@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const Experience = require('../db/models/Experience')
-const { Room } = require('../db')
+const Room = require('../db/models/Room');
 
 // api/
 router.get('/experiences', async (req, res, next) => {
@@ -22,8 +22,59 @@ router.get('/experiences/:id', async (req, res, next) => {
 		});
 		res.json(experience);
 	} catch (error) {
+    console.error('cant find that room id!')
 		next(error);
 	}
 });
+
+router.post('/experiences', async (req, res, next) => {
+  try {
+    const [newExperience, created] = await Experience.findOrCreate({
+      where: {
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description,
+        imageUrl: req.body.imageUrl,
+      },
+    });
+    if (created) {
+      res.status(201).send(newExperience);
+    }
+    res.status(409).send('youre experienced enough');
+  } catch (error) {
+    console.error('your post experience route is broken', error);
+    next(error);
+  }
+});
+
+router.delete('/experiences/:id', async (req, res, next) => {
+  try {
+    const experience = await Experience.findByPk(req.params.id);
+    experience.destroy();
+    res.send(experience);
+  } catch (error) {
+    console.error('cant unlive this experience');
+    next(error);
+  }
+});
+
+router.put('/experiences/:id', async (req, res, next) => {
+  try {
+    const experienceToUpdate = await Experience.findByPk(req.params.projectId);
+    experienceToUpdate.title = req.body.title;
+    experienceToUpdate.name = req.body.name,
+    experienceToUpdate.price = req.body.price,
+    experienceToUpdate.description = req.body.description,
+    experienceToUpdate.imageUrl = req.body.imageUrl,
+    await experienceToUpdate.save();
+    res.json(experienceToUpdate);
+  } catch (error) {
+    console.error(
+      'hey! you made a mistake with your experience put route'
+    );
+    next(error);
+  }
+});
+
 
 module.exports = router;
