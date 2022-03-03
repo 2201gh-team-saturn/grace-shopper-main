@@ -24,9 +24,6 @@
   "license": "MIT",
   "dependencies": {
     "@date-io/date-fns": "^2.13.1",
-    "@emotion/react": "^11.8.1",
-    "@emotion/styled": "^11.8.1",
-    "@mui/material": "^5.4.4",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
     "compression": "^1.7.3",
@@ -42,7 +39,6 @@
     "@babel/core": "^7.12.10",
     "@babel/preset-react": "^7.12.10",
     "@babel/register": "^7.12.10",
-    "axios": "^0.21.1",
     "axios-mock-adapter": "^1.16.0",
     "babel-loader": "^8.2.2",
     "chai": "^4.2.0",
