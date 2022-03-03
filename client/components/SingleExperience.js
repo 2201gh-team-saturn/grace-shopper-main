@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchSingleExperience } from '../store/SingleExperience';
+import { fetchSingleExperience } from '../store/singleExperience';
 import { Link } from 'react-router-dom';
 import { fetchRooms } from '../store/rooms'
 
