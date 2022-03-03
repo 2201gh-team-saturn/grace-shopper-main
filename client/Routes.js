@@ -6,6 +6,7 @@ import Home from './components/Home';
 import {me} from './store'
 import AllRooms from './components/AllRooms';
 import HomePage from './components/HomePage';
+import SingleRoom from './components/SingleRoom';
 import Experiences from './components/Experiences';
 import AddRoom from './components/AddRoom';
 
@@ -30,6 +31,7 @@ class Routes extends Component {
             <Route exact path="/rooms" component={AllRooms} />
             <Route exact path="/experiences" component={Experiences} />
             <Route exact path="/room/add" component={AddRoom} />
+            <Route exact path="/rooms/:id" component={SingleRoom}/>
           </Switch>
         ) : (
           <Switch>
@@ -38,6 +40,7 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/rooms" component={AllRooms} />
+            <Route exact path="/rooms/:id" component={SingleRoom}/>
             <Route exact path="/experiences" component={Experiences} />
           </Switch>
         )}
