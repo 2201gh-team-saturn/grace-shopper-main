@@ -8,6 +8,7 @@ import AllRooms from './components/AllRooms';
 import HomePage from './components/HomePage';
 import SingleRoom from './components/SingleRoom';
 import Experiences from './components/Experiences';
+import SingleExperience from './components/SingleExperience';
 import AddRoom from './components/AddRoom';
 import EmployeeDashboard from './components/EmployeeDashboard';
 
@@ -26,24 +27,26 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/home" component={Account} />
+            <Route exact path="/account" component={Account} />
             {/* <Redirect to="/home" /> */}
-            <Route path="/homepage" component={HomePage} />
+            <Route exact path="/" component={HomePage} />
             <Route exact path="/rooms" component={AllRooms} />
             <Route exact path="/experiences" component={Experiences} />
+            <Route exact path="/experiences/:id" component={SingleExperience} />
             <Route exact path="/room/add" component={AddRoom} />
             <Route exact path="/rooms/:id" component={SingleRoom}/>
             <Route exact path="/dashboard" component={EmployeeDashboard} />
           </Switch>
         ) : (
           <Switch>
-            <Route path='/' exact component={ Login } />
-            <Route path="/homepage" component={HomePage} />
+            <Route exact path="/account" component={Account} />
+            <Route exact path="/" component={HomePage} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/rooms" component={AllRooms} />
             <Route exact path="/rooms/:id" component={SingleRoom}/>
             <Route exact path="/experiences" component={Experiences} />
+            <Route exact path="/experiences/:id" component={SingleExperience} />
           </Switch>
         )}
       </div>
