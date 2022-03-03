@@ -16,15 +16,13 @@ export const fetchSingleExperience = (experienceId) => {
   };
 };
 
-const initialState = {};
-
-const singleExperienceReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case GET_SINGLE_EXPERIENCE:
-      return action.experience;
-    default:
-      return state;
-  }
+const singleExperienceReducer = (state = {}, action) => {
+	switch (action.type) {
+		case GET_SINGLE_EXPERIENCE:
+			return action.experience;
+		default:
+			return state;
+	}
 };
 
 export default singleExperienceReducer;
