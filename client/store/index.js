@@ -6,7 +6,7 @@ import auth from './auth'
 import singleExperienceReducer from './singleExperience'
 import roomsReducer from './rooms'
 import singleRoomReducer from './singleRoom';
-import experiencesReducer from './experiences'
+import experiencesReducer from './experiences';
 
 const reducer = combineReducers({ auth, singleExperienceReducer, roomsReducer, singleRoomReducer, experiencesReducer})
 

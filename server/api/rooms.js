@@ -15,7 +15,7 @@ router.get('/rooms', async (req, res, next) => {
 router.get('/rooms/:id', async (req, res, next) => {
   try {
     const roomId = req.params.id;
-    const getRoomById = await Room.findByPk(roomId);
+    const getRoomById = await Room.findByPk(roomId); 
     res.status(200).send(getRoomById);
   } catch (error) {
     next(error);
@@ -71,4 +71,4 @@ router.delete('/rooms/:id', async (req, res, next) => {
 });
 
 
-module.exports = router; 
+module.exports = router;
