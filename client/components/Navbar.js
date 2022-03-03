@@ -31,6 +31,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <Link to='/signup'>Sign Up</Link>
           <div className='button'> CHECK OUT <i className='fa fa-shopping-cart'></i></div>
         </div>
+        
       )}
     </nav>
     <hr />

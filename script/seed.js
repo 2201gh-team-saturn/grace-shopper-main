@@ -188,6 +188,10 @@ async function seed() {
     await zuma.setRoom(poolRoom);
     await ladybug.setRoom(artistLense);
 
+    await review1.setUser(cody);
+    await review2.setUser(leah);
+    await review3.setUser(tedi)
+
   } catch (err) {
     console.log(err)
   }

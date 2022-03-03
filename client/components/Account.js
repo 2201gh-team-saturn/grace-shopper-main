@@ -10,7 +10,6 @@ export const Account = props => {
   return (
     <div>
       <h3>Welcome back {username}! </h3>
-
     </div>
   )
 }
