@@ -138,8 +138,8 @@ span {
 }
 
 footer {
-  background-color: rgb(29, 64, 87);
-  color: white;
+  background-color: rgb(177, 177, 177);
+  color: rgb(0, 0, 0);
   width: 100%;
 }
 
@@ -189,4 +189,27 @@ footer {
   }
   .button > .ld {
     font-size: initial
+  }
+
+  .homepage_container{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: 1fr;
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+  }
+  .reviews_container {
+   
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(1);
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+      padding: 15px;
+      font-style: italic;
+  }
+
+  .reviews_container h3{
+    font-style: normal;
+    color:rgb(141, 141, 141)
   }

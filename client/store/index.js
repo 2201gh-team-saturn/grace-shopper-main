@@ -7,8 +7,9 @@ import singleExperienceReducer from './singleExperience'
 import roomsReducer from './rooms'
 import singleRoomReducer from './singleRoom';
 import experiencesReducer from './experiences';
+import usersReducer from './users'
 
-const reducer = combineReducers({ auth, singleExperienceReducer, roomsReducer, singleRoomReducer, experiencesReducer})
+const reducer = combineReducers({ auth, singleExperienceReducer, roomsReducer, singleRoomReducer, experiencesReducer, usersReducer})
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

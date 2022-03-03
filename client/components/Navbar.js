@@ -18,7 +18,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
             Logout
           </a>
            {/* Check out cart icon */}
-          <div class='button'> CHECK OUT <i class='fa fa-shopping-cart'></i></div>
+          <div className='button'> CHECK OUT <i className='fa fa-shopping-cart'></i></div>
         </div>
       ) : (
         <div className='navbar'>

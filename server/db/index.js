@@ -20,6 +20,9 @@ Reservation.belongsTo(Room);
 User.hasMany(Reservation);
 Reservation.belongsTo(User);
 
+User.hasMany(Review);
+Review.belongsTo(User)
+
 module.exports = {
   db,
   models: {

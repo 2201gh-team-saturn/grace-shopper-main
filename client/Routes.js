@@ -9,6 +9,7 @@ import HomePage from './components/HomePage';
 import SingleRoom from './components/SingleRoom';
 import Experiences from './components/Experiences';
 import AddRoom from './components/AddRoom';
+import EmployeeDashboard from './components/EmployeeDashboard';
 
 /**
  * COMPONENT
@@ -32,6 +33,7 @@ class Routes extends Component {
             <Route exact path="/experiences" component={Experiences} />
             <Route exact path="/room/add" component={AddRoom} />
             <Route exact path="/rooms/:id" component={SingleRoom}/>
+            <Route exact path="/dashboard" component={EmployeeDashboard} />
           </Switch>
         ) : (
           <Switch>
