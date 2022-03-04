@@ -19,4 +19,5 @@ module.exports = db.define('experience', {
         type: Sequelize.STRING(1000),
         defaultValue: ''
     }
+  }
 })
