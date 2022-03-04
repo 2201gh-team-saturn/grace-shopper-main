@@ -44,7 +44,7 @@ class AddRoom extends Component {
             <label>Price</label>
             <input name='price' placeholder='Room price' onChange={handleChange} value={this.state.price} />
 
-            <label>Category</label>
+            <label>Theme</label>
             <select name='category' onChange={handleChange} value={this.state.category}>
               <option>Fantasy</option>
               <option>Haunted</option>
@@ -54,12 +54,14 @@ class AddRoom extends Component {
               <option>Water</option>
               <option>Art</option>
             </select>
+            <button>+ Theme</button>
 
-            <label>Photo link</label>
+            <label>Photo Image </label>
             <input name='imageUrl' placeholder='image url' onChange={handleChange} value={this.state.imageUrl} />
+            <button type='submit'>Submit</button>
           </div>
 
-          <button type='submit'>Submit</button>
+         
         </form>
       </div>
     );
