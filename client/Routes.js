@@ -35,12 +35,11 @@ class Routes extends Component {
             <Route exact path="/experiences/:id" component={SingleExperience} />
             <Route exact path="/room/add" component={AddRoom} />
             <Route exact path="/rooms/:id" component={SingleRoom}/>
-            <Route exact path="/dashboard" component={EmployeeDashboard} />
+            <Route exact path="/employee-dashboard" component={EmployeeDashboard} />
           </Switch>
         ) : (
           <Switch>
             <Route exact path="/account" component={Account} />
-            <Route exact path="/" component={HomePage} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/rooms" component={AllRooms} />

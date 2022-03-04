@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const Room = require('../db/models/Room');
+const Theme = require('../db/models/Theme');
 
 /* mounted on /api */
 router.get('/rooms', async (req, res, next) => {
   try {
-    const getAllRooms = await Room.findAll();
+    const getAllRooms = await Room.findAll({
+      include: [Theme]
+    });
     res.status(200).send(getAllRooms);
   } catch (error) {
     next(error);
@@ -15,7 +18,9 @@ router.get('/rooms', async (req, res, next) => {
 router.get('/rooms/:id', async (req, res, next) => {
   try {
     const roomId = req.params.id;
-    const getRoomById = await Room.findByPk(roomId); 
+    const getRoomById = await Room.findByPk(roomId, {
+      include: [Theme]
+    }); 
     res.status(200).send(getRoomById);
   } catch (error) {
     next(error);

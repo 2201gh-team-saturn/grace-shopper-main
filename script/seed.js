@@ -1,5 +1,5 @@
 'use strict'
-const { db, models: { User, Room, Experience, Review, Reservation } } = require('../server/db')
+const { db, models: { User, Room, Experience, Review, Reservation, Theme } } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -175,6 +175,16 @@ async function seed() {
     const review2 = await Review.create({ review_text: "I had a wonderful time in the Cave Suite. Our spelunking experience was phenomenal as well! It was fun to play hide an seek with my husband in the cave system. He's been the hide and seek champion for 3 straight days now!" });
     const review3 = await Review.create({ review_text: "I loved staying in the Stanley Suite while I was writing my novel. It's a great place for the whole family too. After all, all work and no play makes Jack a dull boy." });
 
+    // Creating Themes 
+    const space = await Theme.create({ name: 'Space'})
+    const fantasy = await Theme.create({ name: 'Fantasy'})
+    const haunted = await Theme.create({ name: 'Haunted'})
+    const nature = await Theme.create({ name: 'Nature'})
+    const water = await Theme.create({ name: 'Water'})
+    const rustic = await Theme.create({ name: 'Rustic'})
+    const art = await Theme.create({ name: 'Art'})
+   
+
     //Set associations
     await moonWalk.setRoom(moonRoom);
     await alpenWandern.setRoom(dasBergzimmer);
@@ -191,6 +201,19 @@ async function seed() {
     await review1.setUser(cody);
     await review2.setUser(leah);
     await review3.setUser(tedi)
+
+    await moonRoom.setThemes(space);
+    await dasBergzimmer.setThemes(nature);
+    await queensCabin.setThemes(rustic);
+    await caveSuite.setThemes(nature);
+    await zenRoom.setThemes(nature);
+    await stanleySuite.setThemes(haunted);
+    await fantasyRoom.setThemes(fantasy);
+    await spaceRoom.setThemes(space);
+    await dragonRoom.setThemes(fantasy);
+    await poolRoom.setThemes(water);
+    await shedroom.setThemes(nature);
+    await artistLense.setThemes(art);
 
   } catch (err) {
     console.log(err)
