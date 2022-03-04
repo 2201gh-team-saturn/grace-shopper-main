@@ -15,14 +15,14 @@ module.exports = db.define('room', {
     validate: {
       notEmpty: true,
     },
-  },
-  price: {
-    type: Sequelize.FLOAT,
-    defaultValue: 150.0,
-    validate: {
-      isDecimal: true,
-    },
 
+    price: {
+        type: Sequelize.FLOAT,
+        defaultValue: 150.00,
+        // validate: { <------ should we get rid of this?
+        //     isDecimal: true
+        // }
+  },
     imageUrl: {
         type: Sequelize.STRING(1000),
         defaultValue: 'https://media.defense.gov/2016/Jul/01/2001565082/-1/-1/0/160701-O-ZZ999-001.PNG'

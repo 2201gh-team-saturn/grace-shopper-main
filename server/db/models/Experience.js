@@ -8,16 +8,15 @@ module.exports = db.define('experience', {
     validate: {
       notEmpty: true,
     },
-  },
-  description: {
-    type: Sequelize.TEXT,
-    allowNull: true,
-    validate: {
-      notEmpty: true,
+    description: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+        validate: {
+            notEmpty: true
+        }
     },
-  },
-  imageUrl: {
-    type: Sequelize.STRING(1000),
-    defaultValue: '',
-  },
-});
+    imageUrl: {     
+        type: Sequelize.STRING(1000),
+        defaultValue: ''
+    }
+})

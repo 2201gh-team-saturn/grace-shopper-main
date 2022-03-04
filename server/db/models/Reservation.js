@@ -15,16 +15,40 @@ module.exports = db.define('reservation', {
         validate: {
             notEmpty: true,
         }
-    },
-
+    }
 })
 
+/*
+Alternatively:
 
-//leaving this here incase we want to store it for later in the project or remove totally later
-// totalPrice: {
-//     type: Sequelize.FLOAT,
-//     defaultValue: 150.00,
-//     validate: {
-//         isDecimal: true
-//     }
-// }
+module.exports = db.define('reservation', {
+    totalNumofDays: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        }
+    }
+})
+
+module.exports = db.define('reservation', {
+    startDate: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        }
+    },
+    endDate: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        }
+    }
+})
+
+*/
+
+
+

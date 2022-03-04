@@ -162,6 +162,19 @@ async function seed() {
       imageUrl: 'https://t4.ftcdn.net/jpg/02/98/61/45/240_F_298614534_BfuDxvYZ81v9X3p94cClHuD71jxMKZpM.jpg'
     });
 
+    const reservation1 = await Reservation.create({
+      startDate: new Date('2022-04-09 00:00:00'),
+      endDate: new Date('2022-04-12 00:00:00'),
+    });
+    const reservation2 = await Reservation.create({
+      startDate: new Date('2022-04-12 00:00:00'),
+      endDate: new Date('2022-04-16 00:00:00'),
+    });
+    const reservation3 = await Reservation.create({
+      startDate: new Date('2021-12-30 00:00:00'),
+      endDate: new Date('2022-01-02 00:00:00'),
+    });
+
     // Creating Reviews
     const review1 = await Review.create({ review_text: `I cannot recomend the The Reverie Resort enough. For our birthday my twin and I came here and while they rode a dragon I was having tea with the queen and her corgies, no one had to compromisee! The range of experience the resort has to offer can truly make everyones dream come true.` });
     const review2 = await Review.create({ review_text: "I had a wonderful time in the Cave Suite. Our spelunking experience was phenomenal as well! It was fun to play hide an seek with my husband in the cave system. He's been the hide and seek champion for 3 straight days now!" });
@@ -186,13 +199,18 @@ async function seed() {
     await skyBoatRide.setRoom(fantasyRoom);
     await narnia.setRoom(shedroom);
     await margicMirror.setRoom(fantasyRoom);
-    //since zuma was going for a swim today :)
-    await zuma.setRoom(poolRoom);
-    await ladybug.setRoom(artistLense);
 
     await review1.setUser(cody);
     await review2.setUser(leah);
     await review3.setUser(tedi)
+
+    await tedi.addReservation(reservation1);
+    await tedi.addReservation(reservation2);
+    await zuma.addReservation(reservation3);
+
+    await dasBergzimmer.setReservations(reservation1);
+    await spaceRoom.setReservations(reservation2);
+    await poolRoom.setReservations(reservation3);
 
     await moonRoom.setThemes(space);
     await dasBergzimmer.setThemes(nature);
