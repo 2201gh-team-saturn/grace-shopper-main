@@ -22,15 +22,9 @@ module.exports = db.define('room', {
     validate: {
       isDecimal: true,
     },
-  },
-  imageUrl: {
-    type: Sequelize.STRING(1000),
-    defaultValue:
-      'https://media.defense.gov/2016/Jul/01/2001565082/-1/-1/0/160701-O-ZZ999-001.PNG',
-  },
-  available: {
-    type: Sequelize.BOOLEAN,
-    allowNull: false,
-    defaultValue: true,
-  },
+
+    imageUrl: {
+        type: Sequelize.STRING(1000),
+        defaultValue: 'https://media.defense.gov/2016/Jul/01/2001565082/-1/-1/0/160701-O-ZZ999-001.PNG'
+    },
 });

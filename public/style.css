@@ -216,3 +216,8 @@ footer {
     font-style: normal;
     color:rgb(141, 141, 141)
   }
+
+  .add_room{
+    display: flex;
+    flex-direction: column;
+  }
