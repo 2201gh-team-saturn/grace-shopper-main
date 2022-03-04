@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Cart = require('../db/models/cart');
+const Cart = require('../db/models/Cart');
 
 /* mounted on /api */
 router.get('/cart', async (req, res, next) => {
