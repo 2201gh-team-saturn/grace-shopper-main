@@ -16,11 +16,15 @@ module.exports = db.define('reservation', {
             notEmpty: true,
         }
     },
-    totalPrice: {
-        type: Sequelize.FLOAT,
-        defaultValue: 150.00,
-        validate: {
-            isDecimal: true
-        }
-    }
+
 })
+
+
+//leaving this here incase we want to store it for later in the project or remove totally later
+// totalPrice: {
+//     type: Sequelize.FLOAT,
+//     defaultValue: 150.00,
+//     validate: {
+//         isDecimal: true
+//     }
+// }
