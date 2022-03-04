@@ -13,6 +13,7 @@ export class Experiences extends React.Component {
 
     return (
       <>
+       <div className='all_experiences_container'></div>
         {user.type === 'employee' ? (
           <Link to={'/experiences/add'}>
             <div className='button_container'>
@@ -25,9 +26,7 @@ export class Experiences extends React.Component {
           ''
         )}
 
-        <div id='all-experiences-container'>
-          <h1 className='experiences'>Experience Your Reverie</h1>
-          <ul className='container'>
+        <div className='experiences'>
             {experiences.map((experience) => (
               <div className='experience' key={experience.id}>
                 <Link to={`/experiences/${experience.id}`}>
@@ -62,7 +61,6 @@ export class Experiences extends React.Component {
                 )}
               </div>
             ))}
-          </ul>
         </div>
       </>
     );
