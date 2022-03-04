@@ -1,9 +1,9 @@
-import React, {Component, Fragment} from 'react'
-import {connect} from 'react-redux'
-import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
+import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
+import { withRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { Login, Signup } from './components/AuthForm';
 import Account from './components/Account';
-import {me} from './store'
+import { me } from './store'
 import AllRooms from './components/AllRooms';
 import HomePage from './components/HomePage';
 import SingleRoom from './components/SingleRoom';
@@ -21,32 +21,33 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const { isLoggedIn } = this.props
 
     return (
       <div>
         {isLoggedIn ? (
           <Switch>
             <Route exact path="/account" component={Account} />
-           
+
             <Route exact path="/" component={HomePage} />
             <Route exact path="/rooms" component={AllRooms} />
             <Route exact path="/experiences" component={Experiences} />
             <Route exact path="/experiences/:id" component={SingleExperience} />
             <Route exact path="/room/add" component={AddRoom} />
-            <Route exact path="/rooms/:id" component={SingleRoom}/>
+            <Route exact path="/rooms/:id" component={SingleRoom} />
             <Route exact path="/employee-dashboard" component={EmployeeDashboard} />
-            
+
             {/* Needs to be at the end of the list in order to redirect the user to the home page */}
             <Redirect to="/" />
           </Switch>
         ) : (
           <Switch>
+            <Route exact path="/" component={HomePage} />
             <Route exact path="/account" component={Account} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/rooms" component={AllRooms} />
-            <Route exact path="/rooms/:id" component={SingleRoom}/>
+            <Route exact path="/rooms/:id" component={SingleRoom} />
             <Route exact path="/experiences" component={Experiences} />
             <Route exact path="/experiences/:id" component={SingleExperience} />
           </Switch>
