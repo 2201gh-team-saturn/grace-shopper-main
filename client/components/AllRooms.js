@@ -31,7 +31,7 @@ export class AllRooms extends React.Component {
         </div>
       );
     }
-    
+
     return (
       <div className="all_rooms_container">
         {user.type === 'employee' ? (
@@ -59,12 +59,12 @@ export class AllRooms extends React.Component {
                   <br />
                  <span> Price/night: </span> ${room.price}
                   <br />
-                  <span>Category: </span>{room.category}
+                   <span>Category: </span>{room.category} {/* need to change this to new category table assotiation? */}
                   <br />
                  <span>Availability: </span> {room.available ? 'Available' : 'Booked'}
                 </p>
                 {user.type === 'employee' ? (
-                
+
                 <form>
                     <button
                       type='submit'
