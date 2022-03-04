@@ -6,4 +6,4 @@ module.exports = db.define('cart', {
         type: Sequelize.INTEGER,
         defaultValue: 1,
     }
-})
+});

@@ -42,13 +42,12 @@ export const fetchExperiences = () => {
   };
 };
 
-export const addExperience = (name, price, description, imageUrl) => {
+export const addExperience = (name, description, imageUrl) => {
   return async (dispatch) => {
     try {
       const { data: created } = await axios.post(
         '/api/experiences',
         name,
-        price,
         description,
         imageUrl
       );

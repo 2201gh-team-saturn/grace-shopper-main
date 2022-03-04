@@ -28,19 +28,21 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route exact path="/account" component={Account} />
-            {/* <Redirect to="/home" /> */}
+           
             <Route exact path="/" component={HomePage} />
             <Route exact path="/rooms" component={AllRooms} />
             <Route exact path="/experiences" component={Experiences} />
             <Route exact path="/experiences/:id" component={SingleExperience} />
             <Route exact path="/room/add" component={AddRoom} />
             <Route exact path="/rooms/:id" component={SingleRoom}/>
-            <Route exact path="/dashboard" component={EmployeeDashboard} />
+            <Route exact path="/employee-dashboard" component={EmployeeDashboard} />
+            
+            {/* Needs to be at the end of the list in order to redirect the user to the home page */}
+            <Redirect to="/" />
           </Switch>
         ) : (
           <Switch>
             <Route exact path="/account" component={Account} />
-            <Route exact path="/" component={HomePage} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/rooms" component={AllRooms} />

@@ -32,7 +32,6 @@ router.post('/experiences', async (req, res, next) => {
     const [newExperience, created] = await Experience.findOrCreate({
       where: {
         name: req.body.name,
-        price: req.body.price,
         description: req.body.description,
         imageUrl: req.body.imageUrl,
       },

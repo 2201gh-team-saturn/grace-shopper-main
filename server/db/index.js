@@ -8,19 +8,23 @@ const Review = require('./models/Review');
 const Reservation = require('./models/Reservation');
 const Cart = require('./models/Cart')
 const CartItem = require('./models/CartIem')
+const Theme = require('./models/Theme')
 
 //associations could go here!
-Room.hasMany(User);
-User.belongsTo(Room);
-
-Room.hasMany(Experience);
-Experience.belongsTo(Room);
-
+// Many to many association between rooms and reservations
+// Room.belongsToMany(Reservation, {through: 'booked_room', constraints: false, allowNull:true, defaultValue:null});
+// Reservation.belongsToMany(Room, {through: 'booked_room', constraints: false, allowNull:true, defaultValue:null});
+// Room.belongsToMany(Reservation, {through: 'booked_room'});
+// Reservation.belongsToMany(Room, {through: 'booked_room'});
 Room.hasMany(Reservation);
 Reservation.belongsTo(Room);
 
+// One to many association between users and reservations
 User.hasMany(Reservation);
 Reservation.belongsTo(User);
+
+Room.hasMany(Experience);
+Experience.belongsTo(Room);
 
 User.hasMany(Review);
 Review.belongsTo(User);
@@ -31,7 +35,11 @@ User.belongsTo(Cart)
 CartItem.belongsTo(Cart)
 Cart.hasMany(CartItem)
 
+Reservation.hasMany(Review);
+Review.belongsTo(Reservation)
 
+Room.belongsToMany(Theme, {through: "rooms_themes" }); //creates a new table that stores FK and PK , setTheme() comes from this
+Theme.belongsToMany(Room, {through: "rooms_themes" });
 
 module.exports = {
   db,
@@ -40,5 +48,7 @@ module.exports = {
     Experience,
     Review,
     Room,
+    Reservation,
+    Theme
   },
 };
