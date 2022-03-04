@@ -19,9 +19,9 @@ module.exports = db.define('room', {
     price: {
         type: Sequelize.FLOAT,
         defaultValue: 150.00,
-        validate: {
-            isDecimal: true
-        }
+        // validate: { <------ should we get rid of this?
+        //     isDecimal: true
+        // }
     },
     imageUrl: {
         type: Sequelize.STRING(1000),

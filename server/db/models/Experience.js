@@ -9,12 +9,6 @@ module.exports = db.define('experience', {
             notEmpty: true
         }
     },
-    price: {
-        type: Sequelize.FLOAT,
-        validate: {
-            notEmpty: true
-        }
-    },
     description: {
         type: Sequelize.TEXT,
         allowNull: true,

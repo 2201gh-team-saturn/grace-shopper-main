@@ -15,12 +15,37 @@ module.exports = db.define('reservation', {
         validate: {
             notEmpty: true,
         }
-    },
-    totalPrice: {
-        type: Sequelize.FLOAT,
-        defaultValue: 150.00,
+    }
+})
+
+/*
+Alternatively:
+
+module.exports = db.define('reservation', {
+    totalNumofDays: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
         validate: {
-            isDecimal: true
+            notEmpty: true,
         }
     }
 })
+
+module.exports = db.define('reservation', {
+    startDate: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        }
+    },
+    endDate: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        }
+    }
+})
+
+*/

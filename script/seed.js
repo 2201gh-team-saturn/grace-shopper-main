@@ -123,51 +123,56 @@ async function seed() {
     // Creating Experiences
     const moonWalk = await Experience.create({
       name: 'Moon Walk',
-      price: 500.00,
       description: `Are you the type of person who has "enjoys long walks on the beach" on their dating profile? Then why not step it up with a long walk on the Moon? We promise you're dating profile will suddenly be much more interesting.`,
       imageUrl: 'https://images.unsplash.com/photo-1446941303752-a64bb1048d54?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bW9vbiUyMHdhbGt8ZW58MHx8MHx8&auto=format&fit=crop&w=700&q=60'
     });
     const alpenWandern = await Experience.create({
       name: 'Alpen Wandern',
-      price: 20.00,
       description: `Find yourself atop Alpen ridges with cascading views of the multitude of lakes and green fields for kilometers. If you are lucky or bring snacks with you there is a good chance you can pet a Swiss cow on your outing as well!`,
       imageUrl: 'https://images.unsplash.com/photo-1534764945014-02d68e5680d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGFscCUyMGhpa2V8ZW58MHx8MHx8&auto=format&fit=crop&w=700&q=60'
     });
     const teaWQueen = await Experience.create({
       name: 'Tea With The Queen',
-      price: 100.00,
       description: `Find yourself atop Alpen ridges with cascading views of the multitude of lakes and green fields for kilometers. If you are lucky or bring snacks with you there is a good chance you can pet a Swiss cow on your outing as well!`,
       imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ26pQkNLsjb0PMGG5eUFNIacGdKb50Ck0ZLEzeOFhVRRy7ZoabDoZ1waP94gsNzJDTJXE&usqp=CAU'
     });
     const spelunking = await Experience.create({
       name: 'Spelunking',
-      price: 75.00,
       description: `What wonders could exist within the cave system inside your hotel room? An experienced guide will lead you through the passages while you sharing important geological and historical facts about our private caves!`,
       imageUrl: 'https://images.unsplash.com/photo-1600201319330-e99245e614c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'
     });
     const ouijaBoard = await Experience.create({
       name: 'Ouija Board',
-      price: 5.00,
       description: "Do you wish to commune with the spirits that haunt this room? Now's your chance to talk to the evil forces behind the many mysterious caretaker deaths that have occured here.",
       imageUrl: 'https://images.unsplash.com/photo-1571235398671-05a08a7a7e20?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1742&q=80'
     });
     const skyBoatRide = await Experience.create({
       name: 'Boat Ride through the sky',
-      price: 170.00,
       description: 'Take a ride at night through the sky on a clear night and see the world through a beautiful view. Come relax, have a romantic night or a self care night that clears your mind.  ',
       imageUrl: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OTN8fGZhbnRhc3klMjByb29tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60'
     });
     const narnia = await Experience.create({
       name: 'Narnia Day Trip',
-      price: 230.00,
       description: 'Take a day trip to Narnia',
       imageUrl: 'https://t4.ftcdn.net/jpg/02/02/82/19/240_F_202821927_aB8PyDK4RnTx3bfYyoy9wYP40nx5vvMM.jpg'
     });
     const margicMirror = await Experience.create({
       name: 'Magic Mirror',
-      price: 40.00,
       description: "If you know Harry Potter then you know this mirror from Sorcerer's Stone. Come experience the very mirror harry sat in front of.",
       imageUrl: 'https://t4.ftcdn.net/jpg/02/98/61/45/240_F_298614534_BfuDxvYZ81v9X3p94cClHuD71jxMKZpM.jpg'
+    });
+
+    const reservation1 = await Reservation.create({
+      startDate: new Date('2022-04-09 00:00:00'),
+      endDate: new Date('2022-04-12 00:00:00'),
+    });
+    const reservation2 = await Reservation.create({
+      startDate: new Date('2022-04-12 00:00:00'),
+      endDate: new Date('2022-04-16 00:00:00'),
+    });
+    const reservation3 = await Reservation.create({
+      startDate: new Date('2021-12-30 00:00:00'),
+      endDate: new Date('2022-01-02 00:00:00'),
     });
 
     // Creating Reviews
@@ -184,13 +189,18 @@ async function seed() {
     await skyBoatRide.setRoom(fantasyRoom);
     await narnia.setRoom(shedroom);
     await margicMirror.setRoom(fantasyRoom);
-    //since zuma was going for a swim today :) 
-    await zuma.setRoom(poolRoom);
-    await ladybug.setRoom(artistLense);
 
     await review1.setUser(cody);
     await review2.setUser(leah);
     await review3.setUser(tedi)
+
+    await tedi.addReservation(reservation1);
+    await tedi.addReservation(reservation2);
+    await zuma.addReservation(reservation3);
+
+    await dasBergzimmer.setReservations(reservation1);
+    await spaceRoom.setReservations(reservation2);
+    await poolRoom.setReservations(reservation3);
 
   } catch (err) {
     console.log(err)

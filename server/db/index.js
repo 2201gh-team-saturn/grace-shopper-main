@@ -8,17 +8,20 @@ const Review = require('./models/Review');
 const Reservation = require('./models/Reservation');
 
 //associations could go here!
-Room.hasMany(User);
-User.belongsTo(Room);
-
-Room.hasMany(Experience);
-Experience.belongsTo(Room);
-
+// Many to many association between rooms and reservations
+// Room.belongsToMany(Reservation, {through: 'booked_room', constraints: false, allowNull:true, defaultValue:null});
+// Reservation.belongsToMany(Room, {through: 'booked_room', constraints: false, allowNull:true, defaultValue:null});
+// Room.belongsToMany(Reservation, {through: 'booked_room'});
+// Reservation.belongsToMany(Room, {through: 'booked_room'});
 Room.hasMany(Reservation);
 Reservation.belongsTo(Room);
 
+// One to many association between users and reservations
 User.hasMany(Reservation);
 Reservation.belongsTo(User);
+
+Room.hasMany(Experience);
+Experience.belongsTo(Room);
 
 User.hasMany(Review);
 Review.belongsTo(User)
@@ -30,5 +33,6 @@ module.exports = {
     Experience,
     Review,
     Room,
+    Reservation
   },
 };
