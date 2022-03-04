@@ -6,6 +6,8 @@ const User = require('./models/User');
 const Experience = require('./models/Experience');
 const Review = require('./models/Review');
 const Reservation = require('./models/Reservation');
+const Cart = require('./models/Cart')
+const CartItem = require('./models/CartIem')
 
 //associations could go here!
 Room.hasMany(User);
@@ -21,7 +23,15 @@ User.hasMany(Reservation);
 Reservation.belongsTo(User);
 
 User.hasMany(Review);
-Review.belongsTo(User)
+Review.belongsTo(User);
+
+Cart.belongsTo(User)
+User.belongsTo(Cart)
+
+CartItem.belongsTo(Cart)
+Cart.hasMany(CartItem)
+
+
 
 module.exports = {
   db,
