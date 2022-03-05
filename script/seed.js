@@ -1,5 +1,5 @@
 'use strict'
-const { db, models: { User, Room, Experience, Review, Reservation, Theme } } = require('../server/db')
+const { db, models: { User, Room, Experience, Review, Reservation, Theme, Cart, CartItem } } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -175,6 +175,34 @@ async function seed() {
       endDate: new Date('2022-01-02 00:00:00'),
     });
 
+    const codyCart = await Cart.create({
+      totalQuantity: 4,
+    })
+    const murphyCart = await Cart.create({
+      totalQuantity: 4,
+    })
+    const leahCart = await Cart.create({
+      totalQuantity: 4,
+    })
+    const tediCart = await Cart.create({
+      totalQuantity: 4,
+    })
+    const zumaCart = await Cart.create({
+      totalQuantity: 4,
+    })
+    const ladybugCart = await Cart.create({
+      totalQuantity: 4,
+    })
+    const successfulBWCart = await Cart.create({
+      totalQuantity: 4,
+    })
+    const murphyCartItem1 = await CartItem.create({
+      numberOfNights: 2,
+    })
+    const murphyCartItem2 = await CartItem.create({
+      numberOfNights: 2,
+    })
+
     // Creating Reviews
     const review1 = await Review.create({ review_text: `I cannot recomend the The Reverie Resort enough. For our birthday my twin and I came here and while they rode a dragon I was having tea with the queen and her corgies, no one had to compromisee! The range of experience the resort has to offer can truly make everyones dream come true.` });
     const review2 = await Review.create({ review_text: "I had a wonderful time in the Cave Suite. Our spelunking experience was phenomenal as well! It was fun to play hide an seek with my husband in the cave system. He's been the hide and seek champion for 3 straight days now!" });
@@ -224,6 +252,17 @@ async function seed() {
     await poolRoom.setThemes(water);
     await shedroom.setThemes(nature);
     await artistLense.setThemes(art);
+
+    // await cart1.setCartItems(cartItem1);
+    // await cart1.setCartItems(cartItem2);
+    await murphyCartItem1.setCarts(murphyCart)
+    await murphyCartItem2.setCarts(murphyCart)
+
+    await murphyCart.setUser(murphy);
+
+    await murphyCartItem1.setRoom(shedroom);
+    await murphyCartItem2.setRoom(artistLense);
+
 
   } catch (err) {
     console.log(err)
