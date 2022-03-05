@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Cart = require('../db/models/Cart');
 const CartItem = require('../db/models/CartItem')
+const Room = require('../db/models/Room')
 
 /* mounted on /api */
 // router.get('/cart', async (req, res, next) => {
@@ -18,18 +19,37 @@ const CartItem = require('../db/models/CartItem')
 router.get('/cart/:id', async (req, res, next) => {
   try {
     //maybe find or create
-    const cartItemId = req.params.id;
-    const cartItemById = await CartItem.findAll({
+    const cartId = req.params.id;
+    const cartById = await CartItem.findAll({
       where: {
-        cartId: cartItemId
+        cartId: cartId
       },
+      include: [Room]
     });
 
-    res.status(200).send(cartItemById);
+    res.status(200).send(cartById);
   } catch (error) {
     next(error);
   }
 });
+
+// router.put('/cart/:id/decreaseQuantity', async(req, res, next) => {
+//   try{
+//     const cartId = req.params.id;
+//     const {cartItemId} = req.body;
+//     const decreaseRoomQty = await shopping_carts.findOne({
+//       where: {
+//         cartId: cartId,
+//         cartItemId: cartItemId
+//       }
+//      });
+//     //  if (){
+       
+//     //  }
+//   } catch(error){
+//     next(error)
+//   }
+// })
 
 router.delete('/cart/:id', async (req, res, next) => {
   try {

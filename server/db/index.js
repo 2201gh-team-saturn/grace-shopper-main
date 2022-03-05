@@ -36,8 +36,10 @@ User.hasOne(Cart)
 // Cart.hasOne(User)
 
 
-CartItem.belongsToMany(Cart)
-Cart.belongsToMany(CartItem)
+const shopping_cart = db.define('shopping_cart',{}, {timestamps: false})
+
+CartItem.belongsToMany(Cart, {through: "shopping_cart"})
+Cart.belongsToMany(CartItem, {through: "shopping_cart"})
 
 /* MAY EDIT */
 CartItem.belongsTo(Cart);
@@ -62,6 +64,7 @@ module.exports = {
     Reservation,
     Theme,
     Cart,
-    CartItem
+    CartItem,
+    shopping_cart
   },
 };
