@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Cart = require('../db/models/Cart');
 const CartItem = require('../db/models/CartItem')
-const { models: { shopping_cart}} = require('../db')
 
 /* mounted on /api */
 // router.get('/cart', async (req, res, next) => {
