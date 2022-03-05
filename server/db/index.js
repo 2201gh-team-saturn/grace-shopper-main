@@ -29,11 +29,19 @@ Experience.belongsTo(Room);
 User.hasMany(Review);
 Review.belongsTo(User);
 
-Cart.hasOne(User)
-User.belongsTo(Cart)
+Cart.belongsTo(User)
+User.hasOne(Cart)
 
-CartItem.belongsToMany(Cart, {through: "shopping_cart"})
-Cart.belongsToMany(CartItem, {through: "shopping_cart"})
+// User.belongsTo(Cart)
+// Cart.hasOne(User)
+
+
+const shopping_cart = db.define('shopping_cart')
+CartItem.belongsToMany(Cart, {through: "shopping_carts"})
+Cart.belongsToMany(CartItem, {through: "shopping_carts"})
+
+CartItem.belongsTo(Room);
+Room.hasMany(CartItem);
 
 Reservation.hasMany(Review);
 Review.belongsTo(Reservation)
@@ -49,6 +57,9 @@ module.exports = {
     Review,
     Room,
     Reservation,
-    Theme
+    Theme,
+    Cart,
+    CartItem,
+    shopping_cart
   },
 };
