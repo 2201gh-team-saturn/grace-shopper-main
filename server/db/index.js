@@ -29,8 +29,8 @@ Experience.belongsTo(Room);
 User.hasMany(Review);
 Review.belongsTo(User);
 
-Cart.belongsTo(User)
-User.hasOne(Cart)
+Cart.hasOne(User)
+User.belongsTo(Cart)
 
 // User.belongsTo(Cart)
 // Cart.hasOne(User)
