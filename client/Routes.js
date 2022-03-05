@@ -11,6 +11,7 @@ import Experiences from './components/Experiences';
 import SingleExperience from './components/SingleExperience';
 import AddRoom from './components/AddRoom';
 import EmployeeDashboard from './components/EmployeeDashboard';
+import BookingConfirmation from './components/BookingConfirmation';
 
 /**
  * COMPONENT
@@ -28,7 +29,7 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route exact path="/account" component={Account} />
-
+            <Route exact path="/booking-confirmation" component={BookingConfirmation} />
             <Route exact path="/" component={HomePage} />
             <Route exact path="/rooms" component={AllRooms} />
             <Route exact path="/experiences" component={Experiences} />
@@ -50,6 +51,7 @@ class Routes extends Component {
             <Route exact path="/rooms/:id" component={SingleRoom} />
             <Route exact path="/experiences" component={Experiences} />
             <Route exact path="/experiences/:id" component={SingleExperience} />
+            <Route exact path="/booking-confirmation" component={BookingConfirmation} />
           </Switch>
         )}
       </div>

@@ -1,4 +1,6 @@
+
 body {
+  background-image: linear-gradient(rgba(255, 235, 205, 0.345),rgb(171, 201, 247));
   font-family: sans-serif;
   height: 100vh;
   width: 100%;
@@ -28,6 +30,7 @@ form div {
   letter-spacing: 1px;
   height: 100vh;
   width: 100vw;
+  align-content: space-around;
 }
 .room-info img {
   width: 600px;
@@ -124,7 +127,7 @@ h1 {
   opacity: 1;
   right: 10px;
 }
-.room_delete_btn:after, .experience_delete_btn:hover:after {
+.room_delete_btn:after, .experience_delete_btn:after {
   content: "x";
   position: absolute;
   opacity: 0;
@@ -141,6 +144,7 @@ span {
 }
 
 footer {
+  padding: 2%;
   background-color: rgb(177, 177, 177);
   color: rgb(0, 0, 0);
   width: 100%;
@@ -221,3 +225,60 @@ footer {
     display: flex;
     flex-direction: column;
   }
+
+  #room_info{
+    padding: 5%;
+  }
+
+  #add_to_cart_btn.button{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+  }
+
+  #entire_nav{
+    background-image: linear-gradient(rgb(174, 212, 216),rgba(0, 0, 255, 0.564));
+    padding-top: 10px;
+  }
+
+  .booking_confirmation_img{
+    height: 300px;
+    width: 250px;
+    box-shadow: 2px 5px 5px#6c6c6c;
+  }
+
+  .booking_confirmation_container{
+    display: flex;
+    justify-content: center;
+  }
+
+  .booking_text{
+    display: flex;
+    justify-content: center;
+  }
+
+  p .booking_text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+}
+
+#site-title{
+text-align: center;
+color: #FFF;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+letter-spacing: 1px;
+background-image: url(https://media0.giphy.com/media/n3xSURtNE62t2/giphy.webp?cid=ecf05e4752qyrk8ve7i3mke40s7exflp0so859vxoxt9vzfc&rid=giphy.webp&ct=g.gif);
+background-size: cover;
+color: transparent;
+-moz-background-clip: text;
+-webkit-background-clip: text;
+text-transform: uppercase;
+font-size: 100px;
+margin: 10px 0;
+}
+
