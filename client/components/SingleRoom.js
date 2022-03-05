@@ -45,7 +45,7 @@ class SingleRoom extends React.Component {
                     <div id="single-room-img">
                         <img src={room.imageUrl} />
                     </div>
-                    <div>
+                    <div id='room_info'>
                         <h1>{room.name}</h1>
                         <p>{room.description}</p>
                         <div className="room-info__checks">
@@ -53,7 +53,7 @@ class SingleRoom extends React.Component {
                                 <span className="room-info__check-title">Check in </span>
                                 <span className="room-info__check-time">3 - 5 PM</span>
                             </div>
-                            
+
                             <div className="room-info__check">
                                 <span className="room-info__check-title">Check out </span>
                                 <span className="room-info__check-time">12 - 2 PM</span>
@@ -64,10 +64,11 @@ class SingleRoom extends React.Component {
                             <ul>
                                 {(experiences.length > 0 && experienceList) || (experiences.length === 0 && <li>Check back soon for new experiences</li>)}
                             </ul>
+                            <button type="button" id='add_to_cart_btn' className='button' onClick={this.addToCart}>Add to Cart</button>
                         </div>
                     </div>
                 </div>
-                {/* <button type="button" onClick={this.addToCart}>Add to Cart</button> */}
+
                 <div>
                 </div>
             </div >
