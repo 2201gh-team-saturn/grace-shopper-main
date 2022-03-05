@@ -36,9 +36,14 @@ User.hasOne(Cart)
 // Cart.hasOne(User)
 
 
-const shopping_cart = db.define('shopping_cart')
-CartItem.belongsToMany(Cart, {through: "shopping_carts"})
-Cart.belongsToMany(CartItem, {through: "shopping_carts"})
+const shopping_cart = db.define('shopping_cart',{}, {timestamps: false})
+
+CartItem.belongsToMany(Cart, {through: "shopping_cart"})
+Cart.belongsToMany(CartItem, {through: "shopping_cart"})
+
+/* MAY EDIT */
+CartItem.belongsTo(Cart);
+Cart.hasMany(CartItem);
 
 CartItem.belongsTo(Room);
 Room.hasMany(CartItem);

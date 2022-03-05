@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Cart = require('../db/models/Cart');
 const CartItem = require('../db/models/CartItem')
-const { shopping_cart } = require('../db/index.js');
+const { models: { shopping_cart}} = require('../db')
 
 /* mounted on /api */
 // router.get('/cart', async (req, res, next) => {
@@ -20,10 +20,12 @@ router.get('/cart/:id', async (req, res, next) => {
   try {
     //maybe find or create
     const cartItemId = req.params.id;
-    const cartItemById = await shopping_cart.findAll({
-      where: {cartId: cartItemId},
-      include: [CartItem]
+    const cartItemById = await CartItem.findAll({
+      where: {
+        cartId: cartItemId
+      },
     });
+
     res.status(200).send(cartItemById);
   } catch (error) {
     next(error);

@@ -262,7 +262,10 @@ async function seed() {
 
     await murphyCartItem1.setRoom(shedroom);
     await murphyCartItem2.setRoom(artistLense);
-
+    
+    /* MAY EDIT */
+    await murphyCartItem1.setCart(murphyCart);
+    await murphyCartItem2.setCart(murphyCart);
 
   } catch (err) {
     console.log(err)
