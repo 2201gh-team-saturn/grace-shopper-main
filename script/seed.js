@@ -216,8 +216,16 @@ async function seed() {
     const water = await Theme.create({ name: 'Water'})
     const rustic = await Theme.create({ name: 'Rustic'})
     const art = await Theme.create({ name: 'Art'})
-   
 
+    // TEST 
+    const tediCartItem1 = await CartItem.create({
+      numberOfNights: 6,
+    })
+
+    await tediCartItem1.setCart(tediCart);
+    await tediCart.setUser(tedi);
+    await tediCartItem1.setRoom(zenRoom);
+   
     //Set associations
     await moonWalk.setRoom(moonRoom);
     await alpenWandern.setRoom(dasBergzimmer);
