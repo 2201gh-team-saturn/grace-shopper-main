@@ -39,6 +39,7 @@ class SingleRoom extends React.Component {
         })
         return (
             <div className="single-room">
+                <Link to={`/rooms/${this.props.match.params.id}/edit`}>Update Room</Link>
                 <Link to='/rooms'>Go Back</Link>
                 <br/>
                 <div className="room-info">
