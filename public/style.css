@@ -256,3 +256,29 @@ footer {
     display: flex;
     justify-content: center;
   }
+
+  p .booking_text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+}
+
+#site-title{
+text-align: center;
+color: #FFF;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+letter-spacing: 1px;
+background-image: url(https://media0.giphy.com/media/n3xSURtNE62t2/giphy.webp?cid=ecf05e4752qyrk8ve7i3mke40s7exflp0so859vxoxt9vzfc&rid=giphy.webp&ct=g.gif);
+background-size: cover;
+color: transparent;
+-moz-background-clip: text;
+-webkit-background-clip: text;
+text-transform: uppercase;
+font-size: 100px;
+margin: 10px 0;
+}
+

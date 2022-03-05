@@ -2,12 +2,11 @@
 
 //we look forward to making your dreams come true
 //travel check list?
-
-<script src="https://kit.fontawesome.com/cccf77e8e9.js" crossorigin="anonymous"></script>
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Footer } from './Footer';
 import { fetchUsers } from '../store/users';
+import Emoji from 'a11y-react-emoji'
 
 class BookingConfirmation extends Component {
   componentDidMount() {
@@ -18,8 +17,11 @@ class BookingConfirmation extends Component {
     return (
       <div>
         <h2 className='booking_text'>Congratulations {username}! Your Booking's Complete! </h2>
-        {/* <h3 className='booking_text'>Here's your packing list:</h3>
-        <ul className='booking_text'>
+        <h3 className='booking_text'>Here's your packing list:</h3>
+        <p className='booking_text'><Emoji symbol="☀️" label="sun" /> A sunny disposition</p>
+        <p className='booking_text'><Emoji symbol="😏" label="smirk" /> A sense of adventure</p>
+        <p className='booking_text'><Emoji symbol="🍌" label="banana" /> A snack for later</p>
+        {/* <ul className='booking_text'>
           <li> A sunny disposition</li>
           <li>Your passport </li>
           <li>A sense of adventure</li>
