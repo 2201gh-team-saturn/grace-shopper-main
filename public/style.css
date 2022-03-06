@@ -368,7 +368,7 @@ margin: 10px 0;
     align-items: center;
 }
 
-.homepage_subtitle h2 span:after,.nine h2 span:before {
+.homepage_subtitle h2 span:after,.homepage_subtitle h2 span:before {
     content: " ";
     display: block;
     border-bottom: 1px solid #ccc;
