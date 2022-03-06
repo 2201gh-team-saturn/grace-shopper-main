@@ -8,7 +8,10 @@ class UpdateSingleRoom extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: ''
+      name: this.props.room.name,
+      description: this.props.room.description,
+      price: this.props.room.price,
+      theme: this.props.room.theme
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -22,6 +25,10 @@ class UpdateSingleRoom extends React.Component {
     if (prevProps.room.id !== this.props.room.id) {
       this.setState({
         name: this.props.room.name || '',
+        description: this.props.room.description || '',
+        price: this.props.room.price || '',
+        theme: this.props.room.theme || '',
+
       });
     }
   }
@@ -56,29 +63,42 @@ class UpdateSingleRoom extends React.Component {
               value={this.state.name}
             />
 
-            {/* <label htmlFor='fuelType'>
-              <strong>Fuel Type:</strong>
+            <label >
+              <strong>Theme:</strong>
             </label>
             <select
-              id='fuelType'
-              name='fuelType'
+              id='theme'
+              name='theme'
               onChange={handleChange}
-              value={this.state.fuelType}
+              value={this.state.theme}
             >
-              <option>Electric</option>
-              <option>Diesel</option>
-              <option>Gas</option>
+              <option>Nature</option>
+              <option>Art</option>
+              <option>Space</option>
+              <option>Rustic</option>
+              <option>Water</option>
+              <option>Haunted</option>
+              <option>Fantasy</option>
             </select>
 
-            <label htmlFor='fuelLevel'>
-              <strong>Fuel Level:</strong>
+            <label>
+              <strong>Description:</strong>
             </label>
             <input
-              name='fuelLevel'
+              name='description'
               onChange={handleChange}
-              value={this.state.fuelLevel}
+              value={this.state.description}
             />
-            <br /> */}
+            <br /> 
+            <label>
+              <strong>Price:</strong>
+            </label>
+            <input
+              name='price'
+              onChange={handleChange}
+              value={this.state.price}
+            />
+            {/* <input id="the-file-input" type="file" /> */}
             <button type='submit'>Save Changes</button>
           </form>
         </div>
