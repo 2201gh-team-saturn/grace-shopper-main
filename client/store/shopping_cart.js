@@ -1,4 +1,7 @@
 import axios from 'axios';
+import history from '../history'
+
+const TOKEN = 'token'
 
 const SET_SHOPPING_CART = 'SET_SHOPPING_CART';
 const DELETE_CART_ITEM = 'DELETE_CART_ITEM';
@@ -26,10 +29,15 @@ export const updateCart = (cart) => {
 };
 
 //Thunk Creators
-export const fetchShoppingCart = (cartId) => {
+export const fetchShoppingCart = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/api/cart/${cartId}`);
+      const token = window.localStorage.getItem(TOKEN);
+      const { data } = await axios.get(`/api/cart`, {
+        headers: {
+          authorization: token
+        }
+      });
       dispatch(setShoppingCart(data));
     } catch (error) {
       console.log(error);
