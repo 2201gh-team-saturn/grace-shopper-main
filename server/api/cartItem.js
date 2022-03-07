@@ -15,7 +15,7 @@ const requireToken = async (req, res, next) => {
   }
 };
 
-router.get('/cartItems', requireToken, async (req, res, next) => {
+router.get('/cartItem', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');
@@ -32,7 +32,7 @@ router.get('/cartItems', requireToken, async (req, res, next) => {
   }
 });
 
-router.post('/cartItems', requireToken, async (req, res, next) => {
+router.post('/cartItem', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');
@@ -53,7 +53,7 @@ router.post('/cartItems', requireToken, async (req, res, next) => {
   }
 });
 
-router.delete('/cartItems', requireToken, async (req, res, next) => {
+router.delete('/cartItem/:id', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');

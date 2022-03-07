@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const TOKEN = 'token'
+const TOKEN = 'token';
 
 const SET_EXPERIENCES = 'SET_EXPERIENCES';
 const ADD_EXPERIENCE = 'ADD_EXPERIENCE';
@@ -28,7 +28,7 @@ export const _deleteExperience = (experience) => {
   };
 };
 
-const _updateExperience = (newExperience) => {
+export const _updateExperience = (newExperience) => {
   return { type: UPDATE_EXPERIENCE, updatedExperience: newExperience };
 };
 
