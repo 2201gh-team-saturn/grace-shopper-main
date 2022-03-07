@@ -64,8 +64,8 @@ h1 {
 }
 
 .rooms img {
-  width: 600px;
-  height: 350px;
+  width: 400px;
+  height: 300px;
   border:  5px double rgb(194, 194, 194);
 }
 
@@ -152,11 +152,11 @@ footer {
   padding: 1%;
   background-color: rgb(54, 54, 54);
   color: rgb(255, 255, 255);
- 
+
 }
 .footer_info{
   margin-left: 1%;
-  
+
 }
 
 .homepage_img{
@@ -263,12 +263,12 @@ footer {
     color: white;
     letter-spacing: 5px;
     background-color: #000000;
-    font-weight: 550;  
+    font-weight: 550;
   }
 
   .navbar :hover{
-    color: rgb(242, 253, 78); 
-     
+    color: rgb(242, 253, 78);
+
   }
 
 
@@ -462,4 +462,10 @@ margin: 10px 0;
 .cart_container h3 {
   text-align: end;
   width: 42%;
+}
+
+.exp_img{
+  width: 400px;
+  height: 300px;
+  border:  5px double rgb(194, 194, 194);
 }
