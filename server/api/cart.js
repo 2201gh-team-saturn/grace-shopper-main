@@ -22,16 +22,23 @@ router.get('/cart', requireToken, async (req, res, next) => {
     if (!req.user) {
       throw new Error('Unauthorized');
     }
+    const cart = await Cart.findOne({
+      where: {
+        userId: req.user.id
+      },
+    });
     const userCart = await CartItem.findAll({
       where: {
-        cartId: req.user.id
+        cartId: cart.id
       },
-      include: [Room]
+      include: [Cart, Room]
     });
     res.send(userCart);
   } catch (err) {
     next(err)
   }
 })
+
+
 
 module.exports = router; 

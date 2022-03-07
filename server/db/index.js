@@ -29,19 +29,9 @@ Experience.belongsTo(Room);
 User.hasMany(Review);
 Review.belongsTo(User);
 
-Cart.hasOne(User)
-User.belongsTo(Cart)
+Cart.belongsTo(User)
+User.hasOne(Cart)
 
-// User.belongsTo(Cart)
-// Cart.hasOne(User)
-
-
-const shopping_cart = db.define('shopping_cart',{}, {timestamps: false})
-
-CartItem.belongsToMany(Cart, {through: "shopping_cart"})
-Cart.belongsToMany(CartItem, {through: "shopping_cart"})
-
-/* MAY EDIT */
 CartItem.belongsTo(Cart);
 Cart.hasMany(CartItem);
 
@@ -65,6 +55,5 @@ module.exports = {
     Theme,
     Cart,
     CartItem,
-    shopping_cart
   },
 };
