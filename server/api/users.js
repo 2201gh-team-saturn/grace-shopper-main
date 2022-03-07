@@ -12,13 +12,6 @@ const { models: { User }} = require('../db')
 
 router.get('/users', async (req, res, next) => {
   try {
-
-  //   const auth = await axios.get("/api/auth", {
-  //     headers: {
-  //         authorization: token,
-  //     },
-  // });
-
     const users = await User.findAll({
       // explicitly select only the id and username fields - even though
       // users' passwords are encrypted, it won't help if we just

@@ -19,7 +19,6 @@ class Cart extends Component {
     if (totalItems) {
       console.log(totalItems);
     }
-
     //const {room} = this.props.cart
     // console.log(room);
     return (
@@ -62,15 +61,12 @@ class Cart extends Component {
         </div>
       </div>
     );
-  }
-}
 
 const mapState = (state) => {
   return {  
      userId: state.auth.id,
      cartItems: state.shopping_cart,
       user: state.auth,
-
   };
 };
 
@@ -84,36 +80,4 @@ const mapDispatch = (dispatch) => {
 export default connect(mapState, mapDispatch)(Cart);
 
 
-// import React, {Component} from 'react'
-// import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
-// import {fetchShoppingCart} from '../store/shopping_cart';
 
-// class Cart extends Component {
-  
-//   componentDidMount(){
-//     this.props.fetchCart(this.props.userId);
-//   }
-
-//   render(){
-
-//   return (
-//     <div>Cart</div>
-
-//   )
-//   }
-// }
-
-// const mapState = (state) => {
-//   return {
-//     userId: state.auth.id,
-//   };
-// };
-
-// const mapDispatch = (dispatch) => {
-//   return {
-//     fetchCart: (userId) => dispatch(fetchShoppingCart(userId)),
-//   };
-// };
-
-// export default connect(mapState, mapDispatch)(Cart);

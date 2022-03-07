@@ -5,7 +5,6 @@ const Cart = require('../db/models/Cart');
 const CartItem = require('../db/models/CartItem')
 const Room = require('../db/models/Room')
 const { models: { User },} = require('../db');
-//
 
 const requireToken = async (req, res, next) => {
   try {
