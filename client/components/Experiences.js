@@ -36,13 +36,6 @@ export class Experiences extends React.Component {
                 <h3 className='description'>
                   Description: {experience.description}
                 </h3>
-                {/* <button
-                type='button'
-                className='book'
-                onClick={() => this.props.bookExperience(experience.id)}
-              >
-                Book Now!
-              </button>*/}
                 {user.type === 'employee' ? (
                   <form>
                     <button
