@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const CartItem = require('../db/models/CartItem');
 const User = require('../db/models/User');
+const Cart = require('../db/models/Cart');
+const Room = require('../db/models/Room');
 
 const requireToken = async (req, res, next) => {
   try {
@@ -22,6 +24,7 @@ router.get('/cartItems', requireToken, async (req, res, next) => {
       where: {
         cartId: req.user.id,
       },
+      include: [Cart, Room]
     });
     res.send(cartItems);
   } catch (err) {
@@ -63,3 +66,5 @@ router.delete('/cartItems', requireToken, async (req, res, next) => {
     next(error);
   }
 });
+
+module.exports = router;

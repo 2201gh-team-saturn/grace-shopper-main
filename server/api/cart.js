@@ -2,8 +2,8 @@
 const express = require('express');
 const router = express.Router();
 const Cart = require('../db/models/Cart');
-const CartItem = require('../db/models/CartItem')
-const Room = require('../db/models/Room')
+const CartItem = require('../db/models/CartItem');
+const Room = require('../db/models/Room');
 const { models: { User },} = require('../db');
 
 const requireToken = async (req, res, next) => {
@@ -41,4 +41,4 @@ router.get('/cart', requireToken, async (req, res, next) => {
 
 
 
-module.exports = router; 
+module.exports = router;
