@@ -20,7 +20,7 @@ const User = db.define('user', {
   type: {
     type: Sequelize.ENUM("employee", "guest"),
     defaultValue: "guest"
-  }
+  },
 })
 
 module.exports = User
@@ -74,6 +74,10 @@ const hashPassword = async(user) => {
     user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
   }
 }
+
+User.beforeCreate(function (user, options) { 
+  user.username = user.username.charAt(0).toUpperCase() + user.username.slice(1);
+})
 
 User.beforeCreate(hashPassword)
 User.beforeUpdate(hashPassword)

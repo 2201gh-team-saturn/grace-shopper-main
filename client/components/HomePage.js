@@ -42,6 +42,7 @@ class HomePage extends Component {
           </h2>
         </div>
         <div className='homepage_container'>
+        <div className='slider'>
         <SimpleImageSlider
         width={890}
         height={504}
@@ -49,6 +50,8 @@ class HomePage extends Component {
         showBullets={true}
         showNavs={true}
          />
+        </div>
+       
           <div className='reviews_container'>
             <h3> See what others have to say: </h3>
             {reviews
