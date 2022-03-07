@@ -30,7 +30,7 @@ router.get('/experiences', requireToken, async (req, res, next) => {
   }
 })
 
-router.get('/experiences/:id', async (req, res, next) => {
+router.get('/experiences/:id', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');
