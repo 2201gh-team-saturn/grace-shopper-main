@@ -12,7 +12,7 @@ const requireToken = async (req, res, next) => {
   }
 };
 
-router.get('/users', async (req, res, next) => {
+router.get('/users', requireToken, async (req, res, next) => {
   try{
   if (!req.user) {
     throw new Error('Unauthorized');
