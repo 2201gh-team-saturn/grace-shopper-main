@@ -3,8 +3,6 @@ import history from '../history'
 
 const TOKEN = 'token'
 
-const TOKEN = 'token'
-
 const SET_SHOPPING_CART = 'SET_SHOPPING_CART';
 const DELETE_CART_ITEM = 'DELETE_CART_ITEM';
 const UPDATE_CART = 'UPDATE_CART'

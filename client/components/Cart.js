@@ -61,6 +61,8 @@ class Cart extends Component {
         </div>
       </div>
     );
+  }
+}
 
 const mapState = (state) => {
   return {  
