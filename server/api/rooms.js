@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Room = require('../db/models/Room');
 const Theme = require('../db/models/Theme');
+const { requireToken, isEmployee} = require('./security');
 
 /* mounted on /api */
-router.get('/rooms', async (req, res, next) => {
+router.get('/rooms',requireToken, async (req, res, next) => {
   try {
     const getAllRooms = await Room.findAll({
       include: [Theme]
@@ -15,7 +16,7 @@ router.get('/rooms', async (req, res, next) => {
   }
 });
 
-router.get('/rooms/:id', async (req, res, next) => {
+router.get('/rooms/:id',requireToken, async (req, res, next) => {
   try {
     const roomId = req.params.id;
     const getRoomById = await Room.findByPk(roomId, {
@@ -27,7 +28,7 @@ router.get('/rooms/:id', async (req, res, next) => {
   }
 });
 
-router.post('/rooms', async (req, res, next) => {
+router.post('/rooms', requireToken, isEmployee, async (req, res, next) => {
   try {
     const doesRoomExist = await Room.findOne({
       where: {
@@ -46,7 +47,7 @@ router.post('/rooms', async (req, res, next) => {
   }
 });
 
-router.put('/rooms/:id', async (req, res, next) => {
+router.put('/rooms/:id',requireToken, isEmployee, async (req, res, next) => {
   try {
     const roomId = req.params.id;
     const room = await Room.findByPk(roomId);
@@ -60,7 +61,7 @@ router.put('/rooms/:id', async (req, res, next) => {
   }
 });
 
-router.delete('/rooms/:id', async (req, res, next) => {
+router.delete('/rooms/:id',requireToken, isEmployee, async (req, res, next) => {
   try {
     const roomId = req.params.id;
     const roomToBeDeleted = await Room.findByPk(roomId);
