@@ -40,7 +40,7 @@ router.get('/cart', requireToken, async (req, res, next) => {
   }
 });
 
-router.post('/cart', requireToken, async (req, res, next) => {
+router.post('/cart/:id', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');
@@ -57,6 +57,20 @@ router.post('/cart', requireToken, async (req, res, next) => {
     res.status(409).send('not today');
   } catch (error) {
     console.error('your post cart route is broken', error);
+    next(error);
+  }
+});
+
+router.delete('/cart/:id', requireToken, async (req, res, next) => {
+  try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
+    const cart = await Cart.findByPk(req.params.id);
+    cart.destroy();
+    res.send(cart);
+  } catch (error) {
+    console.error('you break it you buy it');
     next(error);
   }
 });
