@@ -53,7 +53,7 @@ export const toggleStatus = (id, availability) => {
 
 export const updateRoomThunk = (room, history) => {
   return async (dispatch) => {
-    const { data: updated } = await axios.put(`/api/room/${room.id}`, room);
+    const { data: updated } = await axios.put(`/api/rooms/${room.id}`, room);
     dispatch(updateRoom(updated));
     history.push('/');
   };

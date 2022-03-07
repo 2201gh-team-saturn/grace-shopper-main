@@ -1,6 +1,14 @@
 const router = require('express').Router()
 const { models: { User }} = require('../db')
-module.exports = router
+
+
+// const isAdmin = (req, res, next) => {
+//   if (req.user.type === 'employee') {
+//       return res.status(403).send('Permission denied');
+//   } else {
+//       next();
+//   }
+// };
 
 router.get('/users', async (req, res, next) => {
   try {
@@ -15,3 +23,5 @@ router.get('/users', async (req, res, next) => {
     next(err)
   }
 })
+
+module.exports = router

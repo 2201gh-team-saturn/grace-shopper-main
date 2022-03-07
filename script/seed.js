@@ -263,8 +263,8 @@ async function seed() {
 
     // await cart1.setCartItems(cartItem1);
     // await cart1.setCartItems(cartItem2);
-    await murphyCartItem1.setCarts(murphyCart)
-    await murphyCartItem2.setCarts(murphyCart)
+    await murphyCartItem1.setCart(murphyCart)
+    await murphyCartItem2.setCart(murphyCart)
 
     await murphyCart.setUser(murphy);
 
@@ -274,6 +274,7 @@ async function seed() {
     /* MAY EDIT */
     await murphyCartItem1.setCart(murphyCart);
     await murphyCartItem2.setCart(murphyCart);
+
 
   } catch (err) {
     console.log(err)

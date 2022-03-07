@@ -57,7 +57,6 @@ export class AllRooms extends React.Component {
               <div className='room_card'>
                 <p>
                   <Link to={`/rooms/${room.id}`} room={room}>
-                    Name: {room.name}
                   </Link>
                   <br />
                   <span>Description: </span>
