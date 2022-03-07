@@ -1,16 +1,8 @@
 const router = require('express').Router()
 const { models: { User }} = require('../db')
+const { requireToken, isEmployee} = require('./security');
 
-
-// const isAdmin = (req, res, next) => {
-//   if (req.user.type === 'employee') {
-//       return res.status(403).send('Permission denied');
-//   } else {
-//       next();
-//   }
-// };
-
-router.get('/users', async (req, res, next) => {
+router.get('/users', requireToken, isEmployee, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and username fields - even though

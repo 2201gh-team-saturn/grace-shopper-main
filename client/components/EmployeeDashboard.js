@@ -11,9 +11,9 @@ class EmployeeDashboard extends Component {
     console.log(this.props.auth.type);
     const userType = this.props.auth.type;
     const users = this.props.users;
-    console.log(this.props.auth);
     return (
       <div>
+        
         {userType === 'employee' ? (
           <div>
             <h2>Employee Dashboard</h2>

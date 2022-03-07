@@ -1,9 +1,10 @@
 const router = require('express').Router()
 const Experience = require('../db/models/Experience')
 const Room = require('../db/models/Room');
+const { requireToken, isEmployee} = require('./security');
 
 // api/
-router.get('/experiences', async (req, res, next) => {
+router.get('/experiences', requireToken, async (req, res, next) => {
   try {
     const experiences = await Experience.findAll();
     res.json(experiences);
@@ -15,7 +16,7 @@ router.get('/experiences', async (req, res, next) => {
   }
 })
 
-router.get('/experiences/:id', async (req, res, next) => {
+router.get('/experiences/:id',requireToken, async (req, res, next) => {
 	try {
 		const experience = await Experience.findByPk(req.params.id, {
 			include: [{ model: Room }],
@@ -27,7 +28,7 @@ router.get('/experiences/:id', async (req, res, next) => {
 	}
 });
 
-router.post('/experiences', async (req, res, next) => {
+router.post('/experiences', requireToken, async (req, res, next) => {
   try {
     const [newExperience, created] = await Experience.findOrCreate({
       where: {
@@ -57,7 +58,7 @@ router.delete('/experiences/:id', async (req, res, next) => {
   }
 });
 
-router.put('/experiences/:id', async (req, res, next) => {
+router.put('/experiences/:id', requireToken, async (req, res, next) => {
   try {
     const experienceToUpdate = await Experience.findByPk(req.params.id);
     if (experienceToUpdate) {

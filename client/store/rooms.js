@@ -4,6 +4,7 @@ const SET_ROOMS= 'SET_ROOMS';
 const ADD_ROOM = 'ADD_ROOM';
 const DELETE_ROOM = 'DELETE_ROOM';
 const UPDATE_ROOM = 'UPDATE_EXPERIENCE';
+const TOKEN = 'token'
 
 export const setRooms = (rooms) => {
     return {
@@ -33,7 +34,12 @@ export const setRooms = (rooms) => {
 export const fetchRooms = () => {
     return async (dispatch) => {
       try {
-        const { data } = await axios.get('/api/rooms');
+        const token = window.localStorage.getItem(TOKEN);
+        const { data } = await axios.get('/api/rooms', {
+          headers: {
+            authorization: token
+          }
+        });
         dispatch(setRooms(data));
       } catch (error) {
         console.log(error);
@@ -44,7 +50,12 @@ export const fetchRooms = () => {
   export const addRoomThunk = (room) => {
     return async (dispatch) => {
       try {
-        const { data: created } = await axios.post('/api/rooms', room);
+        const token = window.localStorage.getItem(TOKEN);
+        const { data: created } = await axios.post('/api/rooms', room,{
+          headers: {
+            authorization: token
+          }
+        });
         dispatch(addRoom(created));
       } catch (error) {
         console.log(error);
@@ -55,7 +66,12 @@ export const fetchRooms = () => {
   export const deleteRoomThunk = (roomId, history) => {
     return async (dispatch) => {
       try {
-        const { data: deleted} = await axios.delete(`/api/rooms/${roomId}`);
+        const token = window.localStorage.getItem(TOKEN);
+        const { data: deleted} = await axios.delete(`/api/rooms/${roomId}`,{
+          headers: {
+            authorization: token
+          }
+        });
         dispatch(deleteRoom(deleted));
         history.push('/');
       } catch (error) {
@@ -66,7 +82,12 @@ export const fetchRooms = () => {
 
   export const updateRoom = (id, roomToUpdate, history) => {
     return async (dispatch) => {
-      const response = await axios.put(`/api/experiences/${id}`, roomToUpdate);
+      const token = window.localStorage.getItem(TOKEN);
+      const response = await axios.put(`/api/experiences/${id}`, roomToUpdate, {
+        headers: {
+          authorization: token
+        }
+      });
       const updatedRoom = response.data;
       dispatch(_updateRoom(updatedRoom));
       history.push('/');
