@@ -22,6 +22,7 @@ const User = db.define('user', {
     type: Sequelize.STRING,
   },
   //employees have access to delete rooms, delete bookings, etc.
+
   type: {
     type: Sequelize.ENUM("employee", "guest"),
     defaultValue: "guest"
@@ -82,6 +83,7 @@ const hashPassword = async(user) => {
     user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
   }
 }
+
 
 User.beforeCreate(function (user, options) { 
   // user.username = user.username.charAt(0).toUpperCase() + user.username.slice(1);

@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const TOKEN = 'token';
+
 const SET_EXPERIENCES = 'SET_EXPERIENCES';
 const ADD_EXPERIENCE = 'ADD_EXPERIENCE';
 const DELETE_EXPERIENCE = 'DELETE_EXPERIENCE';
@@ -27,7 +29,7 @@ export const _deleteExperience = (experience) => {
   };
 };
 
-const _updateExperience = (newExperience) => {
+export const _updateExperience = (newExperience) => {
   return { type: UPDATE_EXPERIENCE, updatedExperience: newExperience };
 };
 
@@ -84,7 +86,7 @@ export const updateExperience = (id, experienceToUpdate, history) => {
     const token = window.localStorage.getItem(TOKEN);
     const response = await axios.put(
       `/api/experiences/${id}`,
-      experienceToUpdate,  {
+      experienceToUpdate, {
         headers: {
           authorization: token
         }
