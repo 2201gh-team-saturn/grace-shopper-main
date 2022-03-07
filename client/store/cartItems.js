@@ -1,40 +1,103 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const SET_ROOMS= 'SET_ROOMS';
-const ADD_ROOM = 'ADD_ROOM';
+const TOKEN = 'token';
+
+const SET_CART_ITEMS = 'SET_CART_ITEMS';
+const ADD_CART_ITEM = 'ADD_CART_ITEM';
+const UPDATE_CART_ITEM = 'UPDATE_CART_ITEM';
 const DELETE_CART_ITEM = 'DELETE_CART_ITEM';
-const UPDATE_ROOM = 'UPDATE_EXPERIENCE';
+
+export const setCartItems = (cartItems) => {
+  return {
+    type: SET_CART_ITEMS,
+    cartItems,
+  };
+};
+
+export const _addCartItem = (cartItem) => {
+  return {
+    type: ADD_CART_ITEM,
+    cartItem,
+  };
+};
+
+export const _deleteCartItem = (cartItem) => {
+  return {
+    type: DELETE_CART_ITEM,
+    cartItem,
+  }
+};
+
+export const _updateCartItem = (newCartItem) => {
+  return { type: UPDATE_CART_ITEM,
+    updatedCartItem: newCartItem }
+};
+
+export const fetchCartItems = () => {
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem(TOKEN);
+      const { data: cartItems } = await axios.get('/api/cartItem', {
+        headers: {
+          authorization: token
+        }
+      });
+      dispatch(setCartItems(cartItems));
+    } catch (err) {
+      console.error('I have zero experience here');
+      console.log(err);
+    }
+  };
+};
+
+export const addCartItem = (numberOfNights) => {
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem(TOKEN);
+      const { data: created } = await axios.post(
+        '/api/cartItem',
+        numberOfNights
+        , {
+          headers: {
+            authorization: token
+          }
+        });
+      dispatch(_addCartItem(created));
+    } catch (error) {
+      console.error('theres something wrong with your add cart item thunk');
+      console.log(error);
+    }
+  };
+};
+
+export const deleteCartItem = (id, history) => {
+  return async (dispatch) => {
+    const token = window.localStorage.getItem(TOKEN);
+    const { data: cartItem } = await axios.delete(`/api/cartItem/${id}`, {
+      headers: {
+        authorization: token
+      }
+    });
+    dispatch(_deleteCartItem(cartItem));
+    history.push('/');
+  };
+};
+
+const initialState = [];
+
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case SET_CART_ITEMS:
+      return action.experiences;
+    case ADD_CART_ITEM:
+      return [...state, action.experience];
+    case DELETE_CART_ITEM:
+      return state.filter(
+        (experience) => experience.id !== action.experience.id
+      );
+    default:
+      return state;
+  }
+}
 
 
-// export const deleteCartItem = (cartItem) => {
-//     return {
-//       type: DELETE_CART_ITEM,
-//       room
-//     }
-//   };
-
-//   const _updateRoom = (newRoom) => {
-//     return { type: UPDATE_ROOM, updatedRoom: newRoom };
-//   };
-
-
-// export const deleteCartItem = (cartId, cartItemId, history) => {
-//     return async (dispatch) => {
-//       try {
-//         const { data: deleted} = await axios.delete(`/api/carts/${cartId}`);
-//         dispatch(deleteRoom(deleted));
-//         history.push('/');
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     };
-//   };
-
-//   export const updateRoom = (id, roomToUpdate, history) => {
-//     return async (dispatch) => {
-//       const response = await axios.put(`/api/experiences/${id}`, roomToUpdate);
-//       const updatedRoom = response.data;
-//       dispatch(_updateRoom(updatedRoom));
-//       history.push('/');
-//     };
-//   };

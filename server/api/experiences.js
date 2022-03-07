@@ -1,10 +1,25 @@
 const router = require('express').Router()
 const Experience = require('../db/models/Experience')
 const Room = require('../db/models/Room');
+const User = require('../db/models/User');
+
+const requireToken = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+    const user = await User.findByToken(token);
+    req.user = user;
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
 
 // api/
-router.get('/experiences', async (req, res, next) => {
+router.get('/experiences', requireToken, async (req, res, next) => {
   try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
     const experiences = await Experience.findAll();
     res.json(experiences);
   } catch (error) {
@@ -15,8 +30,11 @@ router.get('/experiences', async (req, res, next) => {
   }
 })
 
-router.get('/experiences/:id', async (req, res, next) => {
-	try {
+router.get('/experiences/:id', requireToken, async (req, res, next) => {
+  try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
 		const experience = await Experience.findByPk(req.params.id, {
 			include: [{ model: Room }],
 		});
@@ -27,8 +45,11 @@ router.get('/experiences/:id', async (req, res, next) => {
 	}
 });
 
-router.post('/experiences', async (req, res, next) => {
+router.post('/experiences', requireToken, async (req, res, next) => {
   try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
     const [newExperience, created] = await Experience.findOrCreate({
       where: {
         name: req.body.name,
@@ -46,8 +67,11 @@ router.post('/experiences', async (req, res, next) => {
   }
 });
 
-router.delete('/experiences/:id', async (req, res, next) => {
+router.delete('/experiences/:id', requireToken, async (req, res, next) => {
   try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
     const experience = await Experience.findByPk(req.params.id);
     experience.destroy();
     res.send(experience);
@@ -57,8 +81,11 @@ router.delete('/experiences/:id', async (req, res, next) => {
   }
 });
 
-router.put('/experiences/:id', async (req, res, next) => {
+router.put('/experiences/:id', requireToken, async (req, res, next) => {
   try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
     const experienceToUpdate = await Experience.findByPk(req.params.id);
     if (experienceToUpdate) {
       res.status(201).send(await experienceToUpdate.update(req.body));

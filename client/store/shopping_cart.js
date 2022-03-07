@@ -1,11 +1,11 @@
 import axios from 'axios';
-import history from '../history'
+import history from '../history';
 
-const TOKEN = 'token'
+const TOKEN = 'token';
 
 const SET_SHOPPING_CART = 'SET_SHOPPING_CART';
 const DELETE_CART_ITEM = 'DELETE_CART_ITEM';
-const UPDATE_CART = 'UPDATE_CART'
+const UPDATE_CART = 'UPDATE_CART';
 
 export const setShoppingCart = (cart) => {
   return {
@@ -35,8 +35,8 @@ export const fetchShoppingCart = () => {
       const token = window.localStorage.getItem(TOKEN);
       const { data } = await axios.get(`/api/cart`, {
         headers: {
-          authorization: token
-        }
+          authorization: token,
+        },
       });
       dispatch(setShoppingCart(data));
     } catch (error) {
@@ -48,12 +48,21 @@ export const fetchShoppingCart = () => {
 export const removeFromCart = (cartId, cartItemId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.delete(`/api/cart/${cartId}`, {
-        data: {
-          cartId: cartId,
-          cartItemId: cartItemId,
+      const token = window.localStorage.getItem(TOKEN);
+      const { data } = await axios.delete(
+        `/api/cart/${cartId}`,
+        {
+          data: {
+            cartId: cartId,
+            cartItemId: cartItemId,
+          },
         },
-      });
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
       dispatch(deleteCartItem(data));
     } catch (error) {
       console.log(error);
@@ -63,7 +72,12 @@ export const removeFromCart = (cartId, cartItemId) => {
 
 export const updateCartThunk = (cart, history) => {
   return async (dispatch) => {
-    const { data: updated } = await axios.put(`/api/cart/${cart.id}`, cart);
+    const token = window.localStorage.getItem(TOKEN);
+    const { data: updated } = await axios.put(`/api/cart/${cart.id}`, cart, {
+      headers: {
+        authorization: token,
+      },
+    });
     dispatch(updateCart(updated));
     history.push(`/cart/${cart.id}`);
   };

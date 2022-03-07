@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const TOKEN = 'token';
+
 const SET_EXPERIENCES = 'SET_EXPERIENCES';
 const ADD_EXPERIENCE = 'ADD_EXPERIENCE';
 const DELETE_EXPERIENCE = 'DELETE_EXPERIENCE';
@@ -26,14 +28,19 @@ export const _deleteExperience = (experience) => {
   };
 };
 
-const _updateExperience = (newExperience) => {
+export const _updateExperience = (newExperience) => {
   return { type: UPDATE_EXPERIENCE, updatedExperience: newExperience };
 };
 
 export const fetchExperiences = () => {
   return async (dispatch) => {
     try {
-      const { data: experiences } = await axios.get('/api/experiences');
+      const token = window.localStorage.getItem(TOKEN);
+      const { data: experiences } = await axios.get('/api/experiences', {
+        headers: {
+          authorization: token
+        }
+      });
       dispatch(setExperiences(experiences));
     } catch (err) {
       console.error('I have zero experience here');
@@ -45,12 +52,17 @@ export const fetchExperiences = () => {
 export const addExperience = (name, description, imageUrl) => {
   return async (dispatch) => {
     try {
+      const token = window.localStorage.getItem(TOKEN);
       const { data: created } = await axios.post(
         '/api/experiences',
         name,
         description,
         imageUrl
-      );
+        , {
+          headers: {
+            authorization: token
+          }
+        });
       dispatch(_addExperience(created));
     } catch (error) {
       console.error('theres something wrong with your add experience thunk');
@@ -61,7 +73,12 @@ export const addExperience = (name, description, imageUrl) => {
 
 export const deleteExperience = (id, history) => {
   return async (dispatch) => {
-    const { data: experience } = await axios.delete(`/api/experiences/${id}`);
+    const token = window.localStorage.getItem(TOKEN);
+    const { data: experience } = await axios.delete(`/api/experiences/${id}`, {
+      headers: {
+        authorization: token
+      }
+    });
     dispatch(_deleteExperience(experience));
     history.push('/');
   };
@@ -69,10 +86,15 @@ export const deleteExperience = (id, history) => {
 
 export const updateExperience = (id, experienceToUpdate, history) => {
   return async (dispatch) => {
+    const token = window.localStorage.getItem(TOKEN);
     const response = await axios.put(
       `/api/experiences/${id}`,
       experienceToUpdate
-    );
+      , {
+        headers: {
+          authorization: token
+        }
+      });
     const updatedExperience = response.data;
     dispatch(_updateExperience(updatedExperience));
     history.push('/');

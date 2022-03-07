@@ -32,17 +32,10 @@ export class Experiences extends React.Component {
                 <Link to={`/experiences/${experience.id}`}>
                   <h2 className='name'>{experience.name}</h2>
                 </Link>
-                <img src={experience.imageUrl} />
+                <img className='exp_img'src={experience.imageUrl} />
                 <h3 className='description'>
                   Description: {experience.description}
                 </h3>
-                {/* <button
-                type='button'
-                className='book'
-                onClick={() => this.props.bookExperience(experience.id)}
-              >
-                Book Now!
-              </button>*/}
                 {user.type === 'employee' ? (
                   <form>
                     <button
