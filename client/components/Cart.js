@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import {fetchShoppingCart} from '../store/shopping_cart';
 
 
 // dummyData = {
@@ -13,12 +14,37 @@ import { Link } from 'react-router-dom';
 // }
 
 class Cart extends Component {
+  
+  componentDidMount(){
+    this.props.fetchCart(this.props.userId);
+  }
+  // handleSubmit(event) {
+  //   event.preventDefault();
+  //   this.props.addRoom({ ...this.state });
+  //   this.props.history.push('/rooms')
+  //  }
+
   render(){
 
   return (
     <div>Cart</div>
+
   )
   }
 }
 
-export default Cart;
+const mapState = (state) => {
+  return {
+    userId: state.auth.id,
+  };
+};
+
+const mapDispatch = (dispatch) => {
+  return {
+    fetchCart: (userId) => dispatch(fetchShoppingCart(userId)),
+  };
+};
+
+export default connect(mapState, mapDispatch)(Cart);
+
+// export default Cart;
