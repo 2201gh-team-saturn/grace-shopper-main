@@ -31,12 +31,14 @@ router.get('/cart', requireToken, async (req, res, next) => {
       where: {
         cartId: cart.id
       },
-      include: [Room]
+      include: [Cart, Room]
     });
     res.send(userCart);
   } catch (err) {
     next(err)
   }
 })
+
+
 
 module.exports = router; 
