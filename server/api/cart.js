@@ -58,7 +58,7 @@ router.put('/cart', requireToken, async (req, res, next) => {
     if (!req.user) {
       throw new Error('Unauthorized');
     }
-    const cartToUpdate = await Cart.findByPk(req.body.id); //what am I passing?
+    const cartToUpdate = await Cart.findByPk(req.body.id); //what am I passing? const { data: cartItem } = await axios.delete(`/api/cartItem/${id}`, {
     if (cartToUpdate) {
       res.status(201).send(await cartToUpdate.update(req.body));
     } else {
