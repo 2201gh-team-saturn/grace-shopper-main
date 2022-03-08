@@ -5,7 +5,9 @@ const TOKEN = 'token';
 
 const SET_SHOPPING_CART = 'SET_SHOPPING_CART';
 const DELETE_CART_ITEM = 'DELETE_CART_ITEM';
+const UPDATE_CART_ITEM = 'UPDATE_CART_ITEM';
 const UPDATE_CART = 'UPDATE_CART';
+const CLEAR_CART = 'CLEAR_CART'
 
 export const setShoppingCart = (cart) => {
   return {
@@ -24,6 +26,19 @@ export const deleteCartItem = (cart) => {
 export const updateCart = (cart) => {
   return {
     type: UPDATE_CART,
+    cart,
+  };
+};
+export const updateCartItem = (cartItem) => {
+  return {
+    type: UPDATE_CART_ITEM,
+    cartItem,
+  };
+};
+
+export const clearCart = (cart) => {
+  return {
+    type: CLEAR_CART,
     cart,
   };
 };
@@ -50,7 +65,7 @@ export const removeFromCart = (cartId, cartItemId) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
       const { data } = await axios.delete(
-        `/api/cart/${cartId}`,
+        `/api/cart`,
         {
           data: {
             cartId: cartId,
@@ -59,6 +74,7 @@ export const removeFromCart = (cartId, cartItemId) => {
         },
         {
           headers: {
+            
             authorization: token,
           },
         }
@@ -82,6 +98,46 @@ export const updateCartThunk = (cart, history) => {
     history.push(`/cart/${cart.id}`);
   };
 };
+export const increaseQuantity = (id) => async (dispatch) => {
+  const token = window.localStorage.getItem(TOKEN);
+  const {data} = await axios.put(`/api/cart/increase/${id}`, 
+  {
+    headers :{
+      authorization: token
+    }
+  }
+  );
+  dispatch(fetchShoppingCart());
+}
+
+export const decreaseQuantity = (id) => async (dispatch) => {
+  const token = window.localStorage.getItem(TOKEN);
+  const {data} = await axios.put(`/api/cart/decrease/${id}`,
+  {
+    headers: {
+      authorization: token
+    }
+  }
+  );
+  dispatch(fetchShoppingCart());
+}
+
+export const clearAllCartItems = () => {
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem(TOKEN);
+      const { data } = await axios.delete(`/api/cart`,
+        {
+          headers: {
+            authorization: token
+          }
+        });
+      dispatch(clearCart(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 const initialState = [];
 
@@ -92,6 +148,10 @@ export default (state = initialState, action) => {
     case DELETE_CART_ITEM:
       return action.cart;
     case UPDATE_CART:
+      return action.cart;
+    case UPDATE_CART_ITEM:
+      return action.cartItem;
+    case CLEAR_CART:
       return action.cart;
     default:
       return state;

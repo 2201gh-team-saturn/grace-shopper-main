@@ -40,7 +40,8 @@ router.get('/cart', requireToken, async (req, res, next) => {
   }
 });
 
-router.post('/cart/:id', requireToken, async (req, res, next) => {
+//change to put route
+router.post('/cart', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');
@@ -48,7 +49,7 @@ router.post('/cart/:id', requireToken, async (req, res, next) => {
     const [newCart, created] = await Cart.findOrCreate({
       where: {
         id: req.body.id,
-        totalQuanitity: req.body.totalQuanitity,
+        totalQuantity: req.body.totalQuantity,
       },
     });
     if (created) {
@@ -61,9 +62,9 @@ router.post('/cart/:id', requireToken, async (req, res, next) => {
   }
 });
 
-router.put('/cart', async (req, res, next) => {
+router.put('/cart/increase/:id', async (req, res, next) => {
   try {
-    let cartItem = await CartItem.findByPk(req.body.id);
+    let cartItem = await CartItem.findByPk(req.params.id);
     cartItem.numberOfNights++;
     await cartItem.save();
     res.json(cartItem);
@@ -73,14 +74,9 @@ router.put('/cart', async (req, res, next) => {
   }
 });
 
-router.put('/cart', async (req, res, next) => {
+router.put('/cart/decrease/:id', async (req, res, next) => {
   try {
-    console.log('hey',req.body.id)
-    let cartItem = await CartItem.findOne({
-      where: { id: req.body.id}
-    }
-    );
-    console.log('look',cartItem)
+    let cartItem = await CartItem.findByPk(req.params.id);
     cartItem.numberOfNights--;
     await cartItem.save();
     res.json(cartItem);
@@ -90,18 +86,67 @@ router.put('/cart', async (req, res, next) => {
   }
 });
 
-router.delete('/cart/:id', requireToken, async (req, res, next) => {
+router.put('/cart', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');
     }
-    const cart = await Cart.findByPk(req.params.id);
-    cart.destroy();
-    res.send(cart);
+    const cartToUpdate = await Cart.findByPk(req.body.id);
+    if (cartToUpdate) {
+      res.status(201).send(await cartToUpdate.update(req.body));
+    } else {
+      res.status(404).send('Cart does not exist');
+    }
   } catch (error) {
-    console.error('you break it you buy it');
+    console.error(
+      'hey! you made a mistake with your cart put route'
+    );
     next(error);
   }
 });
 
+
+// router.delete('/cart', requireToken, async (req, res, next) => {
+//   try {
+//     if (!req.user) {
+//       throw new Error('Unauthorized');
+//     }
+//     const cart = await Cart.findByPk(req.body.cartId);
+//     cart.destroy();
+//     res.send(cart);
+//   } catch (error) {
+//     console.error('you break it you buy it');
+//     next(error);
+//   }
+// });
+
+//clear entire cart after checkout
+router.delete('/cart', requireToken, async (req, res, next) => {
+  try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
+    const cart = await Cart.findOne({
+      where: {
+        userId: req.user.id
+      },
+    });
+    const cartItemsToBeDeleted = await CartItem.findAll({
+      where: {
+        cartId: cart.id
+      }
+    });
+    if (!cartItemsToBeDeleted) {
+      res.sendStatus(400);
+    } else {
+      await cartItemsToBeDeleted.destroy();
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router;
+
+//==================================
+//Cart Item schtuff
