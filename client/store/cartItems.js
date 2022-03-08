@@ -18,12 +18,11 @@ export const _deleteCartItem = (cartItem) => {
   return {
     type: DELETE_CART_ITEM,
     cartItem,
-  }
+  };
 };
 
 export const _updateCartItem = (newCartItem) => {
-  return { type: UPDATE_CART_ITEM,
-    updatedCartItem: newCartItem }
+  return { type: UPDATE_CART_ITEM, updatedCartItem: newCartItem };
 };
 
 export const addCartItemThunk = (cartItem) => {
@@ -71,6 +70,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-}
-
-
+};

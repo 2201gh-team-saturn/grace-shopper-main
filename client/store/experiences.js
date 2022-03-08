@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const TOKEN = 'token';
-
 const SET_EXPERIENCES = 'SET_EXPERIENCES';
 const ADD_EXPERIENCE = 'ADD_EXPERIENCE';
 const DELETE_EXPERIENCE = 'DELETE_EXPERIENCE';
 const UPDATE_EXPERIENCE = 'UPDATE_EXPERIENCE';
+
+const TOKEN = 'token';
 
 export const setExperiences = (experiences) => {
   return {
@@ -35,12 +35,7 @@ export const _updateExperience = (newExperience) => {
 export const fetchExperiences = () => {
   return async (dispatch) => {
     try {
-      const token = window.localStorage.getItem(TOKEN);
-      const { data: experiences } = await axios.get('/api/experiences', {
-        headers: {
-          authorization: token
-        }
-      });
+      const { data: experiences } = await axios.get('/api/experiences');
       dispatch(setExperiences(experiences));
     } catch (err) {
       console.error('I have zero experience here');

@@ -31,7 +31,6 @@ router.get('/cart', requireToken, async (req, res, next) => {
   }
 });
 
-// for creating a new cart
 router.post('/cart', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
@@ -40,7 +39,7 @@ router.post('/cart', requireToken, async (req, res, next) => {
     const [newCart, created] = await Cart.findOrCreate({
       where: {
         id: req.body.id,
-        totalQuanitity: req.body.totalQuanitity,
+        totalQuantity: req.body.totalQuantity,
       },
     });
     if (created) {
@@ -54,6 +53,31 @@ router.post('/cart', requireToken, async (req, res, next) => {
 });
 
 //for updating the cart itself
+router.put('/cart/increase/:id', async (req, res, next) => {
+  try {
+    let cartItem = await CartItem.findByPk(req.params.id);
+    cartItem.numberOfNights++;
+    await cartItem.save();
+    res.json(cartItem);
+  }
+  catch (err) {
+    next(err);
+  }
+});
+
+router.put('/cart/decrease/:id', async (req, res, next) => {
+  try {
+    let cartItem = await CartItem.findByPk(req.params.id);
+    cartItem.numberOfNights--;
+    await cartItem.save();
+    res.json(cartItem);
+  }
+  catch (err) {
+    next(err);
+  }
+});
+
+//I think were gettign rid of this?
 router.put('/cart', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
@@ -95,40 +119,86 @@ router.put('/cart', requireToken, async (req, res, next) => {
 
 //I put this route here incase.
 //to create a new cart item
-router.post('/cart', requireToken, async (req, res, next) => {
+router.post('/cart', requireToken, isEmployee, async (req, res, next) => {
+  try {
+  const [newCartItem, created] = await CartItem.findOrCreate({
+    where: {
+      id: req.body.id,
+      numberOfNights: req.body.numberOfNights,
+    },
+  });
+  if (created) {
+    res.status(201).send(newCartItem);
+  }
+  res.status(409).send('nope');
+} catch (error) {
+  console.error('your post cartItem route is broken', error);
+  next(error);
+}});
+
+//to delete a cart item
+router.delete('/cart/checkout', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');
     }
-    const [newCartItem, created] = await CartItem.findOrCreate({
+    const cart = await Cart.findOne({
       where: {
-        id: req.body.id,
-        numberOfNights: req.body.numberOfNights,
+        userId: req.user.id
+      },
+    });
+    const cartItemsToBeDeleted = await CartItem.findAll({
+      where: {
+        cartId: cart.id
+      }
+    });
+    if (!cartItemsToBeDeleted) {
+      res.sendStatus(400);
+    } else {
+      await cartItemsToBeDeleted.destroy();
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
+//add item to cart
+router.post('/cart/addToCart', requireToken, async (req, res, next) => {
+  try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
+    const cart = await Cart.findOne({
+      where: {
+        userId: req.user.id,
+      },
+    });
+    const created = await CartItem.findOne({
+      where: {
+        roomId: req.body.roomId,
+        cartId: cart.id
+        // numberOfNights: req.body.numberOfNights,
       },
     });
     if (created) {
-      res.status(201).send(newCartItem);
+      // created.numberOfNights += req.body.numberOfNights;
+      created.numberOfNights ++;
+      await created.save();
+      res.status(201).json(created);
     }
-    res.status(409).send('nope');
+    let newCartItem = await CartItem.create({
+      where: {
+        roomId: req.body.roomId,
+        cartId: cart.id,
+        // numberOfNights: req.body.numberOfNights,
+      }
+    })
+    res.status(200).send(newCartItem);
   } catch (error) {
     console.error('your post cartItem route is broken', error);
     next(error);
   }
 });
 
-//to delete a cart item 
-router.delete('/cart', requireToken, async (req, res, next) => {
-  try {
-    if (!req.user) {
-      throw new Error('Unauthorized');
-    }
-    const cartItem = await CartItem.findByPk(req.body.id);
-    cartItem.destroy();
-    res.send(cartItem);
-  } catch (error) {
-    console.error('if you booked that room youre keepin it darnit');
-    next(error);
-  }
-});
 
 module.exports = router;
