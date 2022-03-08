@@ -266,25 +266,25 @@ async function seed() {
     });
 
     const codyCart = await Cart.create({
-      totalQuantity: 4,
+      totalQuantity: 0,
     });
     const murphyCart = await Cart.create({
       totalQuantity: 4,
     });
     const leahCart = await Cart.create({
-      totalQuantity: 4,
+      totalQuantity: 0,
     });
     const tediCart = await Cart.create({
-      totalQuantity: 4,
+      totalQuantity: 6,
     });
     const zumaCart = await Cart.create({
-      totalQuantity: 4,
+      totalQuantity: 0,
     });
     const ladybugCart = await Cart.create({
-      totalQuantity: 4,
+      totalQuantity: 0,
     });
     const successfulBWCart = await Cart.create({
-      totalQuantity: 4,
+      totalQuantity: 0,
     });
     const murphyCartItem1 = await CartItem.create({
       numberOfNights: 2,
