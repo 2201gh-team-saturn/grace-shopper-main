@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-const TOKEN = 'token';
-
 const SET_USERS= 'SET_USERS';
 const TOKEN = 'token'
 
