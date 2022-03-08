@@ -53,12 +53,13 @@ router.post('/cart', requireToken, async (req, res, next) => {
   }
 });
 
+//for updating the cart itself
 router.put('/cart', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');
     }
-    const cartToUpdate = await Cart.findByPk(req.body.id); //what am I passing? const { data: cartItem } = await axios.delete(`/api/cartItem/${id}`, {
+    const cartToUpdate = await Cart.findByPk(req.body.id);
     if (cartToUpdate) {
       res.status(201).send(await cartToUpdate.update(req.body));
     } else {
@@ -72,29 +73,50 @@ router.put('/cart', requireToken, async (req, res, next) => {
   }
 });
 
+//for updating the cart item
+router.put('/cart', requireToken, async (req, res, next) => {
+  try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
+    const cartItemToUpdate = await CartItem.findByPk(req.body.id);
+    if (cartItemToUpdate) {
+      res.status(201).send(await cartItemToUpdate.update(req.body));
+    } else {
+      res.status(404).send('Cart Item does not exist');
+    }
+  } catch (error) {
+    console.error(
+      'Hey! Hey you! you made a mistake with your cart Item put route!'
+    );
+    next(error);
+  }
+});
 
-// router.post('/cartItem', requireToken, async (req, res, next) => {
-//   try {
-//     if (!req.user) {
-//       throw new Error('Unauthorized');
-//     }
-//     const [newCartItem, created] = await CartItem.findOrCreate({
-//       where: {
-//         id: req.body.id,
-//         numberOfNights: req.body.numberOfNights,
-//       },
-//     });
-//     if (created) {
-//       res.status(201).send(newCartItem);
-//     }
-//     res.status(409).send('nope');
-//   } catch (error) {
-//     console.error('your post cartItem route is broken', error);
-//     next(error);
-//   }
-// });
+//im confused on the difference between creating a new room and creating a new cart item. Or if its just association but I put this route here incase.
+//to create a new cart item
+router.post('/cart', requireToken, async (req, res, next) => {
+  try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
+    const [newCartItem, created] = await CartItem.findOrCreate({
+      where: {
+        id: req.body.id,
+        numberOfNights: req.body.numberOfNights,
+      },
+    });
+    if (created) {
+      res.status(201).send(newCartItem);
+    }
+    res.status(409).send('nope');
+  } catch (error) {
+    console.error('your post cartItem route is broken', error);
+    next(error);
+  }
+});
 
-//to delete a cart item
+//to delete a cart item coz were not actually deleting carts
 router.delete('/cart', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {

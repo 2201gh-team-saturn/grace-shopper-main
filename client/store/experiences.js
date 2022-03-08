@@ -6,7 +6,6 @@ const SET_EXPERIENCES = 'SET_EXPERIENCES';
 const ADD_EXPERIENCE = 'ADD_EXPERIENCE';
 const DELETE_EXPERIENCE = 'DELETE_EXPERIENCE';
 const UPDATE_EXPERIENCE = 'UPDATE_EXPERIENCE';
-const TOKEN = 'token'
 
 export const setExperiences = (experiences) => {
   return {
