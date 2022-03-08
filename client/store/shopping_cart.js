@@ -3,7 +3,8 @@ import history from '../history';
 
 const TOKEN = 'token';
 
-const SET_SHOPPING_CART = 'SET_SHOPPING_CART'; //will set cart items too
+//weird bc we're not getting all carts just want one cart and its items
+const SET_SHOPPING_CART = 'SET_SHOPPING_CART'; 
 const UPDATE_CART = 'UPDATE_CART';
 
 //cart action creators
