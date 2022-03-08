@@ -14,17 +14,30 @@ class Account extends Component {
     const userType = this.props.user.type;
     console.log(userType);
     return (
-      <div>
+      <div className='account_container'>
+        <img className='account_img' src='/profile_pic.jpeg' />
         <h3>Welcome back {username}! </h3>
         {userType === 'employee' ? (
           <div>
-            <Link to={'/employee-dashboard'}>Employee Terminal </Link>
+            <span>
+              <Link to={'/employee-dashboard'}>Employee Terminal </Link>
+            </span>
             <br />
             <span>See Bookings </span>
           </div>
         ) : (
-          'Guest placeholder'
+          ''
         )}
+
+        {userType === 'guest' ? (
+          <div>
+             <span>Reservations</span>
+          </div>
+        ) : (
+          ''
+        )}
+
+       
       </div>
     );
   }
