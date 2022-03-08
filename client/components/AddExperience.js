@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { addExperience } from '../store/rooms';
+import { addExperience } from '../store/experiences';
 
 class AddExperience extends Component {
   constructor() {
@@ -8,7 +8,6 @@ class AddExperience extends Component {
     this.state = {
       name: '',
       description: '',
-      imageUrl: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

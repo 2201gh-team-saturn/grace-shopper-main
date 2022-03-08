@@ -34,7 +34,7 @@ router.get('/experiences/:id', requireToken, async (req, res, next) => {
 	}
 });
 
-router.post('/experiences', requireToken, async (req, res, next) => {
+router.post('/experiences', requireToken, isEmployee, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');
@@ -42,8 +42,6 @@ router.post('/experiences', requireToken, async (req, res, next) => {
     const [newExperience, created] = await Experience.findOrCreate({
       where: {
         name: req.body.name,
-        description: req.body.description,
-        imageUrl: req.body.imageUrl,
       },
     });
     if (created) {
@@ -70,7 +68,7 @@ router.delete('/experiences/:id', requireToken, async (req, res, next) => {
   }
 });
 
-router.put('/experiences/:id', requireToken, async (req, res, next) => {
+router.put('/experiences/:id', requireToken, isEmployee, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');

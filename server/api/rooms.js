@@ -21,7 +21,7 @@ router.get('/rooms/:id',requireToken, async (req, res, next) => {
     const roomId = req.params.id;
     const getRoomById = await Room.findByPk(roomId, {
       include: [Theme]
-    }); 
+    });
     res.status(200).send(getRoomById);
   } catch (error) {
     next(error);
@@ -30,6 +30,9 @@ router.get('/rooms/:id',requireToken, async (req, res, next) => {
 
 router.post('/rooms', requireToken, isEmployee, async (req, res, next) => {
   try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
     const doesRoomExist = await Room.findOne({
       where: {
         name: req.body.name,
@@ -49,6 +52,9 @@ router.post('/rooms', requireToken, isEmployee, async (req, res, next) => {
 
 router.put('/rooms/:id',requireToken, isEmployee, async (req, res, next) => {
   try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
     const roomId = req.params.id;
     const room = await Room.findByPk(roomId);
     if (room) {
@@ -63,6 +69,9 @@ router.put('/rooms/:id',requireToken, isEmployee, async (req, res, next) => {
 
 router.delete('/rooms/:id',requireToken, isEmployee, async (req, res, next) => {
   try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
     const roomId = req.params.id;
     const roomToBeDeleted = await Room.findByPk(roomId);
 
