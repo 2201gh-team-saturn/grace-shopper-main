@@ -13,11 +13,9 @@ class Cart extends Component {
 	}
 	componentDidMount() {
 		// this.props.loadCart(this.props.user.id);
-		console.log('hello', this.props.cartItems);
 		this.props.fetchCart(this.props.userId);
 	}
 	increase(id) {
-		console.log('look in increase', id)
       this.props.increaseQuantity(id);
     }
     
@@ -28,12 +26,7 @@ class Cart extends Component {
         const user = this.props.user;
         const items = this.props.cartItems;
         const totalItems = this.props.cartItems[0];
-        
-        if (totalItems) {
-          console.log(totalItems.numberOfNights);
-        }
 		//const {room} = this.props.cart
-		// console.log(room);
     
 		return (
       <div>
