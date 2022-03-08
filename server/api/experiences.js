@@ -2,7 +2,6 @@ const router = require('express').Router()
 const Experience = require('../db/models/Experience')
 const Room = require('../db/models/Room');
 const { requireToken, isEmployee} = require('./security');
-const User = require('../db/models/User');
 
 // api/
 router.get('/experiences', requireToken, async (req, res, next) => {
