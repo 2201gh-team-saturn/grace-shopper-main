@@ -45,7 +45,7 @@ class AddExperience extends Component {
             <button type='submit'>Submit</button>
           </div>
 
-         
+
         </form>
       </div>
     );
@@ -59,3 +59,4 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(null, mapDispatch)(AddExperience);
+>>>>>>> main

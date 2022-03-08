@@ -5,6 +5,7 @@ const ADD_EXPERIENCE = 'ADD_EXPERIENCE';
 const DELETE_EXPERIENCE = 'DELETE_EXPERIENCE';
 const UPDATE_EXPERIENCE = 'UPDATE_EXPERIENCE';
 
+const TOKEN = 'token';
 
 export const setExperiences = (experiences) => {
   return {
@@ -46,13 +47,14 @@ export const fetchExperiences = () => {
 export const addExperience = (experience) => {
   return async (dispatch) => {
     try {
-      const token = window.localStorage.getItem(TOKEN);
+      //const token = window.localStorage.getItem(TOKEN);
       const { data: created } = await axios.post(
-        '/api/experiences', experience, {
-          headers: {
-            authorization: token
-          }
-        });
+         '/api/experiences', experience, //{
+        //   headers: {
+        //     authorization: token
+        //   }
+        // }
+        );
       dispatch(_addExperience(created));
     } catch (error) {
       console.error('theres something wrong with your add experience thunk');

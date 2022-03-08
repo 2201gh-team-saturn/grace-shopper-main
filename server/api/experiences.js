@@ -2,7 +2,6 @@ const router = require('express').Router()
 const Experience = require('../db/models/Experience')
 const Room = require('../db/models/Room');
 const { requireToken, isEmployee} = require('./security');
-const User = require('../db/models/User');
 
 // api/
 
@@ -49,9 +48,6 @@ router.post('/experiences', requireToken, isEmployee, async (req, res, next) => 
 
 router.delete('/experiences/:id', requireToken, isEmployee, async (req, res, next) => {
   try {
-    if (!req.user) {
-      throw new Error('Unauthorized');
-    }
     const experience = await Experience.findByPk(req.params.id);
     experience.destroy();
     res.send(experience);
@@ -63,9 +59,6 @@ router.delete('/experiences/:id', requireToken, isEmployee, async (req, res, nex
 
 router.put('/experiences/:id', requireToken, isEmployee, async (req, res, next) => {
   try {
-    if (!req.user) {
-      throw new Error('Unauthorized');
-    }
     const experienceToUpdate = await Experience.findByPk(req.params.id);
     if (experienceToUpdate) {
       res.status(201).send(await experienceToUpdate.update(req.body));

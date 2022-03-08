@@ -3,21 +3,12 @@ const router = express.Router();
 const Cart = require('../db/models/Cart');
 const CartItem = require('../db/models/CartItem');
 const Room = require('../db/models/Room');
+const { requireToken, isEmployee} = require('./security');
 const {
   models: { User },
 } = require('../db');
 
-const requireToken = async (req, res, next) => {
-  try {
-    const token = req.headers.authorization;
-    const user = await User.findByToken(token);
-    req.user = user;
-    next();
-  } catch (error) {
-    next(error);
-  }
-};
-
+//for getting the cart and its items
 router.get('/cart', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
@@ -40,7 +31,6 @@ router.get('/cart', requireToken, async (req, res, next) => {
   }
 });
 
-//change to put route
 router.post('/cart', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
@@ -62,6 +52,7 @@ router.post('/cart', requireToken, async (req, res, next) => {
   }
 });
 
+//for updating the cart itself
 router.put('/cart/increase/:id', async (req, res, next) => {
   try {
     let cartItem = await CartItem.findByPk(req.params.id);
@@ -86,6 +77,7 @@ router.put('/cart/decrease/:id', async (req, res, next) => {
   }
 });
 
+//I think were gettign rid of this?
 router.put('/cart', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
@@ -105,22 +97,46 @@ router.put('/cart', requireToken, async (req, res, next) => {
   }
 });
 
+//for updating the cart item
+router.put('/cart', requireToken, async (req, res, next) => {
+  try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
+    const cartItemToUpdate = await CartItem.findByPk(req.body.id);
+    if (cartItemToUpdate) {
+      res.status(201).send(await cartItemToUpdate.update(req.body));
+    } else {
+      res.status(404).send('Cart Item does not exist');
+    }
+  } catch (error) {
+    console.error(
+      'Hey! Hey you! you made a mistake with your cart Item put route!'
+    );
+    next(error);
+  }
+});
 
-// router.delete('/cart', requireToken, async (req, res, next) => {
-//   try {
-//     if (!req.user) {
-//       throw new Error('Unauthorized');
-//     }
-//     const cart = await Cart.findByPk(req.body.cartId);
-//     cart.destroy();
-//     res.send(cart);
-//   } catch (error) {
-//     console.error('you break it you buy it');
-//     next(error);
-//   }
-// });
+//I put this route here incase.
+//to create a new cart item
+router.post('/cart', requireToken, isEmployee, async (req, res, next) => {
+  try {
+  const [newCartItem, created] = await CartItem.findOrCreate({
+    where: {
+      id: req.body.id,
+      numberOfNights: req.body.numberOfNights,
+    },
+  });
+  if (created) {
+    res.status(201).send(newCartItem);
+  }
+  res.status(409).send('nope');
+} catch (error) {
+  console.error('your post cartItem route is broken', error);
+  next(error);
+}});
 
-//clear entire cart after checkout
+//to delete a cart item
 router.delete('/cart/checkout', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
@@ -186,6 +202,3 @@ router.post('/cart/addToCart', requireToken, async (req, res, next) => {
 
 
 module.exports = router;
-
-//==================================
-//Cart Item schtuff

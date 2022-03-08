@@ -10,13 +10,13 @@ class Account extends Component {
     this.props.loadUsers();
   }
   render() {
-    const { username } = this.props;
+    const { firstName } = this.props;
     const userType = this.props.user.type;
     console.log(userType);
     return (
       <div className='account_container'>
         <img className='account_img' src='/profile_pic.jpeg' />
-        <h3>Welcome back {username}! </h3>
+        <h3>Welcome back {firstName}! </h3>
         {userType === 'employee' ? (
           <div>
             <span>
@@ -31,13 +31,11 @@ class Account extends Component {
 
         {userType === 'guest' ? (
           <div>
-             <span>Reservations</span>
+            <span>Reservations</span>
           </div>
         ) : (
           ''
         )}
-
-       
       </div>
     );
   }
@@ -48,7 +46,7 @@ class Account extends Component {
  */
 const mapState = (state) => {
   return {
-    username: state.auth.username,
+    firstName: state.auth.firstName,
     user: state.auth,
   };
 };

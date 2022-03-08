@@ -13,13 +13,13 @@ class BookingConfirmation extends Component {
     this.props.loadUsers();
   }
   render() {
-    const { username } = this.props;
+    const { firstName } = this.props;
     return (
       <>
         <div id='booking_container'>
           <div className='booking_inner_container'>
             <h2 className='booking_text' id='booking_title'>
-              Congratulations {username}! Your Booking's Complete!{' '}
+              Congratulations {firstName}! Your Booking's Complete!{' '}
             </h2>
             <div id='packing_list'>
               <h3 className='booking_text'>Here's your packing list:</h3>
@@ -49,7 +49,7 @@ class BookingConfirmation extends Component {
 
 const mapState = (state) => {
   return {
-    username: state.auth.username,
+    firstName: state.auth.firstName,
     user: state.auth,
   };
 };

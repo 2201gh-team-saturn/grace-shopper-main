@@ -29,7 +29,6 @@ class AddRoom extends Component {
 
   render() {
     const { handleSubmit, handleChange } = this;
-    console.log(this.state)
     return (
       <div>
         <form onSubmit={handleSubmit}>
@@ -60,8 +59,6 @@ class AddRoom extends Component {
             <input name='imageUrl' placeholder='image url' onChange={handleChange} value={this.state.imageUrl} />
             <button type='submit'>Submit</button>
           </div>
-
-         
         </form>
       </div>
     );
