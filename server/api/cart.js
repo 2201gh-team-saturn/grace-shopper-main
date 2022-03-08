@@ -3,21 +3,12 @@ const router = express.Router();
 const Cart = require('../db/models/Cart');
 const CartItem = require('../db/models/CartItem');
 const Room = require('../db/models/Room');
+const { requireToken, isEmployee} = require('./security');
 const {
   models: { User },
 } = require('../db');
 
-const requireToken = async (req, res, next) => {
-  try {
-    const token = req.headers.authorization;
-    const user = await User.findByToken(token);
-    req.user = user;
-    next();
-  } catch (error) {
-    next(error);
-  }
-};
-
+//for getting the cart and its items
 router.get('/cart', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
@@ -40,7 +31,8 @@ router.get('/cart', requireToken, async (req, res, next) => {
   }
 });
 
-router.post('/cart/:id', requireToken, async (req, res, next) => {
+// for creating a new cart
+router.post('/cart', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');
@@ -61,18 +53,54 @@ router.post('/cart/:id', requireToken, async (req, res, next) => {
   }
 });
 
-router.delete('/cart/:id', requireToken, async (req, res, next) => {
+// router.post('/cartItem', requireToken, async (req, res, next) => {
+//   try {
+//     if (!req.user) {
+//       throw new Error('Unauthorized');
+//     }
+//     const [newCartItem, created] = await CartItem.findOrCreate({
+//       where: {
+//         id: req.body.id,
+//         numberOfNights: req.body.numberOfNights,
+//       },
+//     });
+//     if (created) {
+//       res.status(201).send(newCartItem);
+//     }
+//     res.status(409).send('nope');
+//   } catch (error) {
+//     console.error('your post cartItem route is broken', error);
+//     next(error);
+//   }
+// });
+
+//to delete a cart item
+router.delete('/cart', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');
     }
-    const cart = await Cart.findByPk(req.params.id);
-    cart.destroy();
-    res.send(cart);
+    const cartItem = await CartItem.findByPk(req.body.id);
+    cartItem.destroy();
+    res.send(cartItem);
   } catch (error) {
-    console.error('you break it you buy it');
+    console.error('if you booked that room youre keepin it darnit');
     next(error);
   }
 });
+
+// router.delete('/cart/:id', requireToken, async (req, res, next) => {
+//   try {
+//     if (!req.user) {
+//       throw new Error('Unauthorized');
+//     }
+//     const cart = await Cart.findByPk(req.params.id);
+//     cart.destroy();
+//     res.send(cart);
+//   } catch (error) {
+//     console.error('you break it you buy it');
+//     next(error);
+//   }
+// });
 
 module.exports = router;
