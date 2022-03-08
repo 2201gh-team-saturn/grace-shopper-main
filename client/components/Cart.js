@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchShoppingCart, deleteRoomThunk, increaseQuantity, decreaseQuantity } from '../store/shopping_cart';
+import { fetchShoppingCart, increaseQuantity, decreaseQuantity, clearAllCartItems } from '../store/shopping_cart';
 import { fetchUsers } from '../store/users';
+import {addReservation} from '../store/reservations'
 
 
 class Cart extends Component {
@@ -22,6 +23,12 @@ class Cart extends Component {
   decrease(id) {
       this.props.decreaseQuantity(id);
     }
+
+	handleCheckout(roomId){
+		this.props.addReservation(roomId);
+		this.props.checkoutCart();
+	}
+
       render() {
         const user = this.props.user;
         const items = this.props.cartItems;
@@ -101,6 +108,8 @@ const mapDispatch = (dispatch) => {
 		fetchCart: (userId) => dispatch(fetchShoppingCart(userId)),
 		increaseQuantity: (id) => dispatch(increaseQuantity(id)),
 		decreaseQuantity: (id) => dispatch(decreaseQuantity(id)),
+		checkoutCart: () => dispatch(clearAllCartItems()),
+		createReservation: (roomId) => dispatch(addReservation(roomId))
 	};
 };
 export default connect(mapState, mapDispatch)(Cart);
