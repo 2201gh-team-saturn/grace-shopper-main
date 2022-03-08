@@ -53,7 +53,7 @@ async function seed() {
       password: '2468',
       type: 'guest',
       isAdmin: false
-     
+
     });
     const zuma = await User.create({
       username: 'Zuma',
@@ -252,18 +252,28 @@ async function seed() {
         'https://t4.ftcdn.net/jpg/02/98/61/45/240_F_298614534_BfuDxvYZ81v9X3p94cClHuD71jxMKZpM.jpg',
     });
 
+    // const reservation1 = await Reservation.create({
+    //   startDate: new Date('2022-04-09 00:00:00'),
+    //   endDate: new Date('2022-04-12 00:00:00'),
+    // });
+    // const reservation2 = await Reservation.create({
+    //   startDate: new Date('2022-04-12 00:00:00'),
+    //   endDate: new Date('2022-04-16 00:00:00'),
+    // });
+    // const reservation3 = await Reservation.create({
+    //   startDate: new Date('2021-12-30 00:00:00'),
+    //   endDate: new Date('2022-01-02 00:00:00'),
+    // });
+
     const reservation1 = await Reservation.create({
-      startDate: new Date('2022-04-09 00:00:00'),
-      endDate: new Date('2022-04-12 00:00:00'),
-    });
+      totalNumofDays: 10
+    })
     const reservation2 = await Reservation.create({
-      startDate: new Date('2022-04-12 00:00:00'),
-      endDate: new Date('2022-04-16 00:00:00'),
-    });
+      totalNumofDays: 3
+    })
     const reservation3 = await Reservation.create({
-      startDate: new Date('2021-12-30 00:00:00'),
-      endDate: new Date('2022-01-02 00:00:00'),
-    });
+      totalNumofDays: 7
+    })
 
     const codyCart = await Cart.create({
       totalQuantity: 0,
