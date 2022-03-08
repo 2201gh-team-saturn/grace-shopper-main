@@ -53,6 +53,7 @@ router.post('/cartItem', requireToken, async (req, res, next) => {
   }
 });
 
+
 router.delete('/cartItem/:id', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {

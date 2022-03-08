@@ -61,6 +61,35 @@ router.post('/cart/:id', requireToken, async (req, res, next) => {
   }
 });
 
+router.put('/cart', async (req, res, next) => {
+  try {
+    let cartItem = await CartItem.findByPk(req.body.id);
+    cartItem.numberOfNights++;
+    await cartItem.save();
+    res.json(cartItem);
+  }
+  catch (err) {
+    next(err);
+  }
+});
+
+router.put('/cart', async (req, res, next) => {
+  try {
+    console.log('hey',req.body.id)
+    let cartItem = await CartItem.findOne({
+      where: { id: req.body.id}
+    }
+    );
+    console.log('look',cartItem)
+    cartItem.numberOfNights--;
+    await cartItem.save();
+    res.json(cartItem);
+  }
+  catch (err) {
+    next(err);
+  }
+});
+
 router.delete('/cart/:id', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {

@@ -70,6 +70,30 @@ export const addCartItem = (numberOfNights) => {
   };
 };
 
+export const increaseQuantity = (id) => async (dispatch) => {
+  // const token = window.localStorage.getItem(TOKEN);
+  const {data} = await axios.put(`/api/cart`,id 
+  // {
+  //   // headers :{
+  //   //   authorization: token
+  //   // }
+  // }
+  );
+  dispatch(updatedQuantity(data));
+}
+
+export const decreaseQuantity = (id) => async (dispatch) => {
+  // const token = window.localStorage.getItem(TOKEN);
+  const {data} = await axios.put(`/api/cart`,id
+  // {
+  //   // headers: {
+  //   //   authorization: token
+  //   // }
+  // }
+  );
+  dispatch(updatedQuantity(data));
+}
+
 export const deleteCartItem = (id, history) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem(TOKEN);
