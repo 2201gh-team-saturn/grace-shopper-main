@@ -59,8 +59,6 @@ class AddRoom extends Component {
             <input name='imageUrl' placeholder='image url' onChange={handleChange} value={this.state.imageUrl} />
             <button type='submit'>Submit</button>
           </div>
-
-
         </form>
       </div>
     );

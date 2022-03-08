@@ -7,6 +7,9 @@ const { requireToken, isEmployee} = require('./security');
 /* mounted on /api */
 router.get('/rooms',requireToken, async (req, res, next) => {
   try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
     const getAllRooms = await Room.findAll({
       include: [Theme]
     });
@@ -18,6 +21,9 @@ router.get('/rooms',requireToken, async (req, res, next) => {
 
 router.get('/rooms/:id',requireToken, async (req, res, next) => {
   try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
     const roomId = req.params.id;
     const getRoomById = await Room.findByPk(roomId, {
       include: [Theme]
@@ -30,9 +36,6 @@ router.get('/rooms/:id',requireToken, async (req, res, next) => {
 
 router.post('/rooms', requireToken, isEmployee, async (req, res, next) => {
   try {
-    if (!req.user) {
-      throw new Error('Unauthorized');
-    }
     const doesRoomExist = await Room.findOne({
       where: {
         name: req.body.name,

@@ -37,9 +37,8 @@ class Routes extends Component {
             <Route exact path="/rooms" component={AllRooms} />
             <Route exact path="/experiences" component={Experiences} />
             <Route exact path="/experiences/:id" component={SingleExperience} />
-            {/* should this be rooms/add? */}
             <Route exact path="/room/add" component={AddRoom} />
-            <Route exact path="/experiences/add" component={AddExperience} />
+            <Route exact path="/experience/add" component={AddExperience} />
             <Route exact path="/rooms/:id" component={SingleRoom} />
             <Route exact path="/rooms/:id/edit" component={UpdateSingleRoom} />
             <Route exact path="/employee-dashboard" component={EmployeeDashboard} />
