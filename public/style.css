@@ -88,7 +88,7 @@ h1 {
   letter-spacing: 1px;
 }
 
-.add_room_btn, .add_experience_button{
+.add_room_btn, .add_experience_btn{
   margin-left: 5.5%;
   min-width: 130px;
   height: 40px;
@@ -524,4 +524,8 @@ margin: 10px 0;
 
 .account_container {
   margin-left: 2%;
+}
+
+.employee_dashboard{
+  margin-left: 3%;
 }

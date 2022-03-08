@@ -18,7 +18,7 @@ class EmployeeDashboard extends Component {
     const reservations = this.props.reservations;
 
     return (
-      <div>
+      <div className='employee_dashboard'>
         {userType === 'employee' ? (
           <div>
             <h2>Employee Dashboard</h2>
