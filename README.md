@@ -123,8 +123,8 @@ Now, you should be deployed!
 [x] have validated data to ensure reliability.
   * i.e. each customer that creates an account should only be able to do so once with a single email address.
 [x] have full rights to make backend requests to add, edit, and remove products.
-[] No one else should have access.
-[] view user information.
+[x] No one else should have access.
+[x] view user information.
 [] No one else should have access.
 
 ### As an engineer, I want to:
@@ -132,4 +132,4 @@ Now, you should be deployed!
   * By doing this, you really set yourselves up to tackle many of the points throughout the tiers. In the long run, this will save you, potentially, tons of time.
 [] For example, seed hundreds of products with dummy data so that when you get to the “pagination” user story, you won’t have to worry about adding more products.
 [x] Likewise, add a bunch of users with products in their carts so editing the cart can be worked on without already having the “add to cart” functionality built out.
-[] user data to be secure so that no one can unrightfully manipulate information.
+[x] user data to be secure so that no one can unrightfully manipulate information.
