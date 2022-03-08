@@ -5,7 +5,8 @@ const { requireToken, isEmployee} = require('./security');
 const User = require('../db/models/User');
 
 // api/
-router.get('/experiences', async (req, res, next) => {
+
+router.get('/experiences' ,async (req, res, next) => {
   try {
     const experiences = await Experience.findAll();
     res.json(experiences);
@@ -29,16 +30,11 @@ router.get('/experiences/:id', async (req, res, next) => {
 	}
 });
 
-router.post('/experiences', requireToken, async (req, res, next) => {
+router.post('/experiences', requireToken, isEmployee, async (req, res, next) => {
   try {
-    if (!req.user) {
-      throw new Error('Unauthorized');
-    }
     const [newExperience, created] = await Experience.findOrCreate({
       where: {
         name: req.body.name,
-        description: req.body.description,
-        imageUrl: req.body.imageUrl,
       },
     });
     if (created) {
@@ -51,7 +47,7 @@ router.post('/experiences', requireToken, async (req, res, next) => {
   }
 });
 
-router.delete('/experiences/:id', requireToken, async (req, res, next) => {
+router.delete('/experiences/:id', requireToken, isEmployee, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');
@@ -65,7 +61,7 @@ router.delete('/experiences/:id', requireToken, async (req, res, next) => {
   }
 });
 
-router.put('/experiences/:id', requireToken, async (req, res, next) => {
+router.put('/experiences/:id', requireToken, isEmployee, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');

@@ -39,7 +39,7 @@ export class AllRooms extends React.Component {
           <Link to={'/room/add'}>
             <div className='button_container'>
               <button type='button' className='add_room_btn'>
-                Add Rooms
+                Add a Room
               </button>
             </div>
           </Link>
