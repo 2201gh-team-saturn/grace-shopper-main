@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchShoppingCart, deleteRoomThunk, increaseQuantity, decreaseQuantity } from '../store/shopping_cart';
 import { fetchUsers } from '../store/users';
-
+import { deleteCartItem } from '../store/cartItems'
 
 class Cart extends Component {
 	constructor(props) {
@@ -13,6 +13,7 @@ class Cart extends Component {
 	}
 	componentDidMount() {
 		// this.props.loadCart(this.props.user.id);
+		this.props.deleteCartItem()
 		this.props.fetchCart(this.props.userId);
 	}
 	increase(id) {
@@ -50,10 +51,10 @@ class Cart extends Component {
 									<button 
 									type='submit'
                       className='room_delete_btn'
-                      // value={item.id}
-                      // onClick={(event) =>
-                      //   this.props.deleteCartItem(event.target.value)
-                      // }
+                      value={item.id}
+                      onClick={(event) =>
+                        this.props.deleteCartItem(event.target.value)
+                      }
                     >
                       Remove Item
                     </button>
@@ -98,6 +99,7 @@ const mapDispatch = (dispatch) => {
 	return {
 		// loadRooms: () => dispatch(fetchRooms()),
 		//loadCart: (id) => dispatch(fetchShoppingCart(id)),
+		deleteCartItem: (id) => dispatch(deleteCartItem(id)), 
 		fetchCart: (userId) => dispatch(fetchShoppingCart(userId)),
 		increaseQuantity: (id) => dispatch(increaseQuantity(id)),
 		decreaseQuantity: (id) => dispatch(decreaseQuantity(id)),
