@@ -18,7 +18,6 @@ const App = () => {
     // }, 1000)
     cartRef.current = setInterval(() => {
       JSON.parse(localStorage.cart);
-      console.log(cartRef.current);
     }, 1000)
 }, [cart])
 
