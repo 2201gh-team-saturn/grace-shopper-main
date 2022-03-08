@@ -1,8 +1,7 @@
 const router = require('express').Router();
 const CartItem = require('../db/models/CartItem');
 const User = require('../db/models/User');
-const Cart = require('../db/models/Cart');
-const Room = require('../db/models/Room');
+
 
 const requireToken = async (req, res, next) => {
   try {
@@ -14,23 +13,6 @@ const requireToken = async (req, res, next) => {
     next(error);
   }
 };
-
-router.get('/cartItem', requireToken, async (req, res, next) => {
-  try {
-    if (!req.user) {
-      throw new Error('Unauthorized');
-    }
-    const cartItems = await CartItem.findAll({
-      where: {
-        cartId: req.user.id,
-      },
-      include: [Cart, Room]
-    });
-    res.send(cartItems);
-  } catch (err) {
-    next(err);
-  }
-});
 
 router.post('/cartItem', requireToken, async (req, res, next) => {
   try {

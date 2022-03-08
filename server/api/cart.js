@@ -40,6 +40,7 @@ router.get('/cart', requireToken, async (req, res, next) => {
   }
 });
 
+//change to put route
 router.post('/cart/:id', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
