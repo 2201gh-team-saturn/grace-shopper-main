@@ -15,6 +15,8 @@ function GuestCheckout() {
     }, [cart]) //can also maybe do interval, so cart is regularly updating?
     //might want to set local storage when user 
 
+    
+
     const cartItems = cart.map((item) => {
         return (
             <div className='cart_format' key={cart.id}>

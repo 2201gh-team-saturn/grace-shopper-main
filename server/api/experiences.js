@@ -5,11 +5,8 @@ const { requireToken, isEmployee} = require('./security');
 const User = require('../db/models/User');
 
 // api/
-router.get('/experiences', requireToken, async (req, res, next) => {
+router.get('/experiences', async (req, res, next) => {
   try {
-    if (!req.user) {
-      throw new Error('Unauthorized');
-    }
     const experiences = await Experience.findAll();
     res.json(experiences);
   } catch (error) {
@@ -20,11 +17,8 @@ router.get('/experiences', requireToken, async (req, res, next) => {
   }
 })
 
-router.get('/experiences/:id', requireToken, async (req, res, next) => {
+router.get('/experiences/:id', async (req, res, next) => {
   try {
-    if (!req.user) {
-      throw new Error('Unauthorized');
-    }
 		const experience = await Experience.findByPk(req.params.id, {
 			include: [{ model: Room }],
 		});
