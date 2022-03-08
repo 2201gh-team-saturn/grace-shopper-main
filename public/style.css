@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500&family=Montserrat:wght@400&display=swap');
 
 body {
-  background-image: linear-gradient(rgba(255, 235, 205, 0.345),rgb(171, 201, 247));
-  font-family: sans-serif;
+  /* background-image: linear-gradient(rgba(255, 235, 205, 0.345),rgb(168, 220, 209)); */
+  background-color: white;
+  font-family: 'Montserrat', sans-serif;
   background-size: 100%;
   margin-left: 0px;
   margin-right: 0px;
@@ -61,10 +63,11 @@ h1 {
   grid-template-rows: repeat(3, 1fr);
   grid-column-gap: 40px;
   grid-row-gap: 40px;
+  margin-left: 5%;
 }
 
 .rooms img {
-  width: 400px;
+  width: 450px;
   height: 300px;
   border:  5px double rgb(194, 194, 194);
 }
@@ -79,12 +82,14 @@ h1 {
 }
 
 .room_card{
-  font-size: 20px;
+  width: 80%;
+  font-size: 15px;
   color: rgb(100, 100, 100);
   letter-spacing: 1px;
 }
 
 .add_room_btn, .add_experience_button{
+  margin-left: 5.5%;
   min-width: 130px;
   height: 40px;
   color: #fff;
@@ -93,10 +98,9 @@ h1 {
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  display: inline-block;
   outline: none;
-  border: 2px solid #135ca1;
-  background: #135ca1;
+  border: 2px solid rgb(155, 193, 188);
+  background: rgb(155, 193, 188);
 }
 .add_room_btn:hover {
   background: #fff;
@@ -144,20 +148,23 @@ span {
   font-weight: 800;
 }
 b{
-  color: rgb(13, 99, 110);
+  color: rgb(249, 105, 0);
 }
 
 footer {
+  font-size: 15px;
   margin-top: 30px;
   padding: 1%;
-  background-color: rgb(54, 54, 54);
-  color: rgb(255, 255, 255);
-
+  background-color: rgb(245, 158, 108);
+  color: rgb(0, 0, 0);
+  margin-bottom: -20%;
+  columns: 2;
 }
+
 .footer_info{
-  margin-left: 1%;
-
+ margin-left: 1%;
 }
+
 
 .homepage_img{
   width: 100%;
@@ -215,16 +222,29 @@ footer {
       grid-row-gap: 0px;
   }
   .reviews_container {
-
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      grid-template-rows: repeat(1);
-      grid-column-gap: 0px;
-      grid-row-gap: 0px;
-      padding: 15px;
-      font-style: italic;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 5%;
+      background-image: url('/RR LOGO BACKGROUND.png');
+      width: 86%;
+      border-radius: 14px;
+      /* height: 410px; */
   }
 
+  .reviews_container p {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    font-style: italic;
+    padding: 10px;
+    background-color: black;
+    opacity: 0.45;
+    width: 65%;
+    color: white;
+    border-radius: 10px;
+  }
+
+  
   .reviews_container h3{
     font-style: normal;
     color:rgb(141, 141, 141)
@@ -246,9 +266,10 @@ footer {
   }
 
   #entire_nav{
-    background-image: linear-gradient(rgb(174, 212, 216),rgba(0, 0, 255, 0.564));
-    padding-top: 10px;
+    background-image: linear-gradient(rgb(225, 228, 216),rgba(101, 222, 241));
     width: 100%;
+    margin-top: -0.5%;
+    
   }
 
   /* gets rid of link underline */
@@ -259,15 +280,17 @@ footer {
 
   .navbar{
     text-align: center;
+    font-family: 'Montserrat', sans-serif;;
     text-decoration: none;
-    color: white;
+    color: rgb(0, 0, 0);
     letter-spacing: 5px;
-    background-color: #000000;
+    background-color: rgb(255, 255, 255);
     font-weight: 550;
+    margin-bottom: -9px;
   }
 
   .navbar :hover{
-    color: rgb(242, 253, 78);
+    color: rgb(249, 105, 0);
 
   }
 
@@ -303,7 +326,7 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 letter-spacing: 1px;
-background-image: url(https://media0.giphy.com/media/n3xSURtNE62t2/giphy.webp?cid=ecf05e4752qyrk8ve7i3mke40s7exflp0so859vxoxt9vzfc&rid=giphy.webp&ct=g.gif);
+background-image: url(https://media.giphy.com/media/3o7aDbzZnLjVrW9YXe/giphy.gif);
 background-size: cover;
 color: transparent;
 -moz-background-clip: text;
@@ -430,10 +453,9 @@ margin: 10px 0;
   top: 2px;
 }
 
-
 .homepage_subtitle h2 {
-  text-align:center; font-size:35px; text-transform:uppercase; color:rgb(27, 22, 37); letter-spacing:1px;
-  font-family:"Playfair Display","Bookman",serif;
+  text-align:center; font-size:30px; text-transform:uppercase; color:rgb(27, 22, 37); letter-spacing:1px;
+  font-family: 'Lora', serif;
 }
 .homepage_subtitle h2 span {
   margin-top: 5px;
@@ -449,10 +471,7 @@ margin: 10px 0;
 .homepage_subtitle h2 span:after,.homepage_subtitle h2 span:before {
     content: " ";
     display: block;
-    border-bottom: 1px solid #ccc;
-    border-top: 1px solid #ccc;
     height: 5px;
-  background-color:#f8f8f8;
 }
 
 .slider {
@@ -498,4 +517,11 @@ margin: 10px 0;
   justify-content: center;
 }
 
+.account_img {
+  width: 10%;
+  border: solid 1px black;
+}
 
+.account_container {
+  margin-left: 2%;
+}

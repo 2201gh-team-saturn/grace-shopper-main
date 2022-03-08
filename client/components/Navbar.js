@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
+import 'boxicons';
+
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div id='entire_nav'>
@@ -10,26 +12,27 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       {isLoggedIn ? (
         <div className='navbar'>
           {/* The navbar will show these links after you log in */}
-          <Link to='/'>Home</Link>
-          <Link to='/rooms'>Rooms</Link>
-          <Link to='/experiences'>Experiences</Link>
-          <Link to='/account'>Account</Link>
+          <Link to='/'>HOME</Link>
+          <Link to='/rooms'>ROOMS</Link>
+          <Link to='/experiences'>EXPERIENCES</Link>
+          <Link to='/account'>ACCOUNT</Link>
        
            {/* Check out cart icon */}
-          <Link to={'/cart'}>Cart</Link>
+        
           <a href='#' onClick={handleClick}>
-            Logout
+            LOGOUT
           </a>
+          <Link to={'/cart'}><box-icon name='cart-alt' ></box-icon></Link>
         </div>
       ) : (
         <div className='navbar'>
           {/* The navbar will show these links before you log in */}
-          <Link to='/'>Home</Link>
-          <Link to='/rooms'>Rooms</Link>
-          <Link to='/experiences'>Experiences</Link>
-          <Link to='/login'>Login</Link>
-          <Link to='/signup'>Sign Up</Link>
-          <Link to={'/cart'}>Cart</Link>
+          <Link to='/'>HOME</Link>
+          <Link to='/rooms'>ROOMS</Link>
+          <Link to='/experiences'>EXPERIENCES</Link>
+          <Link to='/login'>LOGIN</Link>
+          <Link to='/signup'>SIGN UP</Link>
+          <Link to={'/cart'}><box-icon name='cart-alt' ></box-icon></Link>
         </div>
 
       )}

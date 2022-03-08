@@ -315,6 +315,14 @@ async function seed() {
       review_text:
         "I loved staying in the Stanley Suite while I was writing my novel. It's a great place for the whole family too. After all, all work and no play makes Jack a dull boy.",
     });
+    // const review4 = await Review.create({
+    //   review_text:
+    //     "I loved staying in the Stanley Suite while I was writing my novel. It's a great place for the whole family too. After all, all work and no play makes Jack a dull boy.",
+    // });
+    // const review5 = await Review.create({
+    //   review_text:
+    //     "I loved staying in the Stanley Suite while I was writing my novel. It's a great place for the whole family too. After all, all work and no play makes Jack a dull boy.",
+    // });
 
     // Creating Themes
     const space = await Theme.create({ name: 'Space' });
@@ -347,6 +355,8 @@ async function seed() {
     await review1.setUser(cody);
     await review2.setUser(leah);
     await review3.setUser(tedi);
+    // await review4.setUser(tedi);
+    // await review5.setUser(tedi);
 
     await tedi.addReservation(reservation1);
     await tedi.addReservation(reservation2);

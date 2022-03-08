@@ -42,7 +42,6 @@ class Routes extends Component {
             <Route exact path="/employee-dashboard" component={EmployeeDashboard} />
             <Route exact path="/cart" component={Cart} />
 
-
             {/* Needs to be at the end of the list in order to redirect the user to the home page */}
             <Redirect to="/" />
           </Switch>
