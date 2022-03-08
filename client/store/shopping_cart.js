@@ -58,7 +58,7 @@ export const removeFromCart = (cartId, cartItemId) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
       const { data } = await axios.delete(
-        `/api/cart/${cartId}`,
+        `/api/cart`,
         {
           data: {
             cartId: cartId,
