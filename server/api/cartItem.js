@@ -2,7 +2,6 @@ const router = require('express').Router();
 const CartItem = require('../db/models/CartItem');
 const User = require('../db/models/User');
 
-
 const requireToken = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
@@ -14,7 +13,7 @@ const requireToken = async (req, res, next) => {
   }
 };
 
-router.post('/cartItem', requireToken, async (req, res, next) => {
+router.post('/cart', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');
@@ -35,12 +34,13 @@ router.post('/cartItem', requireToken, async (req, res, next) => {
   }
 });
 
-router.delete('/cartItem/:id', requireToken, async (req, res, next) => {
+//delete specific item
+router.delete('/cart', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');
     }
-    const cartItem = await CartItem.findByPk(req.params.id);
+    const cartItem = await CartItem.findByPk(req.body.id);
     cartItem.destroy();
     res.send(cartItem);
   } catch (error) {
