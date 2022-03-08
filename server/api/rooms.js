@@ -5,7 +5,7 @@ const Theme = require('../db/models/Theme');
 const { requireToken, isEmployee} = require('./security');
 
 /* mounted on /api */
-router.get('/rooms',requireToken, async (req, res, next) => {
+router.get('/rooms', async (req, res, next) => {
   try {
     const getAllRooms = await Room.findAll({
       include: [Theme]
@@ -16,7 +16,7 @@ router.get('/rooms',requireToken, async (req, res, next) => {
   }
 });
 
-router.get('/rooms/:id',requireToken, async (req, res, next) => {
+router.get('/rooms/:id', async (req, res, next) => {
   try {
     const roomId = req.params.id;
     const getRoomById = await Room.findByPk(roomId, {
