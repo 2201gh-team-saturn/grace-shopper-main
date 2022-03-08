@@ -34,6 +34,10 @@ function GuestCheckout() {
         <div>
             <div className='cart_container'>
                 <h3> Guest Cart</h3>
+                {/* JOE CR: I love the use of the && conditional trick to embed conditionals in your template,
+                    but I would suggest not including the || and instead just make both conditionals separate
+                    entries in the template itself.
+                */}
                 {
                     (cart.length > 0 && cartItems) ||
                     (cart.length === 0 &&

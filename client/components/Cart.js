@@ -16,6 +16,9 @@ class Cart extends Component {
     const items = this.props.cartItems;
     const totalItems = this.props.cartItems[0];
 
+    // JOE CR: I ain't gonna yell at ya for leaving console.logs around because this is a work in progress,
+    // but instead I want to highlight how awesome this is and something that programmers forget they can and
+    // should do. Let's discuss!
     if (totalItems) {
       console.log(totalItems);
     }

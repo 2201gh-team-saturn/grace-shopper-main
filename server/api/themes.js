@@ -14,6 +14,8 @@ router.get('/themes', async (req, res, next) => {
 
 router.get('/themes/:id', async (req, res, next) => {
   try {
+    // JOE CR: Nitpicky but why is this variable randomly capitalized?
+    // Reserve capitalized variable names for "class-like" values: Sequelize models, React components, etc.
     const ThemeId = req.params.id;
     const getThemeById = await Theme.findByPk(ThemeId); 
     res.status(200).send(getThemeById);

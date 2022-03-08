@@ -2,11 +2,14 @@ const express = require('express');
 const router = express.Router();
 const Room = require('../db/models/Room');
 const Theme = require('../db/models/Theme');
+// JOE CR: Okay yas, this is nice!
 const { requireToken, isEmployee} = require('./security');
 
 /* mounted on /api */
 router.get('/rooms',requireToken, async (req, res, next) => {
   try {
+    // JOE CR: A bit nitpicky but variables like this should be named for their result
+    // and not the operation. `allRooms` is better.
     const getAllRooms = await Room.findAll({
       include: [Theme]
     });
