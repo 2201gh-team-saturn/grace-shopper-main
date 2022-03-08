@@ -3,10 +3,10 @@ import history from '../history';
 
 const TOKEN = 'token';
 
-const SET_SHOPPING_CART = 'SET_SHOPPING_CART';
-const DELETE_CART_ITEM = 'DELETE_CART_ITEM';
+const SET_SHOPPING_CART = 'SET_SHOPPING_CART'; //will set cart items too
 const UPDATE_CART = 'UPDATE_CART';
 
+//cart action creators
 export const setShoppingCart = (cart) => {
   return {
     type: SET_SHOPPING_CART,
@@ -14,17 +14,10 @@ export const setShoppingCart = (cart) => {
   };
 };
 
-export const deleteCartItem = (cart) => {
-  return {
-    type: DELETE_CART_ITEM,
-    cart,
-  };
-};
-
-export const updateCart = (cart) => {
+export const _updateCart = (cart) => {
   return {
     type: UPDATE_CART,
-    cart,
+    updatedCart: cart,
   };
 };
 
@@ -33,37 +26,12 @@ export const fetchShoppingCart = () => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
-      const { data } = await axios.get(`/api/cart`, {
+      const { data: cart } = await axios.get(`/api/cart`, {
         headers: {
           authorization: token,
         },
       });
-      dispatch(setShoppingCart(data));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-export const removeFromCart = (cartId, cartItemId) => {
-  return async (dispatch) => {
-    try {
-      const token = window.localStorage.getItem(TOKEN);
-      const { data } = await axios.delete(
-        `/api/cart/${cartId}`,
-        {
-          data: {
-            cartId: cartId,
-            cartItemId: cartItemId,
-          },
-        },
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      );
-      dispatch(deleteCartItem(data));
+      dispatch(setShoppingCart(cart));
     } catch (error) {
       console.log(error);
     }
@@ -73,27 +41,57 @@ export const removeFromCart = (cartId, cartItemId) => {
 export const updateCartThunk = (cart, history) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem(TOKEN);
-    const { data: updated } = await axios.put(`/api/cart/${cart.id}`, cart, {
+    const { data: updated } = await axios.put(`/api/cart`, cart, {
       headers: {
         authorization: token,
       },
     });
-    dispatch(updateCart(updated));
-    history.push(`/cart/${cart.id}`);
+    dispatch(_updateCart(updated));
+    history.push(`/`);
   };
 };
 
-const initialState = [];
+const initialState = {};
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case SET_SHOPPING_CART:
       return action.cart;
-    case DELETE_CART_ITEM:
-      return action.cart;
     case UPDATE_CART:
-      return action.cart;
+      return action.cart
     default:
       return state;
   }
 };
+
+
+// put this here incase we want to add a cart, have to figure out where to put it though bc we need state to be an array not object like above.
+
+// const ADD_CART = 'ADD_CART';
+
+//export const _addCart = (cart) => {
+//   return {
+//     type: ADD_CART,
+//     cart,
+//   };
+// };
+
+// export const addCart = (cart) => {
+//   return async (dispatch) => {
+//     try {
+//       const token = window.localStorage.getItem(TOKEN);
+//       const { data: created } = await axios.post('/api/cart', cart, {
+//         headers: {
+//           authorization: token,
+//         },
+//       });
+//       dispatch(_addCart(created));
+//     } catch (error) {
+//       console.error('theres something wrong with your add cart thunk');
+//       console.log(error);
+//     }
+//   };
+// };
+
+// case ADD_CART:
+//   return {...state, action.cart };

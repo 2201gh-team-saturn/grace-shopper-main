@@ -93,7 +93,7 @@ router.put('/cart', requireToken, async (req, res, next) => {
   }
 });
 
-//im confused on the difference between creating a new room and creating a new cart item. Or if its just association but I put this route here incase.
+//I put this route here incase.
 //to create a new cart item
 router.post('/cart', requireToken, async (req, res, next) => {
   try {
@@ -116,13 +116,13 @@ router.post('/cart', requireToken, async (req, res, next) => {
   }
 });
 
-//to delete a cart item coz were not actually deleting carts
+//to delete a cart item 
 router.delete('/cart', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');
     }
-    const cartItem = await CartItem.findByPk(req.body.cartId);
+    const cartItem = await CartItem.findByPk(req.body.id);
     cartItem.destroy();
     res.send(cartItem);
   } catch (error) {
