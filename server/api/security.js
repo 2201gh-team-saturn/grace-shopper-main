@@ -12,6 +12,8 @@ const requireToken = async (req, res, next) => {
   }
 };
 
+// JOE CR: This is a good middleware, but would it always be used combined with `requireToken`?
+// If so, can this middleware assume that req.user already exists?
 const isEmployee = async (req, res, next) => {
     const token = req.headers.authorization;
     const user = await User.findByToken(token);

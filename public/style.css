@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500&family=Montserrat:wght@400&display=swap');
 
+/* JOE CR: I love all the custom CSS! However, this file is realllllly big. 
+   How exactly can we split our CSS into multiple parts?
+*/
+
 body {
   /* background-image: linear-gradient(rgba(255, 235, 205, 0.345),rgb(168, 220, 209)); */
   background-color: white;
@@ -170,6 +174,7 @@ footer {
   width: 100%;
 }
 
+/* JOE CR: RIP formatting */
   .button {
   backface-visibility: hidden;
   position: relative;
@@ -328,6 +333,7 @@ justify-content: center;
 letter-spacing: 1px;
 background-image: url(https://media.giphy.com/media/3o7aDbzZnLjVrW9YXe/giphy.gif);
 background-size: cover;
+/* JOE CR: I was wondering how this effect was achieved! So cool. */
 color: transparent;
 -moz-background-clip: text;
 -webkit-background-clip: text;
@@ -383,6 +389,7 @@ margin: 10px 0;
   background-color: #ffffff;
 }
 
+/* JOE CR: Pick a whitespace convention for your class names and ids--is it underscores, camel case, kebab case? */
 .cart_img{
   width:80%;
   border-radius: 20px;

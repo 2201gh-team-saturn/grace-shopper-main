@@ -28,6 +28,9 @@ class Routes extends Component {
 
     return (
       <div>
+        {/* JOE CR: Instead of having two different routing trees for isLoggedIn vs. not, include/exclude routes within
+            the same <Switch> instead. Way easier to read and manage. Let's discuss!
+        */}
         {isLoggedIn ? (
           <Switch>
             <Route exact path="/account" component={Account} />

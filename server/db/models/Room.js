@@ -16,6 +16,7 @@ module.exports = db.define('room', {
       notEmpty: true,
     },
   },
+  // JOE CR: Use your formatter! :)
     price: {
         type: Sequelize.FLOAT,
         defaultValue: 150.00,

@@ -61,12 +61,17 @@ export class AllRooms extends React.Component {
                   <br />
                   <span>Description: </span>
                   {room.description}
+                  {/* JOE CR: I would heavily suggest that you use CSS to add space between your elements
+                      instead of <br /> tags. Let's discuss!
+                  */}
                   <br />
                   <span> Price/night: </span> ${room.price}
                   <br />
                   <span>Theme: </span>
                   {room.themes
                     ? room.themes.map((theme) => {
+                        // JOE CR: This should probably be an actual element (like <span>)
+                        // instead of just text.
                         return theme.name;
                       })
                     : ''}

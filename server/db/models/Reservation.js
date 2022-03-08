@@ -3,6 +3,7 @@ const db = require('../db')
 
 module.exports = db.define('reservation', {
     totalNumofDays: {
+        // JOE CR: Half days?
         type: Sequelize.FLOAT,
         allowNull: false,
         validate: {

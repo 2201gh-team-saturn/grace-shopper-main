@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchRoom, updateRoomThunk } from '../store/singleRoom';;
 
-
+// JOE CR: It seems to me that this component should only show for admins,
+// but it showed for cody locally who is not an admin. Let's discuss front-end permission gating.
 class UpdateSingleRoom extends React.Component {
   constructor(props) {
     super(props);

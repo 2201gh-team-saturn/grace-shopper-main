@@ -30,8 +30,10 @@ User.hasMany(Review);
 Review.belongsTo(User);
 
 Cart.belongsTo(User)
+// JOE CR: Why hasOne and not hasMany? Does a "checked out" cart become a reservation?
 User.hasOne(Cart)
 
+// JOE CR: I notice there is not CartItem<->Experience association. What ended up being the approach for experiences?
 CartItem.belongsTo(Cart);
 Cart.hasMany(CartItem);
 

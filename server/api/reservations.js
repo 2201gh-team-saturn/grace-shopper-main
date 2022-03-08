@@ -42,6 +42,8 @@ router.post('/reservations', requireToken, async (req, res, next) => {
     if (!req.user) {
       throw new Error('Unauthorized');
     }
+    // JOE CR: I feel like findOrCreate is a habit instead of a solution.
+    // Let's discuss!
     const [newReservation, created] = await Reservation.findOrCreate({
       where: {
         totalNumOfDays: req.body.totalNumOfDays,

@@ -8,6 +8,7 @@ module.exports = db.define('cartItem',
       defaultValue: 1,
     },
   },
+  // JOE CR: Curious why this was added here.
   {
     timestamps: false,
   }
