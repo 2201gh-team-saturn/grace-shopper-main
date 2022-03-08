@@ -78,24 +78,24 @@ router.put('/cart/decrease/:id', async (req, res, next) => {
 });
 
 //I think were gettign rid of this?
-router.put('/cart', requireToken, async (req, res, next) => {
-  try {
-    if (!req.user) {
-      throw new Error('Unauthorized');
-    }
-    const cartToUpdate = await Cart.findByPk(req.body.id);
-    if (cartToUpdate) {
-      res.status(201).send(await cartToUpdate.update(req.body));
-    } else {
-      res.status(404).send('Cart does not exist');
-    }
-  } catch (error) {
-    console.error(
-      'hey! you made a mistake with your cart put route'
-    );
-    next(error);
-  }
-});
+// router.put('/cart', requireToken, async (req, res, next) => {
+//   try {
+//     if (!req.user) {
+//       throw new Error('Unauthorized');
+//     }
+//     const cartToUpdate = await Cart.findByPk(req.body.id);
+//     if (cartToUpdate) {
+//       res.status(201).send(await cartToUpdate.update(req.body));
+//     } else {
+//       res.status(404).send('Cart does not exist');
+//     }
+//   } catch (error) {
+//     console.error(
+//       'hey! you made a mistake with your cart put route'
+//     );
+//     next(error);
+//   }
+// });
 
 //for updating the cart item
 router.put('/cart', requireToken, async (req, res, next) => {

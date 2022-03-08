@@ -45,13 +45,20 @@ export const addCartItemThunk = (cartItem) => {
 export const deleteCartItemThunk = (id, history) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem(TOKEN);
-    const { data: cartItem } = await axios.delete(`/api/cart`, id, {
+    const { data: cartItem } = await axios.delete(`/api/cart`, 
+    {
+      data: {
+        id: id
+      }
+    }, 
+    {
       headers: {
         authorization: token,
       },
     });
+    console.log("THIS IS CARTITEM", cartItem)
     dispatch(_deleteCartItem(cartItem));
-    history.push('/');
+    history.push('/cart');
   };
 };
 
@@ -65,7 +72,7 @@ export default (state = initialState, action) => {
       return action.cartItem;
     case DELETE_CART_ITEM:
       return state.filter(
-        (experience) => experience.id !== action.experience.id
+        (cartItem) => cartItem.id !== action.cartItem.id
       );
     default:
       return state;
