@@ -81,6 +81,7 @@ router.put('/cart', requireToken, async (req, res, next) => {
   }
 });
 
+
 // router.delete('/cart', requireToken, async (req, res, next) => {
 //   try {
 //     if (!req.user) {
@@ -94,6 +95,32 @@ router.put('/cart', requireToken, async (req, res, next) => {
 //     next(error);
 //   }
 // });
+
+//clear entire cart after checkout
+router.delete('/cart', requireToken, async (req, res, next) => {
+  try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
+    const cart = await Cart.findOne({
+      where: {
+        userId: req.user.id
+      },
+    });
+    const cartItemsToBeDeleted = await CartItem.findAll({
+      where: {
+        cartId: cart.id
+      }
+    });
+    if (!cartItemsToBeDeleted) {
+      res.sendStatus(400);
+    } else {
+      await cartItemsToBeDeleted.destroy();
+    }
+  } catch (err) {
+    next(err)
+  }
+})
 
 module.exports = router;
 

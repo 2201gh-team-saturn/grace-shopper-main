@@ -12,13 +12,24 @@ const User = db.define('user', {
     unique: true,
     allowNull: false
   },
+  firstName: {
+    type: Sequelize.STRING,
+  },
+  lastName:{
+    type: Sequelize.STRING,
+  },
   password: {
     type: Sequelize.STRING,
   },
+  //employees have access to delete rooms, delete bookings, etc.
+
   type: {
     type: Sequelize.ENUM("employee", "guest"),
     defaultValue: "guest"
   },
+  isAdmin: {
+    type: Sequelize.BOOLEAN
+  }
 })
 
 module.exports = User
@@ -73,8 +84,10 @@ const hashPassword = async(user) => {
   }
 }
 
-User.beforeCreate(function (user, options) {
-  user.username = user.username.charAt(0).toUpperCase() + user.username.slice(1);
+
+User.beforeCreate(function (user, options) { 
+  // user.username = user.username.charAt(0).toUpperCase() + user.username.slice(1);
+  user.username = user.username.toLowerCase();
 })
 
 User.beforeCreate(hashPassword)
