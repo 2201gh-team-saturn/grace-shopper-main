@@ -5,6 +5,7 @@ const { requireToken, isEmployee} = require('./security');
 const User = require('../db/models/User');
 
 // api/
+
 router.get('/experiences' ,async (req, res, next) => {
   try {
     const experiences = await Experience.findAll();

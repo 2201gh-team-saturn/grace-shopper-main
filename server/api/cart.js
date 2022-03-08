@@ -97,7 +97,7 @@ router.put('/cart', requireToken, async (req, res, next) => {
 // });
 
 //clear entire cart after checkout
-router.delete('/cart', requireToken, async (req, res, next) => {
+router.delete('/cart/checkout', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');
@@ -121,6 +121,45 @@ router.delete('/cart', requireToken, async (req, res, next) => {
     next(err)
   }
 })
+
+//add item to cart
+router.post('/cart/addToCart', requireToken, async (req, res, next) => {
+  try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
+    const cart = await Cart.findOne({
+      where: {
+        userId: req.user.id,
+      },
+    });
+    const created = await CartItem.findOne({
+      where: {
+        roomId: req.body.roomId,
+        cartId: cart.id
+        // numberOfNights: req.body.numberOfNights,
+      },
+    });
+    if (created) {
+      // created.numberOfNights += req.body.numberOfNights;
+      created.numberOfNights ++;
+      await created.save();
+      res.status(201).json(created);
+    }
+    let newCartItem = await CartItem.create({
+      where: {
+        roomId: req.body.roomId,
+        cartId: cart.id,
+        // numberOfNights: req.body.numberOfNights,
+      }
+    })
+    res.status(200).send(newCartItem);
+  } catch (error) {
+    console.error('your post cartItem route is broken', error);
+    next(error);
+  }
+});
+
 
 module.exports = router;
 
