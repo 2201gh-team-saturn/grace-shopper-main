@@ -14,6 +14,7 @@ import AddRoom from './components/AddRoom';
 import EmployeeDashboard from './components/EmployeeDashboard';
 import Cart from './components/Cart'
 import BookingConfirmation from './components/BookingConfirmation';
+import AddExperience from './components/AddExperience';
 
 /**
  * COMPONENT
@@ -36,13 +37,13 @@ class Routes extends Component {
             <Route exact path="/rooms" component={AllRooms} />
             <Route exact path="/experiences" component={Experiences} />
             <Route exact path="/experiences/:id" component={SingleExperience} />
+            {/* should this be rooms/add? */}
             <Route exact path="/room/add" component={AddRoom} />
+            <Route exact path="/experiences/add" component={AddExperience} />
             <Route exact path="/rooms/:id" component={SingleRoom} />
             <Route exact path="/rooms/:id/edit" component={UpdateSingleRoom} />
             <Route exact path="/employee-dashboard" component={EmployeeDashboard} />
             <Route exact path="/cart" component={Cart} />
-
-
             {/* Needs to be at the end of the list in order to redirect the user to the home page */}
             <Redirect to="/" />
           </Switch>
