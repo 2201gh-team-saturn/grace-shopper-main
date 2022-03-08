@@ -21,6 +21,13 @@ export const deleteCartItem = (cart) => {
   };
 };
 
+export const clearCart = (cart) => {
+  return {
+    type: DELETE_CART_ITEM,
+    cart,
+  };
+};
+
 export const updateCart = (cart) => {
   return {
     type: UPDATE_CART,
@@ -45,15 +52,16 @@ export const fetchShoppingCart = () => {
   };
 };
 
-export const removeFromCart = (cartId, cartItemId) => {
+export const clearAllCartItems = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.delete(`/api/cart/${cartId}`, {
-        data: {
-          cartId: cartId,
-          cartItemId: cartItemId,
-        },
-      });
+      const token = window.localStorage.getItem(TOKEN);
+      const { data } = await axios.delete(`/api/cart`,
+        {
+          headers: {
+            authorization: token
+          }
+        });
       dispatch(deleteCartItem(data));
     } catch (error) {
       console.log(error);

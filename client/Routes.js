@@ -14,6 +14,7 @@ import AddRoom from './components/AddRoom';
 import EmployeeDashboard from './components/EmployeeDashboard';
 import Cart from './components/Cart'
 import BookingConfirmation from './components/BookingConfirmation';
+import GuestCheckout from './components/GuestCart';
 
 /**
  * COMPONENT
@@ -57,6 +58,7 @@ class Routes extends Component {
             <Route exact path="/experiences" component={Experiences} />
             <Route exact path="/experiences/:id" component={SingleExperience} />
             <Route exact path="/booking-confirmation" component={BookingConfirmation} />
+            <Route exact path="/cart" component={GuestCheckout} />
           </Switch>
         )}
       </div>

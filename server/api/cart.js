@@ -4,7 +4,7 @@ const router = express.Router();
 const Cart = require('../db/models/Cart');
 const CartItem = require('../db/models/CartItem')
 const Room = require('../db/models/Room')
-const { models: { User },} = require('../db');
+const { models: { User }, } = require('../db');
 
 const requireToken = async (req, res, next) => {
   try {
@@ -34,6 +34,31 @@ router.get('/cart', requireToken, async (req, res, next) => {
       include: [Cart, Room]
     });
     res.send(userCart);
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/cart', requireToken, async (req, res, next) => {
+  try {
+    if (!req.user) {
+      throw new Error('Unauthorized');
+    }
+    const cart = await Cart.findOne({
+      where: {
+        userId: req.user.id
+      },
+    });
+    const cartItemsToBeDeleted = await CartItem.findAll({
+      where: {
+        cartId: cart.id
+      }
+    });
+    if (!cartItemsToBeDeleted) {
+      res.sendStatus(400);
+    } else {
+      await cartItemsToBeDeleted.destroy();
+    }
   } catch (err) {
     next(err)
   }

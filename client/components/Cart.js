@@ -1,14 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchShoppingCart, deleteRoomThunk } from '../store/shopping_cart';
+import { fetchShoppingCart, clearAllCartItems } from '../store/shopping_cart';
 import { fetchUsers } from '../store/users';
+// import { CartContext } from '../App'
+import { addReservation } from '../store/reservations';
 
 class Cart extends Component {
+
   componentDidMount() {
-   // this.props.loadCart(this.props.user.id);
     this.props.fetchCart(this.props.userId);
   }
+  onClick(totalNumOfDays, roomId) {
+    this.props.addReservation(totalNumOfDays, roomId);
+    this.props.checkoutCart();
+  }
+
   render() {
     console.log(this.props);
     // console.log(this.props.user);
@@ -41,19 +48,19 @@ class Cart extends Component {
           })}
           {totalItems ? (
             <div className="cart_summary">
-            <h4> Total Amount of Days: {
-                 items.reduce((total, item )=> {
+              <h4> Total Amount of Days: {
+                items.reduce((total, item) => {
                   return total + item.numberOfNights
-              },0)
-            } 
-            <br/>
-             Total Price: ${
-                    items.reduce((total, item )=> {
-                        return total + item.room.price
-                    },0)
+                }, 0)
               }
-            </h4>
-            <button>Check Out</button>
+                <br />
+                Total Price: ${
+                  items.reduce((total, item) => {
+                    return total + item.room.price
+                  }, 0)
+                }
+              </h4>
+              <button onClick={items.map((item) => this.onClick(item.totalNumOfDays, item.room.id))}>Check Out</button>
             </div>
           ) : (
             ''
@@ -65,21 +72,21 @@ class Cart extends Component {
 }
 
 const mapState = (state) => {
-  return {  
-     userId: state.auth.id,
-     cartItems: state.shopping_cart,
-      user: state.auth,
+  return {
+    userId: state.auth.id,
+    cartItems: state.shopping_cart,
+    user: state.auth,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     // loadRooms: () => dispatch(fetchRooms()),
-      //loadCart: (id) => dispatch(fetchShoppingCart(id)),
-      fetchCart: (userId) => dispatch(fetchShoppingCart(userId)),
+    //loadCart: (id) => dispatch(fetchShoppingCart(id)),
+    fetchCart: () => dispatch(fetchShoppingCart()),
+    createReservations: (totalNumOfDays, roomId) => dispatch(addReservation(totalNumOfDays, roomId)),
+    checkoutCart: () => dispatch(clearAllCartItems())
   };
 };
+
 export default connect(mapState, mapDispatch)(Cart);
-
-
-

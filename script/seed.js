@@ -162,39 +162,49 @@ async function seed() {
       imageUrl: 'https://t4.ftcdn.net/jpg/02/98/61/45/240_F_298614534_BfuDxvYZ81v9X3p94cClHuD71jxMKZpM.jpg'
     });
 
+    // const reservation1 = await Reservation.create({
+    //   startDate: new Date('2022-04-09 00:00:00'),
+    //   endDate: new Date('2022-04-12 00:00:00'),
+    // });
+    // const reservation2 = await Reservation.create({
+    //   startDate: new Date('2022-04-12 00:00:00'),
+    //   endDate: new Date('2022-04-16 00:00:00'),
+    // });
+    // const reservation3 = await Reservation.create({
+    //   startDate: new Date('2021-12-30 00:00:00'),
+    //   endDate: new Date('2022-01-02 00:00:00'),
+    // });
+
     const reservation1 = await Reservation.create({
-      startDate: new Date('2022-04-09 00:00:00'),
-      endDate: new Date('2022-04-12 00:00:00'),
-    });
+      totalNumOfDays: 10
+    })
     const reservation2 = await Reservation.create({
-      startDate: new Date('2022-04-12 00:00:00'),
-      endDate: new Date('2022-04-16 00:00:00'),
-    });
+      totalNumOfDays: 3
+    })
     const reservation3 = await Reservation.create({
-      startDate: new Date('2021-12-30 00:00:00'),
-      endDate: new Date('2022-01-02 00:00:00'),
-    });
+      totalNumOfDays: 7
+    })
 
     const codyCart = await Cart.create({
-      totalQuantity: 4,
+      totalQuantity: 0,
     })
     const murphyCart = await Cart.create({
       totalQuantity: 4,
     })
     const leahCart = await Cart.create({
-      totalQuantity: 4,
+      totalQuantity: 0,
     })
     const tediCart = await Cart.create({
       totalQuantity: 4,
     })
     const zumaCart = await Cart.create({
-      totalQuantity: 4,
+      totalQuantity: 0,
     })
     const ladybugCart = await Cart.create({
-      totalQuantity: 4,
+      totalQuantity: 0,
     })
     const successfulBWCart = await Cart.create({
-      totalQuantity: 4,
+      totalQuantity: 0,
     })
     const murphyCartItem1 = await CartItem.create({
       numberOfNights: 2,
