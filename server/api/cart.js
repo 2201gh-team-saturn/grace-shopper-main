@@ -49,7 +49,7 @@ router.post('/cart', requireToken, async (req, res, next) => {
     const [newCart, created] = await Cart.findOrCreate({
       where: {
         id: req.body.id,
-        totalQuanitity: req.body.totalQuanitity,
+        totalQuantity: req.body.totalQuantity,
       },
     });
     if (created) {
@@ -59,6 +59,30 @@ router.post('/cart', requireToken, async (req, res, next) => {
   } catch (error) {
     console.error('your post cart route is broken', error);
     next(error);
+  }
+});
+
+router.put('/cart/increase/:id', async (req, res, next) => {
+  try {
+    let cartItem = await CartItem.findByPk(req.params.id);
+    cartItem.numberOfNights++;
+    await cartItem.save();
+    res.json(cartItem);
+  }
+  catch (err) {
+    next(err);
+  }
+});
+
+router.put('/cart/decrease/:id', async (req, res, next) => {
+  try {
+    let cartItem = await CartItem.findByPk(req.params.id);
+    cartItem.numberOfNights--;
+    await cartItem.save();
+    res.json(cartItem);
+  }
+  catch (err) {
+    next(err);
   }
 });
 

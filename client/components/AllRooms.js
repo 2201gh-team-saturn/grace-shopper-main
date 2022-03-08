@@ -90,6 +90,18 @@ export class AllRooms extends React.Component {
                 ) : (
                   ''
                 )}
+                <form>
+                    <button
+                      type='submit'
+                      className='room_delete_btn'
+                      // value={cartItem.id}
+                      // onClick={(event) =>
+                      //   this.props.addRoomToCart(event.target.value)
+                      // }
+                    >
+                      Add to Cart
+                    </button>
+                  </form>
               </div>
             </div>
           ))}
@@ -110,6 +122,7 @@ const mapDispatch = (dispatch, { history }) => {
   return {
     loadRooms: () => dispatch(fetchRooms()),
     deleteRooms: (id) => dispatch(deleteRoomThunk(id, history)),
+    //addRoomToCart: (id) => dispatch(addRoomToCartThunk(id))
   };
 };
 export default connect(mapState, mapDispatch)(AllRooms);
