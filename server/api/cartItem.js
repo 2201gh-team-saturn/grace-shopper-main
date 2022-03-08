@@ -35,11 +35,8 @@ router.post('/cart', requireToken, async (req, res, next) => {
 });
 
 //delete specific item
-router.delete('/cart', requireToken, async (req, res, next) => {
+router.delete('/cart', async (req, res, next) => {
   try {
-    if (!req.user) {
-      throw new Error('Unauthorized');
-    }
     const cartItem = await CartItem.findByPk(req.body.id);
     cartItem.destroy();
     res.send(cartItem);

@@ -69,7 +69,7 @@ export const fetchShoppingCart = () => {
   };
 };
 
-export const removeFromCart = (cartId, cartItemId) => {
+export const removeFromCart = (cartItemId) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
@@ -77,7 +77,6 @@ export const removeFromCart = (cartId, cartItemId) => {
         `/api/cart`,
         {
           data: {
-            cartId: cartId,
             cartItemId: cartItemId,
           },
         },
@@ -171,7 +170,8 @@ export const createCartItem = (roomId) => {
   };
 };
 
-const initialState = {};
+// const initialState = {};
+const initialState = [];
 
 export default (state = initialState, action) => {
   switch (action.type) {

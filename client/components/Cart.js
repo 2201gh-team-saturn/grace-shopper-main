@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchShoppingCart, increaseQuantity, decreaseQuantity, clearAllCartItems } from '../store/shopping_cart';
 import { fetchUsers } from '../store/users';
-import {addReservation} from '../store/reservations'
+import { addReservation } from '../store/reservations'
+import { deleteCartItemThunk } from '../store/cartItems'
 
 
 class Cart extends Component {
@@ -17,31 +18,36 @@ class Cart extends Component {
 		this.props.fetchCart(this.props.userId);
 	}
 	increase(id) {
-      this.props.increaseQuantity(id);
-    }
-    
-  decrease(id) {
-      this.props.decreaseQuantity(id);
-    }
+		this.props.increaseQuantity(id);
+	}
 
-	handleCheckout(roomId){
+	decrease(id) {
+		this.props.decreaseQuantity(id);
+	}
+
+	handleCheckout(roomId) {
 		this.props.addReservation(roomId);
 		this.props.checkoutCart();
 	}
 
-      render() {
-        const user = this.props.user;
-        const items = this.props.cartItems;
-        const totalItems = this.props.cartItems[0];
+	handleDelete(id) {
+		this.props.deleteCartItem(id);
+		window.location.reload();
+	}
+
+	render() {
+		const user = this.props.user;
+		const items = this.props.cartItems;
+		const totalItems = this.props.cartItems[0];
 		//const {room} = this.props.cart
-    
+
 		return (
-      <div>
-		<div className="cart_container">
-			<h3> {user.username}'s Cart</h3>
-		{items.map((item) => {
-        const disabledIncrease = (item.numberOfNights === 30);
-        const disabledDecrease = (item.numberOfNights === 1);
+			<div>
+				<div className="cart_container">
+					<h3> {user.username}'s Cart</h3>
+					{items.map((item) => {
+						const disabledIncrease = (item.numberOfNights === 30);
+						const disabledDecrease = (item.numberOfNights === 1);
 						return (
 							<div className="cart_format" key={item.id}>
 								<img className="cart_img" src={item.room.imageUrl} />
@@ -49,24 +55,23 @@ class Cart extends Component {
 								<div className="cartItemInfo">
 									<p>{item.room.name}</p>
 									<p> Price: ${item.room.price}</p>
-									<p> Number of nights: 
-                  							<button  onClick={()=>this.decrease(item.id)}>-</button>
-                    						{item.numberOfNights} 
-                    						<button onClick={()=>this.increase(item.id)}>+</button>
-                    				</p>
-									<button 
-									type='submit'
-                      className='room_delete_btn'
-                      // value={item.id}
-                      // onClick={(event) =>
-                      //   this.props.deleteCartItem(event.target.value)
-                      // }
-                    >
-                      Remove Item
-                    </button>
-					</div>
-					</div>  );
-          })}
+									<p> Number of nights:
+										<button onClick={() => this.decrease(item.id)}>-</button>
+										{item.numberOfNights}
+										<button onClick={() => this.increase(item.id)}>+</button>
+									</p>
+									<button
+										type='submit'
+										className='room_delete_btn'
+										value={item.id}
+										// onClick={(event) => this.props.deleteCartItem(event.target.value)}
+										onClick={(event) => this.handleDelete(event.target.value)}
+									>
+										Remove Item
+									</button>
+								</div>
+							</div>);
+					})}
 					{totalItems ? (
 						<div className="cart_summary">
 							<h4>
@@ -87,8 +92,8 @@ class Cart extends Component {
 						''
 					)}
 				</div>
-			</div> 
-						
+			</div>
+
 		);
 	}
 }
@@ -98,10 +103,11 @@ const mapState = (state) => {
 		userId: state.auth.id,
 		cartItems: state.shopping_cart,
 		user: state.auth,
+		cartItemsReducer: state.cartItemsReducer,
 	};
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, { history }) => {
 	return {
 		// loadRooms: () => dispatch(fetchRooms()),
 		//loadCart: (id) => dispatch(fetchShoppingCart(id)),
@@ -109,7 +115,8 @@ const mapDispatch = (dispatch) => {
 		increaseQuantity: (id) => dispatch(increaseQuantity(id)),
 		decreaseQuantity: (id) => dispatch(decreaseQuantity(id)),
 		checkoutCart: () => dispatch(clearAllCartItems()),
-		createReservation: (roomId) => dispatch(addReservation(roomId))
+		createReservation: (roomId) => dispatch(addReservation(roomId)),
+		deleteCartItem: (id) => dispatch(deleteCartItemThunk(id, history))
 	};
 };
 export default connect(mapState, mapDispatch)(Cart);
