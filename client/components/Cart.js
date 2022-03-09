@@ -31,7 +31,7 @@ class Cart extends Component {
 		// this.props.createReservation(totalNumOfDays, roomId);
 		localStorage.setItem("cart", JSON.stringify(itemsArr));
 		this.props.checkoutCart();
-		//window.location.href = '/booking-confirmation';
+		window.location.href = '/booking-confirmation';
 	}
 
 	handleDelete(id) {
@@ -97,12 +97,13 @@ class Cart extends Component {
 								}, 0)}
 							</h4>
 							{/* <button onClick={(items) => items.map((item)=> console.log('THIS IS ITEM', item))}>Check Out</button> */}
+							<Link to={'/booking-confirmation'}>
 							<button
 								type='submit'
 								className='room_delete_btn'
 								value={items}
 								onClick={(event) => this.handleCheckout(event.target.value) }> Check Out</button>
-								{/* <Redirect to="/booking-confirmation" /> */}
+							</Link>
 							{/* {checkoutButton} */}
 						</div>
 					) : (
