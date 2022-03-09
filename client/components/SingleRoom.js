@@ -23,31 +23,34 @@ class SingleRoom extends React.Component {
         // this.props.isLoggedIn();
     }
 
-    // addToCart(roomId) {
+    addToCart(room) {
+        if(!this.props.isLoggedIn){
+            let localStorageCart = JSON.parse(localStorage.getItem("cart") || "[]");
+            localStorageCart.push(room);
+            localStorage.setItem("cart", JSON.stringify(localStorageCart));
+        } 
     //     //adds something to the cart
     //     if (this.props.isLoggedIn) {
     //         this.props.addToCart(roomId)
     //     } 
-    //     /*
+    //     
     //     if (localStorage.cart()){
     //         parse as an array
     //         push the new thing into that array
     //         stringify again and send it back to storage
     //     } else if (nothing in local storage){
     //         create a new cart with this room info.
-    //     }
+        }
 
     //     context should update everytime i change the state, because i'm 
     //     forcing a rerender.
 
 
-    //     */
-    // }
-
     render() {
         const room = this.props.room;
         console.log("THIS IS THE ID",room.id)
         const experiences = this.props.experiences.filter(experience => experience.roomId === room.id);
+        const isLoggedIn = this.props.isLoggedIn;
         const experienceList = experiences.map((experience) => {
             let id = experience.id;
             return (
@@ -87,7 +90,8 @@ class SingleRoom extends React.Component {
                             <ul>
                                 {(experiences.length > 0 && experienceList) || (experiences.length === 0 && <li>Check back soon for new experiences</li>)}
                             </ul>
-                            <button type="button" id='add_to_cart_btn' className='button' onClick={() => {this.props.addToCart(room.id)}}>Add to Cart</button>
+                           {isLoggedIn && <button type="button" id='add_to_cart_btn' className='button' onClick={() => {this.props.addToCart(room.id)}}>Add to Cart</button>}
+                           {!isLoggedIn && <button type="button" id='add_to_cart_btn' className='button' value={room} onClick={this.addToCart(room)}>Add to Cart</button>}
                         </div>
                     </div>
                 </div>

@@ -8,14 +8,26 @@ import { CartContext } from "../App";
 
 function GuestCheckout() {
     // const [cart, setCart] = useState(cartFromLocalStorage);
-    const { cart } = useContext(CartContext);
+    const { cart, setCart } = useContext(CartContext);
 
     // useEffect(() => {
     //     localStorage.setItem("cart", JSON.stringify(cart));
     // }, [cart]) //can also maybe do interval, so cart is regularly updating?
     // //might want to set local storage when user 
 
-
+    const setQuantity = (product, amount) => {
+        const newCart = [...cart];
+        newCart.find(
+          (item) => item.id === product.id
+        ).quantity = amount;
+        setCart(newCart);
+      };
+    
+      const removeFromCart = (productToRemove) => {
+        setCart(
+          cart.filter((product) => product !== productToRemove)
+        );
+      };
 
     const cartItems = cart.map((cartItem) => {
         return (
