@@ -22,7 +22,8 @@ class SingleRoom extends React.Component {
             let localStorageCart = JSON.parse(localStorage.getItem("cart") || "[]");
             localStorageCart.push(room);
             localStorage.setItem("cart", JSON.stringify(localStorageCart));
-        } 
+        }
+    } 
 
     render() {
         const room = this.props.room;
