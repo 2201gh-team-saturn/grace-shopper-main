@@ -97,6 +97,18 @@ export const decreaseQuantity = (id) => async (dispatch) => {
   dispatch(fetchShoppingCart());
 };
 
+export const increaseQuantity = (id) => async (dispatch) => { //we arent sending data here
+  const token = window.localStorage.getItem(TOKEN);
+  const { data } = await axios.put(`/api/cart/increase/${id}`,
+    {
+      headers: {
+        authorization: token
+      }
+    }
+  );
+  dispatch(fetchShoppingCart());
+}
+
 export const clearAllCartItems = (history) => {
   return async (dispatch) => {
     try {
@@ -126,18 +138,18 @@ export const createCartItem = (id) => {
         },
       });
       console.log('THIS IS FOR CREATED', created); //not working
-// export const createCartItem = (id) => {
-//   return async (dispatch) => {
-//     try {
-//       const token = window.localStorage.getItem(TOKEN);
-//       const { data: created } = await axios.post(
-//         `/api/cart/addToCart/${id}`,
-//         {
-//           headers: {
-//             authorization: token
-//           }
-//         }
-//       );
+      // export const createCartItem = (id) => {
+      //   return async (dispatch) => {
+      //     try {
+      //       const token = window.localStorage.getItem(TOKEN);
+      //       const { data: created } = await axios.post(
+      //         `/api/cart/addToCart/${id}`,
+      //         {
+      //           headers: {
+      //             authorization: token
+      //           }
+      //         }
+      //       );
       dispatch(addRoomToCart(created));
     } catch (error) {
       console.error('theres something wrong with your add room to cart thunk'); //then we get this
@@ -145,6 +157,7 @@ export const createCartItem = (id) => {
     }
   };
 };
+
 
 // const initialState = {};
 const initialState = [];

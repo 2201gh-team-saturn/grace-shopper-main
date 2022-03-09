@@ -30,6 +30,7 @@ class SingleRoom extends React.Component {
         console.log("THIS IS THE ID",room.id)
         const experiences = this.props.experiences.filter(experience => experience.roomId === room.id);
         const isLoggedIn = this.props.isLoggedIn;
+        const isAdmin = this.props.isAdmin;
         const experienceList = experiences.map((experience) => {
             let id = experience.id;
             return (
@@ -45,7 +46,7 @@ class SingleRoom extends React.Component {
                 <Link to='/rooms'>Go Back</Link>
                 <br/>
                 {/* add security here */}
-                <Link to={`/rooms/${this.props.match.params.id}/edit`}>Update Room</Link>
+               {isAdmin && <Link to={`/rooms/${this.props.match.params.id}/edit`}>Update Room</Link>}
                 <br/>
                 <div className="room-info">
                     <div id="single-room-img">
@@ -92,7 +93,8 @@ const mapState = (state) => {
         room: state.singleRoomReducer,
         user: state.auth,
         experiences: state.experiencesReducer,
-        isLoggedIn: !!state.auth.id
+        isLoggedIn: !!state.auth.id,
+        isAdmin: state.auth.type === 'employee'
     };
 };
 
