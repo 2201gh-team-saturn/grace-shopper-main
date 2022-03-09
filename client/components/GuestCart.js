@@ -10,22 +10,22 @@ function GuestCheckout() {
     // const [cart, setCart] = useState(cartFromLocalStorage);
     const { cart } = useContext(CartContext);
 
-    useEffect(() => {
-        localStorage.setItem("cart", JSON.stringify(cart));
-    }, [cart]) //can also maybe do interval, so cart is regularly updating?
-    //might want to set local storage when user 
+    // useEffect(() => {
+    //     localStorage.setItem("cart", JSON.stringify(cart));
+    // }, [cart]) //can also maybe do interval, so cart is regularly updating?
+    // //might want to set local storage when user 
 
-    
 
-    const cartItems = cart.map((item) => {
+
+    const cartItems = cart.map((cartItem) => {
         return (
-            <div className='cart_format' key={cart.id}>
-                <img className='cart_img' src={cart.room.imageUrl} />
+            <div className='cart_format' key={cartItem.id}>
+                <img className='cart_img' src={cartItem.room.imageUrl} />
 
                 <div className='cartItemInfo'>
-                    <p>{item.room.name}</p>
-                    <p> Price: ${item.room.price}</p>
-                    <p> Number of nights: {item.numberOfNights} </p>
+                    <p>{cartItem.room.name}</p>
+                    <p> Price: ${cartItem.room.price}</p>
+                    <p> Number of nights: {cartItem.numberOfNights} </p>
                     <button className='cart_btn'>Edit Dates</button>
                 </div>
             </div>
@@ -36,8 +36,7 @@ function GuestCheckout() {
         <div>
             <div className='cart_container'>
                 <h3> Guest Cart</h3>
-                {
-                    (cart.length > 0 && cartItems) ||
+                {(cart.length > 0 && cartItems) ||
                     (cart.length === 0 &&
                         <p>There are no rooms in your cart.
                             <span>
