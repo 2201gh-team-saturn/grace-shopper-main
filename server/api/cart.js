@@ -58,6 +58,14 @@ router.put('/cart/increase/:id', async (req, res, next) => {
     let cartItem = await CartItem.findByPk(req.params.id);
     cartItem.numberOfNights++;
     await cartItem.save();
+
+    let findCart = await CartItem.findByPk(req.params.id, {include: [Cart]})
+    let cartId = findCart.cart.dataValues.id
+    let cartTotalQuantity = await Cart.findByPk(cartId); 
+    cartTotalQuantity.totalQuantity++
+    console.log(cartTotalQuantity)
+    await cartTotalQuantity.save()
+
     res.json(cartItem);
   }
   catch (err) {
@@ -70,6 +78,13 @@ router.put('/cart/decrease/:id', async (req, res, next) => {
     let cartItem = await CartItem.findByPk(req.params.id);
     cartItem.numberOfNights--;
     await cartItem.save();
+
+    let findCart = await CartItem.findByPk(req.params.id, {include: [Cart]})
+    let cartId = findCart.cart.dataValues.id
+    let cartTotalQuantity = await Cart.findByPk(cartId); 
+    cartTotalQuantity.totalQuantity--;
+    await cartTotalQuantity.save()
+
     res.json(cartItem);
   }
   catch (err) {
@@ -147,16 +162,19 @@ router.delete('/cart/checkout', requireToken, async (req, res, next) => {
         userId: req.user.id
       },
     });
-    const cartItemsToBeDeleted = await CartItem.findAll({
+    const cartItemsToBeDeleted = await CartItem.destroy({
       where: {
         cartId: cart.id
       }
     });
-    if (!cartItemsToBeDeleted) {
-      res.sendStatus(400);
-    } else {
-      await cartItemsToBeDeleted.destroy();
-    }
+    // console.log(cartItemsToBeDeleted)
+
+    const cartTotalQuantity = await Cart.destroy({
+      where: {
+        id: req.user.id
+      }
+    });
+
   } catch (err) {
     next(err)
   }

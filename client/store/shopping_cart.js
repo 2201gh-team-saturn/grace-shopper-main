@@ -130,7 +130,7 @@ export const decreaseQuantity = (id) => async (dispatch) => {
   dispatch(fetchShoppingCart());
 }
 
-export const clearAllCartItems = () => {
+export const clearAllCartItems = (history) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
@@ -141,6 +141,7 @@ export const clearAllCartItems = () => {
           }
         });
       dispatch(clearCart(data));
+      history.push(`/booking-confirmation`);
     } catch (error) {
       console.log(error);
     }
