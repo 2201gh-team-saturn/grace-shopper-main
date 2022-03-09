@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchShoppingCart, increaseQuantity, decreaseQuantity, clearAllCartItems } from '../store/shopping_cart';
 import { fetchUsers } from '../store/users';
-import { addReservation } from '../store/reservations'
-import { deleteCartItemThunk } from '../store/cartItems'
-
+import { addReservation } from '../store/reservations';
+import { deleteCartItemThunk } from '../store/cartItems';
+import BookingConfirmation from './BookingConfirmation';
 
 class Cart extends Component {
 	constructor(props) {
@@ -31,12 +31,12 @@ class Cart extends Component {
 		// this.props.createReservation(totalNumOfDays, roomId);
 		localStorage.setItem("cart", JSON.stringify(itemsArr));
 		this.props.checkoutCart();
-		// window.location.reload();
+		//window.location.href = '/booking-confirmation';
 	}
 
 	handleDelete(id) {
 		this.props.deleteCartItem(id);
-		window.location.reload();
+		//window.location.reload();
 	}
 
 	render() {
@@ -96,13 +96,13 @@ class Cart extends Component {
 									return total + item.room.price;
 								}, 0)}
 							</h4>
-
 							{/* <button onClick={(items) => items.map((item)=> console.log('THIS IS ITEM', item))}>Check Out</button> */}
 							<button
 								type='submit'
 								className='room_delete_btn'
 								value={items}
 								onClick={(event) => this.handleCheckout(event.target.value) }> Check Out</button>
+								{/* <Redirect to="/booking-confirmation" /> */}
 							{/* {checkoutButton} */}
 						</div>
 					) : (

@@ -6,43 +6,34 @@ import { Link } from 'react-router-dom';
 import { createCartItem } from '../store/shopping_cart'
 import { me } from '../store';
 
-
-
-//there was a thought that I could use this to practice the useContext react hook,
-//and we would pass the context to this like props
-//but for now I'm going to build out a standard Component
-
-//QUESTIONS: If someone is logged in this class does not render. why?
-
-
 class SingleRoom extends React.Component {
-
+    constructor(props) {
+        super(props);
+        //this.addToCart = this.addToCart.bind(this);
+      }
     componentDidMount() {
         this.props.loadRoom(this.props.match.params.id)
         this.props.loadExperiences();
         // this.props.isLoggedIn();
     }
-
     // addToCart(roomId) {
     //     //adds something to the cart
-    //     if (this.props.isLoggedIn) {
-    //         this.props.addToCart(roomId)
-    //     } 
-    //     /*
-    //     if (localStorage.cart()){
-    //         parse as an array
-    //         push the new thing into that array
-    //         stringify again and send it back to storage
-    //     } else if (nothing in local storage){
-    //         create a new cart with this room info.
-    //     }
+    //     this.props.addToCart(roomId)
+        /*
+        if (localStorage.cart()){
+            parse as an array
+            push the new thing into that array
+            stringify again and send it back to storage
+        } else if (nothing in local storage){
+            create a new cart with this room info.
+        }
 
-    //     context should update everytime i change the state, because i'm 
-    //     forcing a rerender.
+        context should update everytime i change the state, because i'm
+        forcing a rerender.
 
 
-    //     */
-    // }
+        */
+    //}
 
     render() {
         const room = this.props.room;
@@ -62,6 +53,7 @@ class SingleRoom extends React.Component {
             <div className="single-room">
                 <Link to='/rooms'>Go Back</Link>
                 <br/>
+                {/* add security here */}
                 <Link to={`/rooms/${this.props.match.params.id}/edit`}>Update Room</Link>
                 <br/>
                 <div className="room-info">
@@ -117,7 +109,6 @@ const mapDispatch = (dispatch) => {
         loadRoom: (id) => dispatch(fetchRoom(id)),
         loadExperiences: () => dispatch(fetchExperiences()),
         addToCart: (id) => dispatch(createCartItem(id))
-        //potentially add a loadExperiences function taht will return experiences based on the id?
     };
 };
 

@@ -36,7 +36,6 @@ router.post('/cart', requireToken, async (req, res, next) => {
     if (!req.user) {
       throw new Error('Unauthorized');
     }
-
     const [newCart, created] = await Cart.findOrCreate({
       where: {
         userId: req.user.id,
@@ -77,26 +76,6 @@ router.put('/cart/decrease/:id', async (req, res, next) => {
   }
 });
 
-//I think were gettign rid of this?
-// router.put('/cart', requireToken, async (req, res, next) => {
-//   try {
-//     if (!req.user) {
-//       throw new Error('Unauthorized');
-//     }
-//     const cartToUpdate = await Cart.findByPk(req.body.id);
-//     if (cartToUpdate) {
-//       res.status(201).send(await cartToUpdate.update(req.body));
-//     } else {
-//       res.status(404).send('Cart does not exist');
-//     }
-//   } catch (error) {
-//     console.error(
-//       'hey! you made a mistake with your cart put route'
-//     );
-//     next(error);
-//   }
-// });
-
 //for updating the cart item
 router.put('/cart', requireToken, async (req, res, next) => {
   try {
@@ -116,25 +95,6 @@ router.put('/cart', requireToken, async (req, res, next) => {
     next(error);
   }
 });
-
-//I put this route here incase.
-//to create a new cart item
-router.post('/cart', requireToken, isEmployee, async (req, res, next) => {
-  try {
-  const [newCartItem, created] = await CartItem.findOrCreate({
-    where: {
-      id: req.body.id,
-      numberOfNights: req.body.numberOfNights,
-    },
-  });
-  if (created) {
-    res.status(201).send(newCartItem);
-  }
-  res.status(409).send('nope');
-} catch (error) {
-  console.error('your post cartItem route is broken', error);
-  next(error);
-}});
 
 //to delete all cart items
 router.delete('/cart/checkout', requireToken, async (req, res, next) => {
@@ -163,12 +123,14 @@ router.delete('/cart/checkout', requireToken, async (req, res, next) => {
   }
 })
 
+//I feel like this isnt working
 //add item to cart
-router.post('/cart/addToCart', requireToken, async (req, res, next) => {
+router.post('/cart/addToCart/:id', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');
     }
+    console.log('This is hitting')
     const cart = await Cart.findOne({
       where: {
         userId: req.user.id,
@@ -176,24 +138,25 @@ router.post('/cart/addToCart', requireToken, async (req, res, next) => {
     });
     const created = await CartItem.findOne({
       where: {
-        roomId: req.body.roomId,
+        roomId: req.params.id,
         cartId: cart.id
-        // numberOfNights: req.body.numberOfNights,
       },
     });
+    console.log("CREATED RIGHT HERE", created)
     if (created) {
-      // created.numberOfNights += req.body.numberOfNights;
+      created.numberOfNights += req.body.numberOfNights;
       created.numberOfNights ++;
       await created.save();
       res.status(201).json(created);
     }
     let newCartItem = await CartItem.create({
       where: {
-        roomId: req.body.roomId,
+        roomId: req.params.roomId,
         cartId: cart.id,
         // numberOfNights: req.body.numberOfNights,
       }
-    })
+  }
+    )
     res.status(200).send(newCartItem);
   } catch (error) {
     console.error('your post cartItem route is broken', error);

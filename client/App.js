@@ -11,15 +11,15 @@ const App = () => {
 
   const cartRef = useRef([]);
 
-  useEffect(() => {
-    // if (localStorage.cart !== null)
-    // const cartFromLocalStorage = setInterval(() => {
-    //   JSON.parse(localStorage.getItem("cart") || "[]")
-    // }, 1000)
-    cartRef.current = setInterval(() => {
-      JSON.parse(localStorage.cart);
-    }, 1000)
-}, [cart])
+//   useEffect(() => {
+//     // if (localStorage.cart !== null)
+//     // const cartFromLocalStorage = setInterval(() => {
+//     //   JSON.parse(localStorage.getItem("cart") || "[]")
+//     // }, 1000)
+//     cartRef.current = setInterval(() => {
+//       JSON.parse(localStorage.cart);
+//     }, 1000)
+// }, [cart])
 
   /**
    useEffect but setting an interval, so that every __ time it checks local stroage

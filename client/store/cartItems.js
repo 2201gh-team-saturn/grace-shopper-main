@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const TOKEN = 'token';
 
-//theres no set Items bc we get that from thee set shopping cart in shopping_cart.js
+//theres no set Items bc we get that from the set shopping cart in shopping_cart.js
 const ADD_CART_ITEM = 'ADD_CART_ITEM';
 const UPDATE_CART_ITEM = 'UPDATE_CART_ITEM';
 const DELETE_CART_ITEM = 'DELETE_CART_ITEM';
@@ -45,12 +45,12 @@ export const addCartItemThunk = (cartItem) => {
 export const deleteCartItemThunk = (id, history) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem(TOKEN);
-    const { data: cartItem } = await axios.delete(`/api/cart`, 
+    const { data: cartItem } = await axios.delete(`/api/cart`,
     {
       data: {
         id: id
       }
-    }, 
+    },
     {
       headers: {
         authorization: token,
