@@ -136,12 +136,12 @@ router.post('/cart', requireToken, isEmployee, async (req, res, next) => {
   next(error);
 }});
 
-//to delete a cart item
+//to delete all cart items
 router.delete('/cart/checkout', requireToken, async (req, res, next) => {
   try {
-    if (!req.user) {
-      throw new Error('Unauthorized');
-    }
+    // if (!req.user) {
+    //   throw new Error('Unauthorized');
+    // }
     const cart = await Cart.findOne({
       where: {
         userId: req.user.id
@@ -156,6 +156,7 @@ router.delete('/cart/checkout', requireToken, async (req, res, next) => {
       res.sendStatus(400);
     } else {
       await cartItemsToBeDeleted.destroy();
+      res.sendStatus(204);
     }
   } catch (err) {
     next(err)

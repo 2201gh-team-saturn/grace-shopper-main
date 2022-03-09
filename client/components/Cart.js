@@ -12,6 +12,8 @@ class Cart extends Component {
 		super(props)
 		this.increase = this.increase.bind(this);
 		this.decrease = this.decrease.bind(this);
+		this.handleCheckout = this.handleCheckout.bind(this);
+		this.handleDelete = this.handleDelete.bind(this);
 	}
 	componentDidMount() {
 		// this.props.loadCart(this.props.user.id);
@@ -25,9 +27,11 @@ class Cart extends Component {
 		this.props.decreaseQuantity(id);
 	}
 
-	handleCheckout(roomId) {
-		this.props.addReservation(roomId);
+	handleCheckout(itemsArr) {
+		// this.props.createReservation(totalNumOfDays, roomId);
+		localStorage.setItem("cart", JSON.stringify(itemsArr));
 		this.props.checkoutCart();
+		// window.location.reload();
 	}
 
 	handleDelete(id) {
@@ -40,6 +44,12 @@ class Cart extends Component {
 		const items = this.props.cartItems;
 		const totalItems = this.props.cartItems[0];
 		//const {room} = this.props.cart
+		// const checkoutButton = items.map((item) => {
+		// 	return(
+		// 		// <button key={item.id} onClick={(item) => this.handleCheckout(item.numberOfNights, item.room.id)}>Check Out</button>
+		// 		<button key={item.id} onClick={(item) => console.log('THIS IS ROOM ID', item)}>Check Out</button>
+		// 	)
+		// })
 
 		return (
 			<div>
@@ -86,7 +96,14 @@ class Cart extends Component {
 									return total + item.room.price;
 								}, 0)}
 							</h4>
-							<button>Check Out</button>
+
+							{/* <button onClick={(items) => items.map((item)=> console.log('THIS IS ITEM', item))}>Check Out</button> */}
+							<button
+								type='submit'
+								className='room_delete_btn'
+								value={items}
+								onClick={(event) => this.handleCheckout(event.target.value) }> Check Out</button>
+							{/* {checkoutButton} */}
 						</div>
 					) : (
 						''
@@ -115,7 +132,7 @@ const mapDispatch = (dispatch, { history }) => {
 		increaseQuantity: (id) => dispatch(increaseQuantity(id)),
 		decreaseQuantity: (id) => dispatch(decreaseQuantity(id)),
 		checkoutCart: () => dispatch(clearAllCartItems()),
-		createReservation: (roomId) => dispatch(addReservation(roomId)),
+		createReservation: (totalNumOfDays, roomId) => dispatch(addReservation(totalNumOfDays, roomId)),
 		deleteCartItem: (id) => dispatch(deleteCartItemThunk(id, history))
 	};
 };
