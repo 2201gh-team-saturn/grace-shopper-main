@@ -15,6 +15,7 @@ import EmployeeDashboard from './components/EmployeeDashboard';
 import Cart from './components/Cart'
 import BookingConfirmation from './components/BookingConfirmation';
 import AddExperience from './components/AddExperience';
+import GuestCart from './components/GuestCart';
 
 /**
  * COMPONENT
@@ -25,41 +26,30 @@ class Routes extends Component {
   }
 
   render() {
-    const { isLoggedIn } = this.props
+    const { isLoggedIn } = this.props;
+    const { isAdmin } = this.props;
 
     return (
       <div>
-        {isLoggedIn ? (
-          <Switch>
-            <Route exact path="/account" component={Account} />
-            <Route exact path="/booking-confirmation" component={BookingConfirmation} />
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/rooms" component={AllRooms} />
-            <Route exact path="/experiences" component={Experiences} />
-            <Route exact path="/experiences/add" component={AddExperience} />
-            <Route exact path="/experiences/:id" component={SingleExperience} />
-            <Route exact path="/room/add" component={AddRoom} />
-            <Route exact path="/experience/add" component={AddExperience} />
-            <Route exact path="/rooms/:id" component={SingleRoom} />
-            <Route exact path="/rooms/:id/edit" component={UpdateSingleRoom} />
-            <Route exact path="/employee-dashboard" component={EmployeeDashboard} />
-            <Route exact path="/cart" component={Cart} />
-            {/* Needs to be at the end of the list in order to redirect the user to the home page */}
-            <Redirect to="/" />
-          </Switch>
-        ) : (
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/account" component={Account} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route exact path="/rooms" component={AllRooms} />
-            <Route exact path="/rooms/:id" component={SingleRoom} />
-            <Route exact path="/experiences" component={Experiences} />
-            <Route exact path="/experiences/:id" component={SingleExperience} />
-            <Route exact path="/booking-confirmation" component={BookingConfirmation} />
-          </Switch>
-        )}
+        <Switch>
+          {isLoggedIn && <Route exact path="/account" component={Account} />}
+          <Route exact path="/booking-confirmation" component={BookingConfirmation} />
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/rooms" component={AllRooms} />
+          <Route exact path="/experiences" component={Experiences} />
+          {isAdmin && <Route exact path="/experiences/add" component={AddExperience} />}
+          <Route exact path="/experiences/:id" component={SingleExperience} />
+          {isAdmin && <Route exact path="/room/add" component={AddRoom} />}
+          {isAdmin && <Route exact path="/experience/add" component={AddExperience} />}
+          <Route exact path="/rooms/:id" component={SingleRoom} />
+          {isAdmin && <Route exact path="/rooms/:id/edit" component={UpdateSingleRoom} />}
+          {isAdmin && <Route exact path="/employee-dashboard" component={EmployeeDashboard} />}
+          {isLoggedIn && <Route exact path="/cart" component={Cart} />}
+          {!isLoggedIn && <Route exact path="/cart" component={GuestCart} />}
+          {!isLoggedIn && <Route path="/login" component={Login} />}
+          {!isLoggedIn && <Route path="/signup" component={Signup} />}
+          <Redirect to="/" />
+        </Switch>
       </div>
     )
   }
@@ -72,7 +62,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
-    isLoggedIn: !!state.auth.id
+    isLoggedIn: !!state.auth.id,
+    isAdmin: state.auth.type === 'employee'
   }
 }
 

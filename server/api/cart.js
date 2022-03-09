@@ -178,7 +178,8 @@ router.delete('/cart/checkout', requireToken, async (req, res, next) => {
 })
 
 //add item to cart
-router.post('/cart/addToCart', requireToken, async (req, res, next) => {
+router.post('/cart/addToCart/:id', requireToken, async (req, res, next) => {
+// router.post('/cart', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
       throw new Error('Unauthorized');
@@ -190,7 +191,7 @@ router.post('/cart/addToCart', requireToken, async (req, res, next) => {
     });
     const created = await CartItem.findOne({
       where: {
-        roomId: req.body.roomId,
+        roomId: req.params.id,
         cartId: cart.id
         // numberOfNights: req.body.numberOfNights,
       },

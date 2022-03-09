@@ -8,25 +8,49 @@ import { CartContext } from "../App";
 
 function GuestCheckout() {
     // const [cart, setCart] = useState(cartFromLocalStorage);
-    const { cart } = useContext(CartContext);
+    const { cart, setCart } = useContext(CartContext);
+    // const cartRef = useRef([]);
 
-    useEffect(() => {
-        localStorage.setItem("cart", JSON.stringify(cart));
-    }, [cart]) //can also maybe do interval, so cart is regularly updating?
-    //might want to set local storage when user 
+    // useEffect(() => {
+    //     let cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
+        
+    //     setCart(uniqueCartArr);
+    // }, [cart])
 
+    let uniqueObjArray = [
+        ...new Map(cart.map((item) => [item["id"], item])).values(),
+    ];
+
+    // uniqueObjArray = uniqueObjArray.filter(object => object.length > 0);
     
 
-    const cartItems = cart.map((item) => {
+    const setQuantity = (product, amount) => {
+        const newCart = [...cart];
+        newCart.find(
+            (item) => item.id === product.id
+        ).quantity = amount;
+        setCart(newCart);
+    };
+
+    const removeFromCart = (productToRemove) => {
+        setCart(
+            cart.filter((product) => product !== productToRemove)
+        );
+    };
+
+    const cartItems = uniqueObjArray.map((cartItem) => {
+        if(cartItem.length === 0){
+
+        }
         return (
-            <div className='cart_format' key={cart.id}>
-                <img className='cart_img' src={cart.room.imageUrl} />
+            <div className='cart_format' key={cartItem.id}>
+                <img className='cart_img' src={cartItem.imageUrl} />
 
                 <div className='cartItemInfo'>
-                    <p>{item.room.name}</p>
-                    <p> Price: ${item.room.price}</p>
-                    <p> Number of nights: {item.numberOfNights} </p>
-                    <button className='cart_btn'>Edit Dates</button>
+                    <p>{cartItem.name}</p>
+                    <p> Price: ${cartItem.price}</p>
+                    {/* <p> Number of nights: {setQuantity(cartItem.id, 1)} </p> */}
+                    {/* <button className='cart_btn'>Edit Dates</button> */}
                 </div>
             </div>
         );
@@ -36,14 +60,18 @@ function GuestCheckout() {
         <div>
             <div className='cart_container'>
                 <h3> Guest Cart</h3>
-                {
-                    (cart.length > 0 && cartItems) ||
-                    (cart.length === 0 &&
+                {(uniqueObjArray.length > 0 && cartItems) ||
+                    (uniqueObjArray.length === 0 &&
                         <p>There are no rooms in your cart.
                             <span>
                                 <Link to='/rooms'>Check out our rooms to get started!</Link>
                             </span>
                         </p>)}
+                {/* <p>There are no rooms in your cart.
+                    <span>
+                        <Link to='/rooms'> Check out our rooms to get started!</Link>
+                    </span>
+                </p>) */}
                 {/* {totalItems ? (
                     <div className="cart_summary">
                         <h4> Total Amount of Days: {
