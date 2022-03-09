@@ -150,7 +150,7 @@ export const clearAllCartItems = () => {
 export const createCartItem = (roomId) => {
   return async (dispatch) => {
     try {
-      console.log(roomId);
+      console.log('can i seed this room id',roomId);
       const token = window.localStorage.getItem(TOKEN);
       const { data: created } = await axios.post(
         '/api/cart/addToCart',
@@ -184,7 +184,7 @@ export default (state = initialState, action) => {
     case CLEAR_CART:
       return action.cart;
     case ADD_ROOM_TO_CART: //this might be a problem?
-      return [...state, action.cartItem];
+      return action.cartItem;
     default:
       return state;
   }

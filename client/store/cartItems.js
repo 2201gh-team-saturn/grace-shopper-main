@@ -26,15 +26,18 @@ export const _updateCartItem = (newCartItem) => {
 };
 
 export const addCartItemThunk = (cartItem) => {
-  return async (dispatch) => {
+  return async (dispatch, history) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
-      const { data: created } = await axios.post('/api/cart', cartItem, {
+      const { data: created } = await axios.post('/api/addToCart', cartItem, {
         headers: {
           authorization: token,
         },
       });
+      console.log('looking for data object inside cartitem redux addcartitemthunk', data)
+      console.log(created)
       dispatch(_addCartItem(created));
+      history.push(`/`);
     } catch (error) {
       console.error('theres something wrong with your add cart item thunk');
       console.log(error);
@@ -67,7 +70,7 @@ const initialState = [];
 export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_CART_ITEM:
-      return [...state, action.cartItem];
+      return action.cartItem;
     case UPDATE_CART_ITEM:
       return action.cartItem;
     case DELETE_CART_ITEM:

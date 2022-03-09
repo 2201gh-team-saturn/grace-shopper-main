@@ -18,10 +18,13 @@ class SingleExperience extends Component {
     const experience = this.props.experience;
     const room = this.props.experience.room;
     return (
-      <div id='single-experience' className='column'>
+      <div id='single-experience' className="room-info">
         <div id='single-experience-detail' className='row'>
           <h1>Experience Name: {experience.name}</h1>
+          <div  id="single-experience-img"> 
+
           <img src={experience.imageUrl} />
+          </div>
           <p>Description: {experience.description}</p>
           <div>
             <h3></h3>

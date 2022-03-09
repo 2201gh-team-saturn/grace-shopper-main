@@ -36,7 +36,7 @@ class Cart extends Component {
 
 	handleDelete(id) {
 		this.props.deleteCartItem(id);
-		window.location.reload();
+		// window.location.reload();
 	}
 
 	render() {
@@ -66,9 +66,9 @@ class Cart extends Component {
 									<p>{item.room.name}</p>
 									<p> Price: ${item.room.price}</p>
 									<p> Number of nights:
-										<button onClick={() => this.decrease(item.id)}>-</button>
+										<button disabled={disabledDecrease} onClick={() => this.decrease(item.id)}>-</button>
 										{item.numberOfNights}
-										<button onClick={() => this.increase(item.id)}>+</button>
+										<button disabled={disabledIncrease} onClick={() => this.increase(item.id)}>+</button>
 									</p>
 									<button
 										type='submit'

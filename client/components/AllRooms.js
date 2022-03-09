@@ -2,16 +2,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchRooms, deleteRoomThunk } from '../store/rooms';
+import { addCartItemThunk } from '../store/cartItems';
 
 export class AllRooms extends React.Component {
+  constructor(props){
+    super(props);
+    this.state ={
+      room: {}
+    }
+    this.addItemToCart = this.addItemToCart.bind(this)
+  }
   componentDidMount() {
     this.props.loadRooms();
+  }
+
+  addItemToCart(id){
+    console.log('wtf is that', id)
+    this.props.addRoomToCart(id)
   }
 
   render() {
     const user = this.props.user;
     const rooms = this.props.rooms;
-
     console.log(rooms);
 
     if (rooms.length <= 0) {
@@ -94,10 +106,12 @@ export class AllRooms extends React.Component {
                     <button
                       type='submit'
                       className='room_delete_btn'
-                      // value={cartItem.id}
-                      // onClick={(event) =>
-                      //   this.props.addRoomToCart(event.target.value)
-                      // }
+                      value={this.state.room}
+                      onClick={(event) => {
+                      // console.log('is my add room button clicking?')
+                        this.addItemToCart(event.target.value)
+                        this.setState({ room: {} });
+                       }}
                     >
                       Add to Cart
                     </button>
@@ -122,7 +136,7 @@ const mapDispatch = (dispatch, { history }) => {
   return {
     loadRooms: () => dispatch(fetchRooms()),
     deleteRooms: (id) => dispatch(deleteRoomThunk(id, history)),
-    //addRoomToCart: (id) => dispatch(addRoomToCartThunk(id))
+    addRoomToCart: (id) => dispatch(addCartItemThunk(id, history))
   };
 };
 export default connect(mapState, mapDispatch)(AllRooms);

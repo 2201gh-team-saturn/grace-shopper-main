@@ -15,9 +15,9 @@ const requireToken = async (req, res, next) => {
 
 router.post('/cart', requireToken, async (req, res, next) => {
   try {
-    if (!req.user) {
-      throw new Error('Unauthorized');
-    }
+    // if (!req.user) {
+    //   throw new Error('Unauthorized');
+    // }
     const [newCartItem, created] = await CartItem.findOrCreate({
       where: {
         id: req.body.id,

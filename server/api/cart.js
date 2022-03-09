@@ -119,22 +119,22 @@ router.put('/cart', requireToken, async (req, res, next) => {
 
 //I put this route here incase.
 //to create a new cart item
-router.post('/cart', requireToken, isEmployee, async (req, res, next) => {
-  try {
-  const [newCartItem, created] = await CartItem.findOrCreate({
-    where: {
-      id: req.body.id,
-      numberOfNights: req.body.numberOfNights,
-    },
-  });
-  if (created) {
-    res.status(201).send(newCartItem);
-  }
-  res.status(409).send('nope');
-} catch (error) {
-  console.error('your post cartItem route is broken', error);
-  next(error);
-}});
+// router.post('/cart', requireToken, isEmployee, async (req, res, next) => {
+//   try {
+//   const [newCartItem, created] = await CartItem.findOrCreate({
+//     where: {
+//       id: req.body.id,
+//       numberOfNights: req.body.numberOfNights,
+//     },
+//   });
+//   if (created) {
+//     res.status(201).send(newCartItem);
+//   }
+//   res.status(409).send('nope');
+// } catch (error) {
+//   console.error('your post cartItem route is broken', error);
+//   next(error);
+// }});
 
 //to delete all cart items
 router.delete('/cart/checkout', requireToken, async (req, res, next) => {
@@ -164,23 +164,26 @@ router.delete('/cart/checkout', requireToken, async (req, res, next) => {
 })
 
 //add item to cart
-router.post('/cart/addToCart', requireToken, async (req, res, next) => {
+router.post('/cart/addToCart', async (req, res, next) => {
   try {
-    if (!req.user) {
-      throw new Error('Unauthorized');
-    }
-    const cart = await Cart.findOne({
+    // if (!req.user) {
+    //   throw new Error('Unauthorized');
+    // }
+    console.log(req.user)
+    const cart = await Cart.findByPk({
       where: {
         userId: req.user.id,
       },
     });
+    console.log('looking at the cart backend',cart)
     const created = await CartItem.findOne({
       where: {
-        roomId: req.body.roomId,
+        roomId: req.body,
         cartId: cart.id
         // numberOfNights: req.body.numberOfNights,
       },
     });
+    console.log(created)
     if (created) {
       // created.numberOfNights += req.body.numberOfNights;
       created.numberOfNights ++;
@@ -200,6 +203,5 @@ router.post('/cart/addToCart', requireToken, async (req, res, next) => {
     next(error);
   }
 });
-
 
 module.exports = router;

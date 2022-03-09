@@ -385,6 +385,12 @@ async function seed() {
     await murphyCartItem2.setCart(murphyCart);
 
     await murphyCart.setUser(murphy);
+    await murphyCart.setUser(murphy);
+    await codyCart.setUser(cody);
+    await leahCart.setUser(leah);
+    await zumaCart.setUser(zuma);
+    await ladybugCart.setUser(ladybug);
+    await successfulBWCart.setUser(successfulBW);
 
     await murphyCartItem1.setRoom(shedroom);
     await murphyCartItem2.setRoom(artistLense);
