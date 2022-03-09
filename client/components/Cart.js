@@ -10,24 +10,27 @@ import {
 import { fetchUsers } from '../store/users';
 import { addReservation } from '../store/reservations';
 import { deleteCartItemThunk } from '../store/cartItems';
+import BookingConfirmation from './BookingConfirmation';
 
 class Cart extends Component {
-  constructor(props) {
-    super(props);
-    this.increase = this.increase.bind(this);
-    this.decrease = this.decrease.bind(this);
-  }
-  componentDidMount() {
-    this.props.fetchCart(this.props.userId);
-  }
-  increase(id) {
-    this.props.increaseQuantity(id);
-  }
+	constructor(props) {
+		super(props)
+		this.increase = this.increase.bind(this);
+		this.decrease = this.decrease.bind(this);
+		this.handleCheckout = this.handleCheckout.bind(this);
+		this.handleDelete = this.handleDelete.bind(this);
+	}
+	componentDidMount() {
+		// this.props.loadCart(this.props.user.id);
+		this.props.fetchCart(this.props.userId);
+	}
+	increase(id) {
+		this.props.increaseQuantity(id);
+	}
 
-  decrease(id) {
-    this.props.decreaseQuantity(id);
-  }
-
+	decrease(id) {
+		this.props.decreaseQuantity(id);
+	}
   handleCheckout() {
     // this.props.addReservation(roomId);
     this.props.checkoutCart();
@@ -98,8 +101,13 @@ class Cart extends Component {
                   return total + item.numberOfNights * item.room.price;
                 }, 0)}
               </h4>
-               {/* <Link to={'/booking-confirmation'}><button>Check Out</button></Link> */}
-			  <button onClick={() => this.handleCheckout()}>Check Out</button>
+              <Link to={'/booking-confirmation'}>
+							<button
+								type='submit'
+								className='room_delete_btn'
+								value={items}
+								onClick={(event) => this.handleCheckout(event.target.value) }> Check Out</button>
+							</Link>
             </div>
           ) : (
             ''
