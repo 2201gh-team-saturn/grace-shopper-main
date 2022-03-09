@@ -23,8 +23,9 @@ const App = () => {
 
   useEffect(() => {
     setInterval(() => {
-      JSON.parse(localStorage.getItem("cart") || "[]")
-    }, 1000)
+      let cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
+      setCart(cartFromLocalStorage);
+    }, 5000)
   }, [cart]);
 
   /**

@@ -7,8 +7,7 @@ export class AllRooms extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      banana: {},
-      roomId: null,
+      banana: null,
       // rooms: [],
       // user: {},
       // isLoggedIn: false
@@ -128,18 +127,6 @@ export class AllRooms extends React.Component {
                     //   this.props.addRoomToCart(event.target.value)
                     // }
                     >
-                      Add to Cart
-                    </button>}
-                  {!isLoggedIn &&
-                    <button
-                      type="button"
-                      id='add_to_cart_btn'
-                      className='button'
-                      value={room.id}
-                      onClick={(event) => {
-                        this.setState({roomId: event.target.value});
-                        this.addToCart()
-                      }}>
                       Add to Cart
                     </button>}
                 </form>

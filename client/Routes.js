@@ -27,42 +27,29 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-    const {isAdmin} = this.props;
+    const { isAdmin } = this.props;
 
     return (
       <div>
-          <Switch>
-            {isLoggedIn && <Route exact path="/account" component={Account} />}
-            <Route exact path="/booking-confirmation" component={BookingConfirmation} />
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/rooms" component={AllRooms} />
-            <Route exact path="/experiences" component={Experiences} />
-           {isAdmin && <Route exact path="/experiences/add" component={AddExperience} />}
-            <Route exact path="/experiences/:id" component={SingleExperience} />
-            {isAdmin && <Route exact path="/room/add" component={AddRoom} />}
-            {isAdmin && <Route exact path="/experience/add" component={AddExperience} />}
-            <Route exact path="/rooms/:id" component={SingleRoom} />
-            {isAdmin && <Route exact path="/rooms/:id/edit" component={UpdateSingleRoom} />}
-            {isAdmin && <Route exact path="/employee-dashboard" component={EmployeeDashboard} />}
-            { isLoggedIn && <Route exact path="/cart" component={Cart} />}
-            {!isLoggedIn && <Route exact path="/cart" component={GuestCart} />}
-            {!isLoggedIn && <Route path="/login" component={Login} />}
-            {!isLoggedIn && <Route path="/signup" component={Signup} />}
-            <Redirect to="/" />
-          {/* </Switch>
-        ) : (
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/account" component={Account} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route exact path="/rooms" component={AllRooms} />
-            <Route exact path="/rooms/:id" component={SingleRoom} />
-            <Route exact path="/experiences" component={Experiences} />
-            <Route exact path="/experiences/:id" component={SingleExperience} />
-            <Route exact path="/booking-confirmation" component={BookingConfirmation} />
-           */}
-           </Switch>
+        <Switch>
+          {isLoggedIn && <Route exact path="/account" component={Account} />}
+          <Route exact path="/booking-confirmation" component={BookingConfirmation} />
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/rooms" component={AllRooms} />
+          <Route exact path="/experiences" component={Experiences} />
+          {isAdmin && <Route exact path="/experiences/add" component={AddExperience} />}
+          <Route exact path="/experiences/:id" component={SingleExperience} />
+          {isAdmin && <Route exact path="/room/add" component={AddRoom} />}
+          {isAdmin && <Route exact path="/experience/add" component={AddExperience} />}
+          <Route exact path="/rooms/:id" component={SingleRoom} />
+          {isAdmin && <Route exact path="/rooms/:id/edit" component={UpdateSingleRoom} />}
+          {isAdmin && <Route exact path="/employee-dashboard" component={EmployeeDashboard} />}
+          {isLoggedIn && <Route exact path="/cart" component={Cart} />}
+          {!isLoggedIn && <Route exact path="/cart" component={GuestCart} />}
+          {!isLoggedIn && <Route path="/login" component={Login} />}
+          {!isLoggedIn && <Route path="/signup" component={Signup} />}
+          <Redirect to="/" />
+        </Switch>
       </div>
     )
   }

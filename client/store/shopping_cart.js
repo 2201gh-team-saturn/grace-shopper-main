@@ -147,15 +147,12 @@ export const clearAllCartItems = () => {
   };
 };
 
-export const createCartItem = (roomId) => {
+export const createCartItem = (id) => {
   return async (dispatch) => {
     try {
-      console.log(roomId);
       const token = window.localStorage.getItem(TOKEN);
       const { data: created } = await axios.post(
-        '/api/cart/addToCart',
-        // numberOfNights,
-        roomId,
+        `/api/cart/addToCart/${id}`,
         {
           headers: {
             authorization: token
