@@ -29,7 +29,7 @@ export const addCartItemThunk = (cartItem) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
-      const { data: created } = await axios.post('/api/cart', cartItem, {
+      const { data: created } = await axios.post('/api/cart/', cartItem, {
         headers: {
           authorization: token,
         },

@@ -97,7 +97,7 @@ export const decreaseQuantity = (id) => async (dispatch) => {
   dispatch(fetchShoppingCart());
 };
 
-export const clearAllCartItems = () => {
+export const clearAllCartItems = (history) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
@@ -107,6 +107,7 @@ export const clearAllCartItems = () => {
         },
       });
       dispatch(clearCart(data));
+      history.push(`/booking-confirmation`);
     } catch (error) {
       console.log(error);
     }
@@ -125,6 +126,18 @@ export const createCartItem = (id) => {
         },
       });
       console.log('THIS IS FOR CREATED', created); //not working
+// export const createCartItem = (id) => {
+//   return async (dispatch) => {
+//     try {
+//       const token = window.localStorage.getItem(TOKEN);
+//       const { data: created } = await axios.post(
+//         `/api/cart/addToCart/${id}`,
+//         {
+//           headers: {
+//             authorization: token
+//           }
+//         }
+//       );
       dispatch(addRoomToCart(created));
     } catch (error) {
       console.error('theres something wrong with your add room to cart thunk'); //then we get this

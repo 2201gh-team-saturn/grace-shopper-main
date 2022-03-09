@@ -279,7 +279,7 @@ async function seed() {
       totalQuantity: 0,
     });
     const murphyCart = await Cart.create({
-      totalQuantity: 4,
+      totalQuantity: 2,
     });
     const leahCart = await Cart.create({
       totalQuantity: 0,
@@ -297,10 +297,10 @@ async function seed() {
       totalQuantity: 0,
     });
     const murphyCartItem1 = await CartItem.create({
-      numberOfNights: 2,
+      numberOfNights: 1,
     });
     const murphyCartItem2 = await CartItem.create({
-      numberOfNights: 2,
+      numberOfNights: 1,
     });
 
     // Creating Reviews
