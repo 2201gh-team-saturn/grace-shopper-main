@@ -133,7 +133,6 @@ h1 {
   right: 10px;
 }
 .room_delete_btn:after, .experience_delete_btn:after {
-  content: "x";
   position: absolute;
   opacity: 0;
   font-size: 20px;
