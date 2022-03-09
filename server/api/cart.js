@@ -151,7 +151,7 @@ router.post('/cart', requireToken, isEmployee, async (req, res, next) => {
   next(error);
 }});
 
-//to delete a cart item
+//to delete all cart items
 router.delete('/cart/checkout', requireToken, async (req, res, next) => {
   try {
     if (!req.user) {
@@ -167,14 +167,11 @@ router.delete('/cart/checkout', requireToken, async (req, res, next) => {
         cartId: cart.id
       }
     });
-    // console.log(cartItemsToBeDeleted)
-
     const cartTotalQuantity = await Cart.destroy({
       where: {
         id: req.user.id
       }
     });
-
   } catch (err) {
     next(err)
   }

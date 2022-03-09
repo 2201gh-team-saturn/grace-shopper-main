@@ -33,7 +33,6 @@ class Cart extends Component {
     this.props.checkoutCart();
 	window.location.href = '/booking-confirmation';
   }
-
   handleDelete(id) {
     this.props.deleteCartItem(id);
     window.location.reload();
@@ -44,14 +43,13 @@ class Cart extends Component {
     const items = this.props.cartItems;
     const totalItems = this.props.cartItems[0];
 
-
     return (
       <div>
         <div className='cart_container'>
           <h3> {user.username}'s Cart</h3>
              {items.map((item) => {
-            // const disabledIncrease = (item.numberOfNights === 30);
-            // const disabledDecrease = (item.numberOfNights === 1);
+            const disabledIncrease = (item.numberOfNights === 30);
+            const disabledDecrease = (item.numberOfNights === 1);
             return (
               <div className='cart_format' key={item.id}>
                 <img className='cart_img' src={item.room.imageUrl} />
@@ -61,14 +59,14 @@ class Cart extends Component {
                   <p>
                     Number of nights:
                     <button
-                      disabled={item.numberOfNights === 1}
+                      disabled={disabledDecrease}
                       onClick={() => this.decrease(item.id)}
                     >
                       -
                     </button>
                     {item.numberOfNights}
                     <button
-                      disabled={item.numberOfNights === 30}
+                      disabled={disabledIncrease}
                       onClick={() => this.increase(item.id)}
                     >
                       +
@@ -122,8 +120,6 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch, { history }) => {
   return {
-    // loadRooms: () => dispatch(fetchRooms()),
-    //loadCart: (id) => dispatch(fetchShoppingCart(id)),
     fetchCart: (userId) => dispatch(fetchShoppingCart(userId)),
     increaseQuantity: (id) => dispatch(increaseQuantity(id)),
     decreaseQuantity: (id) => dispatch(decreaseQuantity(id)),
@@ -132,4 +128,5 @@ const mapDispatch = (dispatch, { history }) => {
     deleteCartItem: (id) => dispatch(deleteCartItemThunk(id, history)),
   };
 };
+
 export default connect(mapState, mapDispatch)(Cart);
