@@ -132,7 +132,7 @@ export const createCartItem = (id) => {
     try {
       console.log('HERES YOUR ROOM ID', id); //this is working
       const token = window.localStorage.getItem(TOKEN);
-      const { data: created } = await axios.post(`/api/cart/addToCart/${id}`, {
+      const { data: created } = await axios.post(`/api/cart/addToCart/${id}`, {}, {
         headers: {
           authorization: token,
         },
@@ -171,7 +171,7 @@ export default (state = initialState, action) => {
     case CLEAR_CART:
       return action.cart;
     case ADD_ROOM_TO_CART: //this might be a problem?
-      return action.cartItem;
+      return [ ...state, action.cartItem];
     default:
       return state;
   }
