@@ -3,7 +3,7 @@ const router = express.Router();
 const Cart = require('../db/models/Cart');
 const CartItem = require('../db/models/CartItem');
 const Room = require('../db/models/Room');
-const { requireToken, isEmployee} = require('./security');
+const { requireToken, isEmployee } = require('./security');
 const {
   models: { User },
 } = require('../db');
@@ -58,16 +58,15 @@ router.put('/cart/increase/:id', async (req, res, next) => {
     cartItem.numberOfNights++;
     await cartItem.save();
 
-    let findCart = await CartItem.findByPk(req.params.id, {include: [Cart]})
-    let cartId = findCart.cart.dataValues.id
-    let cartTotalQuantity = await Cart.findByPk(cartId); 
-    cartTotalQuantity.totalQuantity++
-    console.log(cartTotalQuantity)
-    await cartTotalQuantity.save()
+    let findCart = await CartItem.findByPk(req.params.id, { include: [Cart] });
+    let cartId = findCart.cart.dataValues.id;
+    let cartTotalQuantity = await Cart.findByPk(cartId);
+    cartTotalQuantity.totalQuantity++;
+    console.log(cartTotalQuantity);
+    await cartTotalQuantity.save();
 
     res.json(cartItem);
-  }
-  catch (err) {
+  } catch (err) {
     next(err);
   }
 });
@@ -78,15 +77,14 @@ router.put('/cart/decrease/:id', async (req, res, next) => {
     cartItem.numberOfNights--;
     await cartItem.save();
 
-    let findCart = await CartItem.findByPk(req.params.id, {include: [Cart]})
-    let cartId = findCart.cart.dataValues.id
-    let cartTotalQuantity = await Cart.findByPk(cartId); 
+    let findCart = await CartItem.findByPk(req.params.id, { include: [Cart] });
+    let cartId = findCart.cart.dataValues.id;
+    let cartTotalQuantity = await Cart.findByPk(cartId);
     cartTotalQuantity.totalQuantity--;
-    await cartTotalQuantity.save()
+    await cartTotalQuantity.save();
 
     res.json(cartItem);
-  }
-  catch (err) {
+  } catch (err) {
     next(err);
   }
 });
@@ -119,23 +117,23 @@ router.delete('/cart/checkout', requireToken, async (req, res, next) => {
     }
     const cart = await Cart.findOne({
       where: {
-        userId: req.user.id
+        userId: req.user.id,
       },
     });
     const cartItemsToBeDeleted = await CartItem.destroy({
       where: {
-        cartId: cart.id
-      }
+        cartId: cart.id,
+      },
     });
     const cartTotalQuantity = await Cart.destroy({
       where: {
-        id: req.user.id
-      }
+        id: req.user.id,
+      },
     });
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 //I feel like this isnt working
 //add item to cart
@@ -144,7 +142,7 @@ router.post('/cart/addToCart/:id', requireToken, async (req, res, next) => {
     if (!req.user) {
       throw new Error('Unauthorized');
     }
-    console.log('This is hitting')
+    console.log('This is hitting');
     const cart = await Cart.findOne({
       where: {
         userId: req.user.id,
@@ -153,30 +151,28 @@ router.post('/cart/addToCart/:id', requireToken, async (req, res, next) => {
     const created = await CartItem.findOne({
       where: {
         roomId: req.params.id,
-        cartId: cart.id
+        cartId: cart.id,
       },
     });
-    console.log("CREATED RIGHT HERE", created)
+    console.log('CART RIGHT HERE', cart);
     if (created) {
       created.numberOfNights += req.body.numberOfNights;
-      created.numberOfNights ++;
+      created.numberOfNights++;
       await created.save();
       res.status(201).json(created);
-    }
-    let newCartItem = await CartItem.create({
-      where: {
-        roomId: req.params.roomId,
+    } else {
+      let newCartItem = await CartItem.create({ //NO WHERE CLAUSE DANG IT
+        roomId: req.params.id,
         cartId: cart.id,
         // numberOfNights: req.body.numberOfNights,
-      }
-  }
-    )
-    res.status(200).send(newCartItem);
+      });
+      let populatedCartItem = await CartItem.findByPk(newCartItem.id, {include: [Room, Cart]})
+      res.status(200).send(populatedCartItem);
+    }
   } catch (error) {
     console.error('your post cartItem route is broken', error);
     next(error);
   }
 });
-
 
 module.exports = router;
