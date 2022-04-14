@@ -17,14 +17,6 @@ export class AllRooms extends React.Component {
 
   componentDidMount() {
     this.props.loadRooms();
-    // const user = this.props.user;
-    // const rooms = this.props.rooms;
-    // const isLoggedIn = this.props.isLoggedIn;
-    // this.setState({
-    //   rooms: rooms,
-    //   user: user,
-    //   isLoggedIn: isLoggedIn
-    // });
   }
 
   addToCart() {
@@ -39,8 +31,7 @@ export class AllRooms extends React.Component {
     const user = this.props.user;
     const rooms = this.props.rooms;
     const isLoggedIn = this.props.isLoggedIn;
-    // const {banana, user, rooms, isLoggedIn} = this.state
-
+  
     if (rooms.length <= 0) {
       return (
         <div>
@@ -81,11 +72,10 @@ export class AllRooms extends React.Component {
                 <h2>{room.name}</h2>
               </Link>
               <img src={room.imageUrl} />
-              <div className='room_card'>
+              <div className='room-card'>
                 <p>
                   <Link to={`/rooms/${room.id}`} room={room}>
                   </Link>
-                  <br />
                   <span>Description: </span>
                   {room.description}
                   <br />
