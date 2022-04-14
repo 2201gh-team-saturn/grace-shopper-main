@@ -23,35 +23,20 @@ form div {
   display: inline-block;
 }
 
-
 span {
   color: rgb(13, 99, 110);
   font-weight: 800;
 }
-b{
+b {
   color: rgb(249, 105, 0);
 }
 
-footer {
-  font-size: 15px;
-  margin-top: 30px;
-  padding: 1%;
-  background-color: rgb(2, 63, 85);
-  color: rgb(255, 255, 255);
-  margin-bottom: -20%;
-  columns: 2;
-}
 
-.footer_info{
- margin-left: 1%;
-}
-
-
-.homepage_img{
+.homepage_img {
   width: 100%;
 }
 
-  .button {
+.button {
   backface-visibility: hidden;
   position: relative;
   cursor: pointer;
@@ -62,23 +47,23 @@ footer {
   border: 0px solid #040000;
   border-width: 0px 0px 0px 0px;
   padding: 8px 20px 8px 50px;
-    color: #fff;
+  color: #fff;
   font-size: 15px;
   font-family: Helvetica Neue;
   font-weight: 900;
-  font-style: normal
-  }
-  .button > div {
-    color: #999;
+  font-style: normal;
+}
+.button > div {
+  color: #999;
   font-size: 10px;
   font-family: Helvetica Neue;
   font-weight: initial;
   font-style: normal;
   text-align: center;
-  margin: 0px 0px 0px 0px
-  }
-  .button > i {
-    color: #6c6c6c;
+  margin: 0px 0px 0px 0px;
+}
+.button > i {
+  color: #6c6c6c;
   font-size: 1em;
   background: #fff;
   border-radius: 100px;
@@ -89,153 +74,139 @@ footer {
   position: absolute;
   top: -10px;
   left: -10px;
-  bottom: -10px
-  }
-  .button > .ld {
-    font-size: initial
-  }
-
-  .homepage_container{
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: 1fr;
-      grid-column-gap: 0px;
-      grid-row-gap: 0px;
-  }
-  .reviews_container {
-      display: flex;
-      flex-wrap: wrap;
-      padding: 5%;
-      background-image: url('/RR LOGO BACKGROUND.png');
-      width: 86%;
-      border-radius: 14px;
-      /* height: 410px; */
-  }
-
-  .reviews_container p {
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    font-style: italic;
-    padding: 10px;
-    background-color: black;
-    opacity: 0.45;
-    width: 65%;
-    color: white;
-    border-radius: 10px;
-  }
-
-  
-  .reviews_container h3{
-    font-style: normal;
-    color:rgb(141, 141, 141)
-  }
-
-  .add_room{
-    display: flex;
-    flex-direction: column;
-  }
-
-  #room_info{
-    padding: 5%;
-  }
-
-  #add_to_cart_btn.button{
-    display: flex;
-    align-content: center;
-    justify-content: center;
-  }
-
-  #entire_nav{
-    background-image: linear-gradient(rgb(225, 228, 216),rgba(101, 222, 241));
-    width: 100%;
-    margin-top: -0.5%;
-    
-  }
-
-  /* gets rid of link underline */
-  a:-webkit-any-link {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .navbar{
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;;
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    letter-spacing: 5px;
-    background-color: rgb(255, 255, 255);
-    font-weight: 550;
-    margin-bottom: -9px;
-  }
-
-  .navbar :hover{
-    color: rgb(249, 105, 0);
-
-  }
-
-
-  .booking_confirmation_img{
-    height: 300px;
-    width: 250px;
-    box-shadow: 2px 5px 5px#6c6c6c;
-  }
-
-  .booking_confirmation_container{
-    display: flex;
-    justify-content: center;
-  }
-
-  .booking_text{
-    display: flex;
-    justify-content: center;
-  }
-
-  p .booking_text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
+  bottom: -10px;
+}
+.button > .ld {
+  font-size: initial;
 }
 
-#site-title{
-text-align: center;
-color: #FFF;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-letter-spacing: 1px;
-background-image: url(https://media.giphy.com/media/3o7aDbzZnLjVrW9YXe/giphy.gif);
-background-size: cover;
-color: transparent;
--moz-background-clip: text;
--webkit-background-clip: text;
-text-transform: uppercase;
-font-size: 100px;
-margin: 10px 0;
+.homepage_container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+.reviews_container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5%;
+  background-image: url('/RR LOGO BACKGROUND.png');
+  width: 86%;
+  border-radius: 14px;
+  /* height: 410px; */
 }
 
-.cart_container{
+.reviews_container p {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  font-style: italic;
+  padding: 10px;
+  background-color: black;
+  opacity: 0.45;
+  width: 65%;
+  color: white;
+  border-radius: 10px;
+}
+
+.reviews_container h3 {
+  font-style: normal;
+  color: rgb(141, 141, 141);
+}
+
+#add_to_cart_btn {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+#entire_nav {
+  background-image: linear-gradient(rgb(225, 228, 216), rgba(101, 222, 241));
+  width: 100%;
+  margin-top: -0.5%;
+}
+
+/* gets rid of link underline */
+a:-webkit-any-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  letter-spacing: 5px;
+  background-color: rgb(255, 255, 255);
+  font-weight: 550;
+  margin-bottom: -9px;
+}
+
+.navbar :hover {
+  color: rgb(249, 105, 0);
+}
+
+.booking_confirmation_img {
+  height: 300px;
+  width: 250px;
+  box-shadow: 2px 5px 5px#6c6c6c;
+}
+
+.booking_confirmation_container {
+  display: flex;
+  justify-content: center;
+}
+
+.booking_text {
+  display: flex;
+  justify-content: center;
+}
+
+p .booking_text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+}
+
+#site-title {
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 1px;
+  background-image: url(https://media.giphy.com/media/3o7aDbzZnLjVrW9YXe/giphy.gif);
+  background-size: cover;
+  color: transparent;
+  -moz-background-clip: text;
+  -webkit-background-clip: text;
+  text-transform: uppercase;
+  font-size: 100px;
+  margin: 10px 0;
+}
+
+.cart_container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.cart_format{
+.cart_format {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
-  grid-column-gap:5px;
+  grid-column-gap: 5px;
   grid-row-gap: 0px;
   width: 60%;
-  }
+}
 
-
-.cartItemInfo{
-    text-align: end;
-    margin-right: 30%;
+.cartItemInfo {
+  text-align: end;
+  margin-right: 30%;
 }
 
 .cartItemInfo p {
@@ -253,7 +224,7 @@ margin: 10px 0;
   background: transparent;
 }
 .cartItemInfo p:after {
-  content: "";
+  content: '';
   width: 100%;
   z-index: -1;
   position: absolute;
@@ -264,8 +235,8 @@ margin: 10px 0;
   background-color: #ffffff;
 }
 
-.cart_img{
-  width:80%;
+.cart_img {
+  width: 80%;
   border-radius: 20px;
   padding: 10px;
 }
@@ -295,7 +266,7 @@ margin: 10px 0;
   top: 5px;
 }
 
-.cart_summary{
+.cart_summary {
   width: 49%;
   height: 80px;
   background-color: rgb(231, 231, 231);
@@ -306,7 +277,7 @@ margin: 10px 0;
   border-radius: 13px;
 }
 
-.cart_summary h4{
+.cart_summary h4 {
   margin-top: 2px;
 }
 
@@ -324,7 +295,8 @@ margin: 10px 0;
   outline: none;
   border-radius: 5px;
   border: none;
-  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5), 7px 7px 20px 0px rgba(0,0,0,.1), 4px 4px 5px 0px rgba(0,0,0,.1);
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
   background: #212529;
 }
 .cart_summary button:hover {
@@ -335,24 +307,35 @@ margin: 10px 0;
 }
 
 .homepage_subtitle h2 {
-  text-align:center; font-size:30px; text-transform:uppercase; color:rgb(27, 22, 37); letter-spacing:1px;
+  text-align: center;
+  font-size: 30px;
+  text-transform: uppercase;
+  color: rgb(27, 22, 37);
+  letter-spacing: 1px;
   font-family: 'Lora', serif;
 }
 .homepage_subtitle h2 span {
   margin-top: 5px;
-    font-size:15px; color:rgb(51, 51, 51); word-spacing:1px; font-weight:normal; letter-spacing:2px;
-    text-transform: uppercase; font-family:"Raleway", sans-serif; font-weight:500;
-    display: grid;
-    grid-template-columns: 1fr max-content 1fr;
-    grid-template-rows: 27px 0;
-    grid-gap: 20px;
-    align-items: center;
+  font-size: 15px;
+  color: rgb(51, 51, 51);
+  word-spacing: 1px;
+  font-weight: normal;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+  grid-template-rows: 27px 0;
+  grid-gap: 20px;
+  align-items: center;
 }
 
-.homepage_subtitle h2 span:after,.homepage_subtitle h2 span:before {
-    content: " ";
-    display: block;
-    height: 5px;
+.homepage_subtitle h2 span:after,
+.homepage_subtitle h2 span:before {
+  content: ' ';
+  display: block;
+  height: 5px;
 }
 
 .slider {
@@ -364,13 +347,11 @@ margin: 10px 0;
   width: 42%;
 }
 
-
-
-.emoji{
+.emoji {
   width: 30px;
 }
 
-.booking_inner_container{
+.booking_inner_container {
   padding-top: 2%;
   border: 2px solid blueviolet;
   border-radius: 15px;
@@ -380,16 +361,17 @@ margin: 10px 0;
   box-shadow: 0px 10px 15px rgb(110, 97, 110);
 }
 
-#booking_container{
+#booking_container {
   display: flex;
   justify-content: center;
 }
 
-#dreams_text, #booking_title{
+#dreams_text,
+#booking_title {
   font-size: 25px;
   text-shadow: 0px 0px 6px #fccd58;
   border-radius: 15px;
-  color:rgb(4, 4, 134);
+  color: rgb(4, 4, 134);
   padding: 4px;
   justify-content: center;
 }
@@ -403,6 +385,6 @@ margin: 10px 0;
   margin-left: 2%;
 }
 
-.employee_dashboard{
+.employee_dashboard {
   margin-left: 3%;
 }

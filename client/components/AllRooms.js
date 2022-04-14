@@ -91,6 +91,7 @@ export class AllRooms extends React.Component {
                   <span>Availability: </span>{' '}
                   {room.available ? 'Available' : 'Booked'}
                 </p>
+              <div className="all-rooms-buttons">
                 {user.type === 'employee' ? (
                   <form>
                     <button
@@ -111,7 +112,7 @@ export class AllRooms extends React.Component {
                   {isLoggedIn &&
                     <button
                       type='submit'
-                      className='room_delete_btn'
+                      className='room-add-cart-btn'
                     // value={cartItem.id}
                     // onClick={(event) =>
                     //   this.props.addRoomToCart(event.target.value)
@@ -120,6 +121,7 @@ export class AllRooms extends React.Component {
                       Add to Cart
                     </button>}
                 </form>
+              </div>
               </div>
             </div>
           ))}
