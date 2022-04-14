@@ -9,3 +9,9 @@
     height: 300px;
     border:  5px double rgb(194, 194, 194);
   }
+
+.experience {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

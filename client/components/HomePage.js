@@ -65,13 +65,13 @@ class HomePage extends Component {
           </div>
         
           <div className='reviews_container'>
-            {reviews
+            {/* {reviews
               ? reviews.map((review) => (
                   <p key={review.id}>
                     "{review.review_text}" - From {review.user.username}
                   </p>
                 ))
-              : ''}
+              : ''} */}
           </div>
         </div>
         <Footer />

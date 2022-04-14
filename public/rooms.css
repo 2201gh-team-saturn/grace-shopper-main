@@ -42,6 +42,7 @@ h1 {
   grid-row-gap: 40px;
   margin-left: 5%;
   padding: 5px;
+
 }
 
 .rooms img {
@@ -53,6 +54,12 @@ h1 {
 .room h2 {
   color: rgb(51, 51, 51);
   letter-spacing: 2px;
+}
+
+.room {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .room-card {
