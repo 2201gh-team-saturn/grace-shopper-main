@@ -33,14 +33,12 @@ h1 {
   text-align: center;
 }
 
-.rooms,
-.experiences {
+.rooms{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   grid-column-gap: 40px;
   grid-row-gap: 40px;
-  margin-left: 5%;
   padding: 5px;
 
 }
@@ -69,8 +67,7 @@ h1 {
   letter-spacing: 1px;
 }
 
-.add_room_btn,
-.add_experience_btn {
+.add_room_btn {
   margin-left: 5.5%;
   min-width: 130px;
   height: 40px;
@@ -84,13 +81,13 @@ h1 {
   border: 2px solid rgb(155, 193, 188);
   background: rgb(155, 193, 188);
 }
+
 .add_room_btn:hover {
   background: #fff;
   color: #135ca1;
 }
 
-.room_delete_btn, 
-.experience_delete_btn {
+.room_delete_btn{
   min-width: 130px;
   height: 40px;
   color: #fff;
@@ -106,19 +103,18 @@ h1 {
   border: none;
   background-color: #d67984;
 }
-.room_delete_btn:hover,
-.experience_delete_btn:hover {
+.room_delete_btn:hover {
   border-radius: 5px;
   padding-right: 24px;
   padding-left: 8px;
 }
-.room_delete_btn:hover:after,
-.experience_delete_btn:hover:after {
+
+.room_delete_btn:hover:after {
   opacity: 1;
   right: 10px;
 }
-.room_delete_btn:after,
-.experience_delete_btn:after {
+
+.room_delete_btn:after{
   position: absolute;
   opacity: 0;
   font-size: 20px;

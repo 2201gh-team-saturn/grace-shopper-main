@@ -84,10 +84,10 @@ b {
 .reviews_container {
   display: flex;
   flex-wrap: wrap;
-  padding: 5%;
+  padding: 6%;
   background-image: url('/RR LOGO BACKGROUND.png');
-  width: 86%;
-  border-radius: 14px;
+  background-position: 18%;
+  width: 85%;
   /* height: 410px; */
 }
 
@@ -102,6 +102,7 @@ b {
   width: 65%;
   color: white;
   border-radius: 10px;
+
 }
 
 .reviews_container h3 {

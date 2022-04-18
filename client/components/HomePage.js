@@ -56,8 +56,8 @@ class HomePage extends Component {
         <div className='homepage_container'>
           <div className='slider'>
             <SimpleImageSlider
-              width={890}
-              height={504}
+              width={'48%'}
+              height={600}
               images={images}
               showBullets={true}
               showNavs={true}
