@@ -17,14 +17,6 @@ export class AllRooms extends React.Component {
 
   componentDidMount() {
     this.props.loadRooms();
-    // const user = this.props.user;
-    // const rooms = this.props.rooms;
-    // const isLoggedIn = this.props.isLoggedIn;
-    // this.setState({
-    //   rooms: rooms,
-    //   user: user,
-    //   isLoggedIn: isLoggedIn
-    // });
   }
 
   addToCart() {
@@ -39,8 +31,7 @@ export class AllRooms extends React.Component {
     const user = this.props.user;
     const rooms = this.props.rooms;
     const isLoggedIn = this.props.isLoggedIn;
-    // const {banana, user, rooms, isLoggedIn} = this.state
-
+  
     if (rooms.length <= 0) {
       return (
         <div>
@@ -81,11 +72,10 @@ export class AllRooms extends React.Component {
                 <h2>{room.name}</h2>
               </Link>
               <img src={room.imageUrl} />
-              <div className='room_card'>
+              <div className='room-card'>
                 <p>
                   <Link to={`/rooms/${room.id}`} room={room}>
                   </Link>
-                  <br />
                   <span>Description: </span>
                   {room.description}
                   <br />
@@ -101,6 +91,7 @@ export class AllRooms extends React.Component {
                   <span>Availability: </span>{' '}
                   {room.available ? 'Available' : 'Booked'}
                 </p>
+              <div className="all-rooms-buttons">
                 {user.type === 'employee' ? (
                   <form>
                     <button
@@ -121,7 +112,7 @@ export class AllRooms extends React.Component {
                   {isLoggedIn &&
                     <button
                       type='submit'
-                      className='room_delete_btn'
+                      className='room-add-cart-btn'
                     // value={cartItem.id}
                     // onClick={(event) =>
                     //   this.props.addRoomToCart(event.target.value)
@@ -130,6 +121,7 @@ export class AllRooms extends React.Component {
                       Add to Cart
                     </button>}
                 </form>
+              </div>
               </div>
             </div>
           ))}

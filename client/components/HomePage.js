@@ -56,8 +56,8 @@ class HomePage extends Component {
         <div className='homepage_container'>
           <div className='slider'>
             <SimpleImageSlider
-              width={890}
-              height={504}
+              width={'48%'}
+              height={600}
               images={images}
               showBullets={true}
               showNavs={true}
@@ -65,13 +65,13 @@ class HomePage extends Component {
           </div>
         
           <div className='reviews_container'>
-            {reviews
+            {/* {reviews
               ? reviews.map((review) => (
                   <p key={review.id}>
                     "{review.review_text}" - From {review.user.username}
                   </p>
                 ))
-              : ''}
+              : ''} */}
           </div>
         </div>
         <Footer />
