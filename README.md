@@ -3,7 +3,7 @@
 ## Description
 
 An eCommerce platform selling luxury hotel rooms and experiences.
-Deployed site: https://reverie-resort.herokuapp.com/
+<br /> Deployed site: https://reverie-resort.herokuapp.com/
 
 ## Tech Stack
 
